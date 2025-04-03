@@ -1,0 +1,13 @@
+{# templates/lucky.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Lucky{% endblock %}
+
+{% block body %}
+    <h1>Lyckokatt</h1>
+    
+    <p>Här är din lyckokatt:</p>
+    <h4>{{ name }}</h4>
+    <img class="flower" src="{{ asset('build/images/'~number~'.jpg') }}" alt="lyckokatt">
+{% endblock %}

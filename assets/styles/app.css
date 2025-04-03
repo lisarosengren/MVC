@@ -1,0 +1,53 @@
+@import "init.css";
+
+body {
+    background-color: skyblue;
+}
+
+main {
+    display: flex;
+}
+
+.article {
+    width: 80%;
+}
+
+.menu {
+    width: 20%;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+
+/* from https://css-generators.com/flower-shapes/ */
+.flower {
+    width: 200px; /* adjust to control the size */
+    aspect-ratio: 1;
+    --g:/20.56% 20.56% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+    mask: 100% 50% var(--g),93.301% 75% var(--g),75% 93.301% var(--g),50% 100% var(--g),25% 93.301% var(--g),6.699% 75% var(--g),0% 50% var(--g),6.699% 25% var(--g),25% 6.699% var(--g),50% 0% var(--g),75% 6.699% var(--g),93.301% 25% var(--g),radial-gradient(100% 100%,#000 38.366%,#0000 calc(38.366% + 1px));
+  }
+
+
+  .json {
+    background-color: #63a32bf1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
