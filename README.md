@@ -1,4 +1,4 @@
-![mvc image](mvc.png)
+![mvc image](.img/mvc.png)
 
 MVC
 =====
