@@ -21,7 +21,7 @@
             <h1>Redovisning</h1>
                 <h3 id="kmom01">kmom01</h3>
 
-                <p>Här kommer redovisningstexten för detta kursmoment.</p>
+                {{ kmom01|striptags('<p>')|raw }}
 
 
                 <h3 id="kmom02">kmom02</h3>

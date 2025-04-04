@@ -38,7 +38,13 @@ class ControllerTwig extends AbstractController
     #[Route("/report", name: "report")]
     public function report(): Response
     {
-        return $this->render('report.html.twig');
+        $kmom01 = "<p>Mina förkunskaper och tidigare erfarenheter kring objektorientering är enbart från OOPython-kursen. Där skapades en webbplats för att spela yahzee och en annan för att söka efter olika ord i ett prefix-träd (trie).</p><p>Ett objekt är en samling variabler och metoder (funktioner kallas metoder i objekt). Variablernas värde ändras med hjälp av objektets metoder. Metoderna kan också användas för att utföra en uppgift. För att skapa ett objekt använder man sig av en klass. Klassen är som en ritning eller mall för objekten. Den talar om vilka variabler och metoder som ska finnas. </p><p> I den här uppgiften ärvde templatefilerna från en basmall vilket gjorde att man inte behövde inkludera header och footer. Det tyckte jag var väldigt smidigt. Jag känner mig inte helt hemma i ramverk och att skriva php med olika taggar och så där, men jag hoppas att det ger sig så småningom. Jag tycker det är kul med router!</p><p> Jag har inte tittat på “PHP The Right Way” så mycket, men tänker att delen och testning och errors and exceptions nog kan vara intressanta. </p><p> Idag har jag lärt mig att överskugga borders i CSS! Det har jag varit sugen på sen starten av förra lärperioden. </p>";
+        $data = [
+            'kmom01' => $kmom01
+        ];
+
+
+        return $this->render('report.html.twig', $data);
     }
 
     #[Route("/api", name: "api")]
