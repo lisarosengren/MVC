@@ -23,7 +23,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 1.4rem;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
     margin-top: 1.4rem;
 
@@ -110,7 +110,7 @@ nav {
     font-family: "Arvo", serif;
     background-color: rgb(215, 170, 20);
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     border-bottom: solid 2px #000;
     padding-top: 0.7rem;
 }
@@ -124,6 +124,7 @@ nav {
     background-color: rgb(216, 195, 124);
     padding: 0.7rem;
     padding-bottom: 0.35rem;
+    margin-right: 2.8rem;
 }
 
 a.nav {
@@ -153,6 +154,7 @@ footer {
 }
 
 .me {
+    max-width: 700px;
     text-align: justify;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
