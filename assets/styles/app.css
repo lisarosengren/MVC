@@ -1,11 +1,49 @@
-@import "init.css";
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    font-family: "Poppins", sans-serif;
+}
 
 body {
-    background-color: skyblue;
+    background-color: rgb(156, 214, 237);
+    min-height: 100vh;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     display: flex;
+    flex-direction: column;
+    padding: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 1.4rem;
+
+}
+
+p {
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2%;
+    border: solid 1px #000;
+    max-width: 100%;
+}
+
+h1 {
+    display: block;
 }
 
 .article {
@@ -14,11 +52,17 @@ main {
 
 .menu {
     width: 20%;
+    padding-right: 0.7rem;
 }
 
 footer {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
+    padding: 1.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    color: #f0f0f0;
 }
 
 .left {
@@ -32,14 +76,15 @@ footer {
 
 /* from https://css-generators.com/flower-shapes/ */
 .flower {
-    width: 200px; /* adjust to control the size */
+    width: 300px; /* adjust to control the size */
     aspect-ratio: 1;
     --g:/20.56% 20.56% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
     mask: 100% 50% var(--g),93.301% 75% var(--g),75% 93.301% var(--g),50% 100% var(--g),25% 93.301% var(--g),6.699% 75% var(--g),0% 50% var(--g),6.699% 25% var(--g),25% 6.699% var(--g),50% 0% var(--g),75% 6.699% var(--g),93.301% 25% var(--g),radial-gradient(100% 100%,#000 38.366%,#0000 calc(38.366% + 1px));
-  }
+    margin: 1.4rem;
+}
 
 
-  .json {
+.json {
     background-color: #63a32bf1;
     border: none;
     color: white;
@@ -50,4 +95,76 @@ footer {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.site-header {
+    font-family: "Arvo", serif;
+    width: 100%;
+    height: 7rem;
+    background-color: rgb(215, 170, 20);
+    padding: 1.4rem;
+
+}
+
+nav {
+    font-family: "Arvo", serif;
+    background-color: rgb(215, 170, 20);
+    display: flex;
+    justify-content: space-around;
+    border-bottom: solid 2px #000;
+    padding-top: 0.7rem;
+}
+
+.nav {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: solid 2px #000;
+    border-left: solid 2px #000;
+    border-right: solid 2px #000;
+    background-color: rgb(216, 195, 124);
+    padding: 0.7rem;
+    padding-bottom: 0.35rem;
+}
+
+a.nav {
+    text-decoration: none;
+    color: #000;
+}
+
+.active {
+    background-color: rgb(156, 214, 237);
+    box-shadow: 0 2px 0 rgb(156, 214, 237);
   }
+
+.site-title {
+    background-color: rgb(216, 195, 124);
+    padding: 0.7rem;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+}
+
+footer {
+    background-color: #333;
+}
+
+.center {
+    text-align: center;
+}
+
+.me {
+    text-align: justify;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.text {
+    grid-column-start: 2;
+    grid-column-end: span 2;
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+}

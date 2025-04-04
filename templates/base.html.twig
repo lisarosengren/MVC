@@ -15,21 +15,23 @@
     </head>
     <body>
         <header class="site-header">
-            <div class="site-title">Lisas Me-sida</div>
+            <div class="site-title"><h3>Lisas Me-sida</h3></div>
         </header>
         <nav>
-            <ul>
-                <li><a href="{{ path('home') }}">Home</a></li>
-                <li><a href="{{ path('about') }}">Om</a></li>
-                <li><a href="{{ path('lucky') }}">Lucky</a></li>
-                <li><a href="{{ path('report') }}">Redovisning</a></li>
-                <li><a href="{{ path('api') }}">API</a></li> 
-            </ul>
+            <a {% if app.request.pathinfo == path('home') %} class="active nav" {% else %} class ="nav" {% endif %} href="{{ path('home') }}">Home</a>
+            <a {% if app.request.pathinfo == path('about') %} class="active nav" {% else %} class ="nav" {% endif %} href="{{ path('about') }}">Om</a>
+            <a {% if app.request.pathinfo == path('lucky') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('lucky') }}">Lucky</a>
+            <a {% if app.request.pathinfo == path('report') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('report') }}">Redovisning</a>
+            <a {% if app.request.pathinfo == path('api') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('api') }}">API</a>
         </nav>
+        <main>
         {% block body %}{% endblock %}
+        </main>
         <footer>
         <div class="left">kurs: MVC</div>
         <div class="right">student: Lisa Rosengren</div>
         </footer>
     </body>
 </html>
+
+

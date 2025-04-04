@@ -5,9 +5,10 @@
 {% block title %}Lucky{% endblock %}
 
 {% block body %}
-    <h1>Lyckokatt</h1>
-    
-    <p>Här är din lyckokatt:</p>
-    <h4>{{ name }}</h4>
-    <img class="flower" src="{{ asset('build/images/'~number~'.jpg') }}" alt="lyckokatt">
+    <center>
+        
+        <h3>Här är din lyckokatt:</h3>
+        <img class="flower" src="{{ asset('build/images/'~number~'.jpg') }}" alt="lyckokatt">
+        <h3>{{ name }}</h3>
+    </center>
 {% endblock %}
