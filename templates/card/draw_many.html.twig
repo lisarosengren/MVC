@@ -1,0 +1,19 @@
+{# templates/card/draw_many.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Dra kort{% endblock %}
+
+{% block body %}
+    
+    <div class="card">
+        <div class="count">Det finns {{count}} kort kvar i leken</div>
+        {{ include('flash.html.twig') }}
+            <div class="draw">
+                {% for card in cards %}
+                    {{card|striptags('<div>')|raw }}
+                {% endfor %}
+            </div>
+
+    </div>
+{% endblock %}

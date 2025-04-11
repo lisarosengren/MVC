@@ -1,0 +1,17 @@
+{# templates/card/draw.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Dra ett kort{% endblock %}
+
+{% block body %}
+    
+    <div class="card">
+        <div class="count">Det finns {{count}} kort kvar i leken</div>
+        {{ include('flash.html.twig') }}
+            <div class="draw">
+                {{card|striptags('<div>')|raw }}
+            </div>
+
+    </div>
+{% endblock %}

@@ -8,9 +8,9 @@ class CardHand
 {
     private $hand = [];
 
-    public function add(Card $card): void
+    public function add(): void
     {
-        $this->hand[] = $card;
+        $this->hand[] = New Card;
     }
 
     public function getString(): array
