@@ -18,7 +18,7 @@ class DeckControllerJson
             $session->set("deck", New DeckOfCards());    
         }
 
-        $deck = $session->get("deck")->getValues();
+        $deck = $session->get("deck")->getSortedValues();
         sort($deck);
 
         $data = $deck;

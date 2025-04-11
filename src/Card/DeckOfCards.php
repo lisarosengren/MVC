@@ -10,18 +10,18 @@ class DeckOfCards
 
     public function __construct() {
         $this->deck = [
-        1 => New CardGraphic("Ace of Spades"),
-        1 => New CardGraphic("Two of Spades"),
-        1 => New CardGraphic("Three of Spades"),
-        1 => New CardGraphic("Four of Spades"),
-        1 => New CardGraphic("Five of Spades"),
-        1 => New CardGraphic("Six of Spades"),
-        1 => New CardGraphic("Seven of Spades"),
-        1 => New CardGraphic("Eight of Spades"),
-        1 => New CardGraphic("Nine of Spades"),
-        1 => New CardGraphic("Ten of Spades"),
-        1 => New CardGraphic("Jack of Spades"),
-        1 => New CardGraphic("Queen of Spades"),
+        New CardGraphic("Ace of Spades"),
+        New CardGraphic("Two of Spades"),
+        New CardGraphic("Three of Spades"),
+        New CardGraphic("Four of Spades"),
+        New CardGraphic("Five of Spades"),
+        New CardGraphic("Six of Spades"),
+        New CardGraphic("Seven of Spades"),
+        New CardGraphic("Eight of Spades"),
+        New CardGraphic("Nine of Spades"),
+        New CardGraphic("Ten of Spades"),
+        New CardGraphic("Jack of Spades"),
+        New CardGraphic("Queen of Spades"),
         New CardGraphic("King of Spades"),
         New CardGraphic("Ace of Hearts"),
         New CardGraphic("Two of Hearts"),
@@ -41,27 +41,27 @@ class DeckOfCards
         New CardGraphic("Three of Clubs"),
         New CardGraphic("Four of Clubs"),
         New CardGraphic("Five of Clubs"),
-        1 => New CardGraphic("Six of Clubs"),
-        1 => New CardGraphic("Seven of Clubs"),
-        1 => New CardGraphic("Eight of Clubs"),
-        1 => New CardGraphic("Nine of Clubs"),
-        1 => New CardGraphic("Ten of Clubs"),
-        1 => New CardGraphic("Jack of Clubs"),
-        1 => New CardGraphic("Queen of Clubs"),
-        1 => New CardGraphic("King of Clubs"),
-        1 => New CardGraphic("Ace of Diamonds"),
-        1 => New CardGraphic("Two of Diamonds"),
-        1 => New CardGraphic("Three of Diamonds"),
-        1 => New CardGraphic("Four of Diamonds"),
-        1 => New CardGraphic("Five of Diamonds"),
-        1 => New CardGraphic("Six of Diamonds"),
-        1 => New CardGraphic("Seven of Diamonds"),
-        1 => New CardGraphic("Eight of Diamonds"),
-        1 => New CardGraphic("Nine of Diamonds"),
-        1 => New CardGraphic("Ten of Diamonds"),
-        1 => New CardGraphic("Jack of Diamonds"),
-        1 => New CardGraphic("Queen of Diamonds"),
-        1 => New CardGraphic("King of Diamonds")
+        New CardGraphic("Six of Clubs"),
+        New CardGraphic("Seven of Clubs"),
+        New CardGraphic("Eight of Clubs"),
+        New CardGraphic("Nine of Clubs"),
+        New CardGraphic("Ten of Clubs"),
+        New CardGraphic("Jack of Clubs"),
+        New CardGraphic("Queen of Clubs"),
+        New CardGraphic("King of Clubs"),
+        New CardGraphic("Ace of Diamonds"),
+        New CardGraphic("Two of Diamonds"),
+        New CardGraphic("Three of Diamonds"),
+        New CardGraphic("Four of Diamonds"),
+        New CardGraphic("Five of Diamonds"),
+        New CardGraphic("Six of Diamonds"),
+        New CardGraphic("Seven of Diamonds"),
+        New CardGraphic("Eight of Diamonds"),
+        New CardGraphic("Nine of Diamonds"),
+        New CardGraphic("Ten of Diamonds"),
+        New CardGraphic("Jack of Diamonds"),
+        New CardGraphic("Queen of Diamonds"),
+        New CardGraphic("King of Diamonds")
     ];
     }
 
@@ -91,17 +91,6 @@ class DeckOfCards
         }
         return $values;
     }
-
-    public function getSortedValues(): array
-    {
-        $values = [];
-        $sortedDeck = $this->deck;
-        foreach ($this->deck as $card) {
-            $values[] = $card->getValue();
-        }
-        return $values;
-    }
-
 
     public function getString(): array
     {
