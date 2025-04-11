@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<h1>Pig game</h1>
+<h1>Kortlek</h1>
 
-<p>This is a classical dice game called "Pig" where you roll a set of dices to try and reach 100 points. You can read more on the <a href="https://en.wikipedia.org/wiki/Pig_(dice_game)">basics of the game on Wikipedia</a>.</p>
+<p>Jag har skapat fyra klasser. Card, CardGraphic, CardHand och DeckOfCards. CardGraphic ärver från Card och GraphicCard och DeckOfCards är relaterade via komposition, DeckOfCards skapar 52 objekt av GraphicCard.</p>
 
-<p>These are the routes used in developing this exercise and game.</p>
+<p>Här är sidorna som skapats i den här uppgiften:</p>
 
 <ul>
     <li><a href="{{ path('card_start') }}">Den här sidan</li>
@@ -16,9 +16,8 @@
     <li><a href="{{ path('deck') }}">Titta på den sorterade kortleken</li>
     <li><a href="{{ path('shuffle') }}">Ta en ny kortlek, blanda och titta</li>
     <li><a href="{{ path('draw') }}">Dra ett kort</li>
-    <li><a href="{{ path('draw', {num: 5}) }}">Dra flera kort</li>
-    <li><a href="{{ path('pig_init_get') }}">Game Pig Start</li>
+    <li><a href="{{ path('draw_many', {num: 5}) }}">Dra flera kort</li>
 </ul>
-<main>
+
 
 {% endblock %}
