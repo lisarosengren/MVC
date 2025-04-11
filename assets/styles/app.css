@@ -124,7 +124,7 @@ nav {
     background-color: rgb(216, 195, 124);
     padding: 0.7rem;
     padding-bottom: 0.35rem;
-    margin-right: 2.8rem;
+    margin-right: 0.7rem;
 }
 
 a.nav {
@@ -169,4 +169,28 @@ footer {
 .about {
     display: flex;
     flex-direction: row;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.flash-warning:before {
+    content: "⚠";
 }

@@ -53,15 +53,3 @@ class ControllerTwig extends AbstractController
         return $this->render('api.html.twig');
     }
 }
-
-// $letter_list = [];
-// $alphabet = range('a', 'z');
-// foreach ($alphabet as $letter)
-// {
-//     $letter_list[] = $letter;
-// }
-
-// $number = random_int(0, 26);
-// $lucky_letter = $letter_list[$number];
-
-// '<img src="{{ asset('build/images/" . $num . ".jpg') }}" alt="lyckokatt" width=300>'
