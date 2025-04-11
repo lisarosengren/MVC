@@ -26,6 +26,7 @@ main {
     max-width: 900px;
     margin: 0 auto;
     margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
 
 }
 
@@ -193,4 +194,22 @@ ul {
 }
 .flash-warning:before {
     content: "⚠";
+}
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    background-color: #fdf6df;
+    padding: 2rem;
+    border-radius: 5%;
+}
+
+.black {
+    font-size: 5rem;
+}
+
+.red {
+    font-size: 5rem;
+    color: #ff0000;
 }

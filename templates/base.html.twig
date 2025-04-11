@@ -23,6 +23,7 @@
             <a {% if app.request.pathinfo == path('lucky') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('lucky') }}">Lucky</a>
             <a {% if app.request.pathinfo == path('report') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('report') }}">Redovisning</a>
             <a {% if app.request.pathinfo == path('api') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('api') }}">API</a>
+            <a {% if app.request.pathinfo == path('card_start') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('card_start') }}">Kort</a>
         {#    <a {% if app.request.pathinfo == path('pig_init_get') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('pig_init_get') }}">Pig</a> #}
         </nav>
         <main>
