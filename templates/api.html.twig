@@ -7,22 +7,13 @@
 {% block body %}
     <h1>JSON routes</h1>
 
-    <div class="json">
-        <a href="{{ path('quote') }}">
-            <p>Slumpade citat</p>
-        </a>
-    </div>
-    
 
-
-    <div class="json">
-        <a href="{{ path('api_deck') }}">
-            <p>Visar den sorterade kortleken</p>
-        </a>
-    </div>
 
     <form method="post" action="">
     <p>
+        <input type="submit" name="quote" value="Visar slumpade citat"
+            onClick="this.form.action='{{ path('quote') }}';">
+
         <input type="submit" name="shuffle" value="Visar blandad kortlek"
             onClick="this.form.action='{{ path('api_shuffle') }}';">
 
@@ -32,8 +23,8 @@
        <input type="submit" name="draw" value="Visar flera dragna kort"
             onClick="this.form.action='{{ path('api_draw_many', {num: 2}) }}';">
 
-        <input type="submit" name="restart" value="Restart"
-            onClick="this.form.action='{{ path('pig_init_get') }}';this.form.method='get';"
+        <input type="submit" name="sorterad" value="Visar sorterad kortlek"
+            onClick="this.form.action='{{ path('api_deck') }}';this.form.method='get';"
 
         
     </p>
@@ -41,11 +32,5 @@
 
 
 
-    <a href="{{ path('api_deck') }}">
-    <div class="json">
-        <h3>Sorterad kortlek</h3>
-        <p>Visar den sorterade kortleken</p>
-    </div>
-    </a>
 
 {% endblock %}

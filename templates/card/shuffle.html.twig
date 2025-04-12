@@ -5,9 +5,11 @@
 {% block title %}Blandad kortlek{% endblock %}
 
 {% block body %}
+<div class="card">
     <div class="deck">
-    {% for div in deck %}
-        {{div|striptags('<div>')|raw }}
-    {% endfor %}
+        {% for div in deck %}
+            {{div|striptags('<div>')|raw }}
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
