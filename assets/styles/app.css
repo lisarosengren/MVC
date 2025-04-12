@@ -87,6 +87,18 @@ footer {
     margin: 1.4rem;
 }
 
+input[type=submit] {
+    background-color: #63a32bf1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
 .json {
     background-color: #63a32bf1;

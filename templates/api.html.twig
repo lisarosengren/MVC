@@ -6,10 +6,46 @@
 
 {% block body %}
     <h1>JSON routes</h1>
-    <a href="{{ path('quote') }}">
-        <div class="json">
-        <h3>Quote</h3>
-        <p>Slumpade citat</p>
-        </div>
+
+    <div class="json">
+        <a href="{{ path('quote') }}">
+            <p>Slumpade citat</p>
+        </a>
+    </div>
+    
+
+
+    <div class="json">
+        <a href="{{ path('api_deck') }}">
+            <p>Visar den sorterade kortleken</p>
+        </a>
+    </div>
+
+    <form method="post" action="">
+    <p>
+        <input type="submit" name="shuffle" value="Visar blandad kortlek"
+            onClick="this.form.action='{{ path('api_shuffle') }}';">
+
+        <input type="submit" name="draw" value="Visar ett draget kort"
+            onClick="this.form.action='{{ path('api_draw') }}';">
+
+       <input type="submit" name="draw" value="Visar flera dragna kort"
+            onClick="this.form.action='{{ path('api_draw_many', {num: 2}) }}';">
+
+        <input type="submit" name="restart" value="Restart"
+            onClick="this.form.action='{{ path('pig_init_get') }}';this.form.method='get';"
+
+        
+    </p>
+</form>
+
+
+
+    <a href="{{ path('api_deck') }}">
+    <div class="json">
+        <h3>Sorterad kortlek</h3>
+        <p>Visar den sorterade kortleken</p>
+    </div>
     </a>
+
 {% endblock %}

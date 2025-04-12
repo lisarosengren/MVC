@@ -83,6 +83,14 @@ class DeckOfCards
         return $card->getAsString();
     }
 
+    public function drawCardJson(): string
+    {
+        $card = array_pop($this->deck);
+
+        return $card->getValue();
+    }
+
+
     public function getValues(): array
     {
         $values = [];
@@ -148,7 +156,6 @@ class DeckOfCards
             "Queen of Diamonds",
             "King of Diamonds"
         ];
-        $values = [];
         $sortedDeck = [];
         $inDeck = $this->getValues();
 
@@ -156,15 +163,11 @@ class DeckOfCards
 
             if (in_array($card, $inDeck)) {
 
-                $sortedDeck[] = New CardGraphic($card);
+                $sortedDeck[] = $card;
             }
         }
 
-        foreach ($sortedDeck as $card) {
-            $values[] = $card->getValue();
-        }
-        
-        return $values;
+        return $sortedDeck;
     }
 
     public function getString(): array
