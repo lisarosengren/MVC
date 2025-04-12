@@ -19,7 +19,27 @@ class DeckControllerJson
         }
 
         $deck = $session->get("deck")->getSortedValues();
-        sort($deck);
+
+        $data = $deck;
+
+
+        // return new JsonResponse($data);
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/deck/shuffle", name: "api_shuffle", methods: ['POST'])]
+    public function jsonShuffle(SessionInterface $session): Response
+    {
+        if (!$session->has("deck")) {
+            $session->set("deck", New DeckOfCards());    
+        }
+
+        $deck = $session->get("deck")->shuffle();
 
         $data = $deck;
 
