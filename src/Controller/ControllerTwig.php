@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,7 +55,7 @@ class ControllerTwig extends AbstractController
     public function api(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
         $data = [

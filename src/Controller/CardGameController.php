@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,11 +32,11 @@ class CardGameController extends AbstractController
     public function sessionDelete(SessionInterface $session): Response
     {
         $session->clear();
-        
+
         $this->addFlash(
-                        'notice',
-                        'Sessionen är raderad.'
-                        );
+            'notice',
+            'Sessionen är raderad.'
+        );
         return $this->redirectToRoute('session');
     }
 
@@ -45,7 +44,7 @@ class CardGameController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
         $deck = $session->get("deck")->getString();
@@ -54,24 +53,24 @@ class CardGameController extends AbstractController
         $data = [
             "deck" => $deck
         ];
-        
+
         return $this->render('card/deck.html.twig', $data);
     }
 
     #[Route("/card/shuffle", name: "shuffle")]
     public function shuffle(SessionInterface $session): Response
     {
-        
-        $session->set("deck", New DeckOfCards());       
+
+        $session->set("deck", new DeckOfCards());
 
         $session->get("deck")->shuffleDeck();
         $deck = $session->get("deck")->getString();
-        
+
 
         $data = [
             "deck" => $deck
         ];
-        
+
         return $this->render('card/shuffle.html.twig', $data);
     }
 
@@ -79,21 +78,21 @@ class CardGameController extends AbstractController
     public function draw(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
-        }     
+            $session->set("deck", new DeckOfCards());
+        }
 
         $data = [
             "card" => "",
             "count" => $session->get("deck")->numberOfCards()
         ];
 
-        if ($data["count"]>0) {
+        if ($data["count"] > 0) {
             $data["card"] = $session->get("deck")->drawCard();
         } else {
             $this->addFlash(
                 'notice',
                 'Det finns inga kort att dra.'
-                );
+            );
         }
         $data["count"] = $session->get("deck")->numberOfCards();
 
@@ -104,8 +103,8 @@ class CardGameController extends AbstractController
     public function drawMany(SessionInterface $session, int $num): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
-        }    
+            $session->set("deck", new DeckOfCards());
+        }
 
         $count = $session->get("deck")->numberOfCards();
 
@@ -118,7 +117,7 @@ class CardGameController extends AbstractController
             $this->addFlash(
                 'warning',
                 'Du kan inte dra fler kort än det finns kvar.'
-                );
+            );
             return $this->render('card/draw_many.html.twig', $data);
         }
         $cards = [];

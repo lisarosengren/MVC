@@ -58,7 +58,7 @@ class CardGraphic extends Card
         "Ten of Clubs" => "<div class='black'>&#127194</div>",
         "Jack of Clubs" => "<div class='black'>&#127195</div>",
         "Queen of Clubs" => "<div class='black'>&#127197</div>",
-        "King of Clubs" => "<div class='black'>&#127198</div>",    
+        "King of Clubs" => "<div class='black'>&#127198</div>",
     ];
 
     public function __construct($value)

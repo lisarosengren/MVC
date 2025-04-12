@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ class DeckControllerJson
     public function jsonDeck(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
         $deck = $session->get("deck")->getSortedValues();
@@ -36,12 +35,13 @@ class DeckControllerJson
     public function jsonShuffle(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
         $deck = $session->get("deck")->shuffleDeck();
 
-        $data = $session->get("deck")->getValues();;
+        $data = $session->get("deck")->getValues();
+        ;
 
 
         // return new JsonResponse($data);
@@ -57,7 +57,7 @@ class DeckControllerJson
     public function jsonDraw(SessionInterface $session): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
 
@@ -79,23 +79,24 @@ class DeckControllerJson
     public function jsonDrawMany(SessionInterface $session, int $num): Response
     {
         if (!$session->has("deck")) {
-            $session->set("deck", New DeckOfCards());    
+            $session->set("deck", new DeckOfCards());
         }
 
 
-         {
+        {
             $data["cards"] = "not enough cards to draw";
         }
 
         $cards = [];
-        
+
         if ($num < $session->get("deck")->numberOfCards()) {
             for ($i = 1; $i <= $num; $i++) {
                 $cards[] = $session->get("deck")->drawCardJson();
-            }} else {
-                $cards = "not enough cards to draw";
             }
-        
+        } else {
+            $cards = "not enough cards to draw";
+        }
+
 
         $data = [
             "cards" => $cards,
