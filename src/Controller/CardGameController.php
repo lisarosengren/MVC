@@ -95,6 +95,7 @@ class CardGameController extends AbstractController
                 'Det finns inga kort att dra.'
                 );
         }
+        $data["count"] = $session->get("deck")->numberOfCards();
 
         return $this->render('card/draw.html.twig', $data);
     }
