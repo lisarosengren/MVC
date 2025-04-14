@@ -13,9 +13,9 @@ class ControllerTwig extends AbstractController
     #[Route("/lucky", name: "lucky")]
     public function number(): Response
     {
-        $name_list = ["Chariman Meow", "Cindy Clawford", "Fidel Catstro", "Dolly Purrton", "Paw McCartney", "Cat Stevens", "Puma Thurman"];
+        $nameList = ["Chariman Meow", "Cindy Clawford", "Fidel Catstro", "Dolly Purrton", "Paw McCartney", "Cat Stevens", "Puma Thurman"];
         $number = random_int(0, 6);
-        $name = $name_list[$number];
+        $name = $nameList[$number];
 
         $data = [
             'name' => $name,
@@ -52,17 +52,8 @@ class ControllerTwig extends AbstractController
     }
 
     #[Route("/api", name: "api")]
-    public function api(SessionInterface $session): Response
+    public function api(): Response
     {
-        if (!$session->has("deck")) {
-            $session->set("deck", new DeckOfCards());
-        }
-
-        $data = [
-            "cards" => $session->get("deck")->numberOfCards()
-        ];
-
-
         return $this->render('api.html.twig');
     }
 }

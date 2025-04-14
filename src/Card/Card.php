@@ -4,9 +4,9 @@ namespace App\Card;
 
 class Card
 {
-    protected $value;
+    protected string $value;
 
-    public function __construct(string $value = null)
+    public function __construct(string $value)
     {
         $this->value = $value;
     }

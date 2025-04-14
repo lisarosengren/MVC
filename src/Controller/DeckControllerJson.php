@@ -38,7 +38,7 @@ class DeckControllerJson
             $session->set("deck", new DeckOfCards());
         }
 
-        $deck = $session->get("deck")->shuffleDeck();
+        $session->get("deck")->shuffleDeck();
 
         $data = $session->get("deck")->getValues();
         ;
@@ -82,29 +82,18 @@ class DeckControllerJson
             $session->set("deck", new DeckOfCards());
         }
 
+        $cards = "Not enough cards to draw";
+        $data = [
+            "cards" => $cards,
+            "cardsLeft" => $session->get("deck")->numberOfCards()
+        ];
 
-        {
-            $data["cards"] = "not enough cards to draw";
-        }
-
-        $cards = [];
-
-        if ($num < $session->get("deck")->numberOfCards()) {
+        if ($data["cardsLeft"] > 0) {
+            $cards = [];
             for ($i = 1; $i <= $num; $i++) {
                 $cards[] = $session->get("deck")->drawCardJson();
             }
-        } else {
-            $cards = "not enough cards to draw";
         }
-
-
-        $data = [
-            "cards" => $cards,
-            "cards_left" => $session->get("deck")->numberOfCards()
-        ];
-
-
-        // return new JsonResponse($data);
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(

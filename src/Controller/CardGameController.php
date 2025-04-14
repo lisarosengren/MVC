@@ -12,9 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class CardGameController extends AbstractController
 {
     #[Route("/card", name: "card_start")]
-    public function home(SessionInterface $session): Response
+    public function home(): Response
     {
-
         return $this->render('card/home.html.twig');
     }
 
@@ -46,7 +45,6 @@ class CardGameController extends AbstractController
         if (!$session->has("deck")) {
             $session->set("deck", new DeckOfCards());
         }
-
         $deck = $session->get("deck")->getString();
         sort($deck);
 
@@ -86,14 +84,14 @@ class CardGameController extends AbstractController
             "count" => $session->get("deck")->numberOfCards()
         ];
 
-        if ($data["count"] > 0) {
-            $data["card"] = $session->get("deck")->drawCard();
-        } else {
+        if ($data["count"] < 1) {
             $this->addFlash(
                 'notice',
                 'Det finns inga kort att dra.'
             );
+            return $this->render('card/draw.html.twig', $data);
         }
+        $data["card"] = $session->get("deck")->drawCard();
         $data["count"] = $session->get("deck")->numberOfCards();
 
         return $this->render('card/draw.html.twig', $data);

@@ -6,7 +6,10 @@ use App\Card\CardGraphic;
 
 class DeckOfCards
 {
-    private $deck;
+    /**
+     * @var array<CardGraphic> $deck
+     */
+    private array $deck;
 
     public function __construct()
     {
@@ -80,18 +83,24 @@ class DeckOfCards
     public function drawCard(): string
     {
         $card = array_pop($this->deck);
-
-        return $card->getAsString();
+        if ($card !== null) {
+            return $card->getAsString();
+        }
+        return "No cards to draw";
     }
 
     public function drawCardJson(): string
     {
         $card = array_pop($this->deck);
-
-        return $card->getValue();
+        if ($card !== null) {
+            return $card->getValue();
+        }
+        return "No cards to draw";
     }
 
-
+    /**
+     * @return array<string>
+     */
     public function getValues(): array
     {
         $values = [];
@@ -101,6 +110,9 @@ class DeckOfCards
         return $values;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getSortedValues(): array
     {
         $completeDeck = [
@@ -171,6 +183,9 @@ class DeckOfCards
         return $sortedDeck;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getString(): array
     {
         $values = [];

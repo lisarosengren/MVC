@@ -4,9 +4,11 @@ namespace App\Card;
 
 class CardGraphic extends Card
 {
-    protected $value;
-
-    private $representation = [
+    protected string $value;
+    /**
+     * @var array<string, string> $representation
+     */
+    private array $representation = [
         "Ace of Spades" => "<div class='black'>&#127137</div>",
         "Two of Spades" => "<div class='black'>&#127138</div>",
         "Three of Spades" => "<div class='black'>&#127139</div>",
@@ -61,7 +63,7 @@ class CardGraphic extends Card
         "King of Clubs" => "<div class='black'>&#127198</div>",
     ];
 
-    public function __construct($value)
+    public function __construct(string $value)
     {
         parent::__construct($value);
     }

@@ -6,13 +6,19 @@ use App\Card\CardGraphic;
 
 class CardHand
 {
-    private $hand = [];
+    /**
+     * @var array<CardGraphic> $hand
+     */
+    private array $hand = [];
 
     public function add(CardGraphic $card): void
     {
         $this->hand[] = $card;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getString(): array
     {
         $values = [];
