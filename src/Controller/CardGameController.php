@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
+use App\Card\Game21;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,5 +129,19 @@ class CardGameController extends AbstractController
 
 
         return $this->render('card/draw_many.html.twig', $data);
+    }
+
+
+
+    #[Route("/test", name: "test")]
+    public function test(SessionInterface $session): Response
+    {
+        $game = New Game21;
+
+        $data = [
+            "value" => $game->getValue("King of Spades")
+        ];
+
+        return $this->render('card/test.html.twig', $data);
     }
 }
