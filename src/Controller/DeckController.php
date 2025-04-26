@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Card\Game21;
 use App\Card\DeckOfCards;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,42 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CardGameController extends AbstractController
+class DeckController extends AbstractController
 {
-        
-    #[Route("/test", name: "test")]
-    public function test(SessionInterface $session): Response
-    {
-        $game = New Game21;
-    
-        $data = [
-            "value" => $game->getValue("Queen of Spades")
-        ];
-    
-        return $this->render('game/test.html.twig', $data);
-    }
-
-    #[Route("/game", name: "game_start")]
+    #[Route("/card", name: "card_start")]
     public function home(): Response
     {
-        return $this->render('game/home.html.twig');
+        return $this->render('card/home.html.twig');
     }
-
-    #[Route("/game/player", name: "game_player")]
-    public function player(SessionInterface $session): Response
-    {
-        return $this->render('game/player.html.twig');
-    }
-
-
-
-
-
-    // #[Route("/card", name: "card_start")]
-    // public function home(): Response
-    // {
-    //     return $this->render('card/home.html.twig');
-    // }
 
     #[Route("/session", name: "session")]
     public function session(SessionInterface $session): Response
@@ -159,6 +129,4 @@ class CardGameController extends AbstractController
 
         return $this->render('card/draw_many.html.twig', $data);
     }
-
 }
-

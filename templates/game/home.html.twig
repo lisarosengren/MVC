@@ -1,0 +1,11 @@
+{# templates/game/home.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Spela 21{% endblock %}
+
+{% block body %}
+<h1>Spela 21</h1>
+<p>Här kan du spela kortspelet 21. Spelet går ut på att med kort uppnå det sammanlagda värdet 21, eller komma så nära som möjligt utan att överskrida 21. Ess är värda 1 eller 14. Först är det din tur. Du får ta så många kort du vill så länge du inte överskrider 21. Får du mer än 21 vinner banken. När du har valt att stanna är det bankens tur. Om du och banken får lika vinner banken.</p>
+<button onclick="document.location='{{ path('card_start') }}'">Starta spelet</button>
+{% endblock %}
