@@ -19,7 +19,7 @@ class CardGameController extends AbstractController
         $game = New Game21;
     
         $data = [
-            "value" => $game->getValue("Queen of Spades")
+            "value" => $game->getValue("Ten of Spades")
         ];
     
         return $this->render('game/test.html.twig', $data);
