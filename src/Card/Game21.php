@@ -32,7 +32,7 @@ class Game21
      *     bank: array{hand: CardHand, total: int}
      * }
      */
-    private array $participants;
+    public array $participants;
 
     public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $deck)
     {
@@ -73,6 +73,11 @@ class Game21
         $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
         $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
     }
+    
+    public function calculateSum(CardHand $hand): int
+    {
+        
+    }
 }
 
-    
+

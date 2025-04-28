@@ -1,0 +1,32 @@
+{# templates/card/player.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Din tur{% endblock %}
+
+{% block body %}
+
+<div class="card">
+<h4 class="center">Din hand</h4>
+    <div class="draw">
+        {% for card in player_cards %}
+            {{card|striptags('<div>')|raw}}
+        {% endfor %}
+    </div>
+
+
+<form method="post" action="">
+    <p>
+        <input type="submit" name="draw" value="Dra ett kort"
+            onClick="this.form.action='{{ path('card_draw') }}';"
+        >
+        <input type="submit" name="save" value="Stanna ({{player_tot}})"
+            onClick="this.form.action='{{ path('card_draw') }}';"
+        >
+    </p>
+</form>
+
+
+
+</div>
+{% endblock %}

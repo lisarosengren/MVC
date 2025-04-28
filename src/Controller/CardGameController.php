@@ -17,17 +17,11 @@ class CardGameController extends AbstractController
     #[Route("/test", name: "test")]
     public function test(SessionInterface $session): Response
     {
-        $game = New Game21(new CardHand, new CardHand, new DeckOFCards);
     
-        $data = [
-            "value" => $game->getValue("Ten of Spades"),
-            "cards" => $game->firstDraw()
-        ];
-    
-        return $this->render('game/test.html.twig', $data);
+        return $this->render('game/test.html.twig');
     }
 
-    #[Route("/game", name: "game_start")]
+    #[Route("/game", name: "game_start", methods: ['GET'])]
     public function home(): Response
     {
         return $this->render('game/home.html.twig');
@@ -38,18 +32,30 @@ class CardGameController extends AbstractController
         SessionInterface $session
         ): Response
     {
-        echo "gameStartPost called";
+        $session->set("game", New Game21(new CardHand, new CardHand, new DeckOFCards));
+        $session->get("game")->firstDraw("player");
+
         return $this->redirectToRoute('game_player');
     }
 
     #[Route("/game/player", name: "game_player")]
     public function player(SessionInterface $session): Response
     {
-
-        return $this->render('game/test.html.twig');
+        $data = [
+            "player_cards" => $session->get("game")->participants["player"]["hand"]->getString(),
+            "player_tot" => $session->get("game")->participants["player"]["total"]
+        ];
+        return $this->render('game/player.html.twig', $data);
     }
 
-
+    #[Route("/game", name: "card_draw", methods: ['POST'])]
+    public function playerDraw(
+        SessionInterface $session
+        ): Response
+    {
+        
+        return $this->redirectToRoute('game_player');
+    }
 
 
 

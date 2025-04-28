@@ -7,6 +7,6 @@
 {% block body %}
 {{value}}
 {% for card in cards %}
-    {{card.getValue()}}
+    {{card|striptags('<div>')|raw}}
 {% endfor %}
 {% endblock %}
