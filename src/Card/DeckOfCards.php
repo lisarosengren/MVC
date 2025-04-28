@@ -88,6 +88,7 @@ class DeckOfCards
         }
         return "No cards to draw";
     }
+   
 
     public function drawCardJson(): string
     {
@@ -193,5 +194,12 @@ class DeckOfCards
             $values[] = $card->getAsString();
         }
         return $values;
+    }
+
+    public function drawCardGame(): CardGraphic
+    {
+        $card = array_pop($this->deck);
+
+        return $card;
     }
 }

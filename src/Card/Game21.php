@@ -3,6 +3,7 @@
 namespace App\Card;
 
 use App\Card\Player;
+use App\Card\DeckOfCards;
 
 class Game21
 {
@@ -24,8 +25,29 @@ class Game21
         "Queen" => 12,
         "King" => 13,
     ];
+    
+    /**
+     * @var array{
+     *     player: array{hand: CardHand, total: int},
+     *     bank: array{hand: CardHand, total: int}
+     * }
+     */
+    private array $participants;
 
+    public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $deck)
+    {
 
+        $this->participants = [
+            "player" => [
+                "hand" => $player,
+                "total" => 0
+            ],
+            "bank" => [
+                "hand" => $bank,
+                "total" => 0
+            ]
+            ];
+    }
 
 
 
@@ -42,10 +64,14 @@ class Game21
     {
 
         $value = $this->values[strtok($card, " ")];
-
-
-        
+     
         return $value;
+    }
+
+    public function firstDraw($who): void
+    {
+        $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
+        $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
     }
 }
 

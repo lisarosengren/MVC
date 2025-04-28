@@ -6,4 +6,7 @@
 
 {% block body %}
 {{value}}
+{% for card in cards %}
+    {{card.getValue()}}
+{% endfor %}
 {% endblock %}
