@@ -44,9 +44,7 @@ class CardGameController extends AbstractController
     ): Response {
 
         $session->get("game")->draw("player");
-        $data = [
-            "game" => $session->get("game")
-        ];
+
         return $this->redirectToRoute('game_player');
     }
 
