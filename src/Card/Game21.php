@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\Player;
 use App\Card\DeckOfCards;
+
 // use App\Card\CardGraphic;
 
 class Game21
@@ -55,11 +56,13 @@ class Game21
             ];
     }
 
-    public function getTotal(string $who): int {
+    public function getTotal(string $who): int
+    {
         return $this->participants[$who]["total"];
     }
 
-    public function getHand(string $who): CardHand {
+    public function getHand(string $who): CardHand
+    {
         return $this->participants[$who]["hand"];
     }
 
@@ -130,7 +133,7 @@ class Game21
         $this->winner();
     }
 
-    private function winner(): void 
+    private function winner(): void
     {
         if ($this->participants["bank"]["total"] >= $this->participants["player"]["total"]) {
             $this->gameStatus = "Banken vann!";
