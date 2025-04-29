@@ -101,10 +101,10 @@ class Game21
         }
         if ($aces > 0) {
             if ($sum + $aces + 13 <= 21) {
-                $sum += 13 + $aces;
-            } else {
-                $sum += $aces;
+                $sum += 13;
             }
+            $sum += $aces;
+
         }
         $this->participants[$who]["total"] = $sum;
 
