@@ -1,0 +1,15 @@
+{# templates/game/doc.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Doc{% endblock %}
+
+{% block body %}
+<p>Följande innehåll skapades innan själva implementeringen påbörjades. Implementeringen påbörjades relativt lång tid efter att det här var gjort och mina tidigare lösningar hade under den tiden stötts och blötts i mitt bakhuvud. Min lösning skiljer sig från de här första utkasten.</p>
+<h4 class="center">Flödesschema</h4>
+<img src="{{ asset('build/images/flowchartkmom03.jpg') }}" alt="Flödesschema" width=500>
+<h4 class="center">Pseudokod</h4>
+<img src="{{ asset('build/images/pseudo.jpg') }}" alt="Pseudokod" width=500>
+<h4 class="center">Klasser</h4>
+<img src="{{ asset('build/images/klasser.jpg') }}" alt="Klasser" width=500>
+{% endblock %}
