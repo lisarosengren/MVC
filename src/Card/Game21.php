@@ -35,20 +35,21 @@ class Game21
 
     private string $gameStatus = "Inte avgjort än!";
 
-    public function __construct(private DeckOfCards $deck)
+    public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $deck)
     {
         $this->deck->shuffleDeck();
+        $this->addParticipants();
     }
 
-    public function addParticipants(CardHand $player, CardHand $bank): void
+    public function addParticipants(): void
     {
         $this->participants = [
             "player" => [
-                "hand" => $player,
+                "hand" => $this->player,
                 "total" => 0
             ],
             "bank" => [
-                "hand" => $bank,
+                "hand" => $this->bank,
                 "total" => 0
             ]
             ];
