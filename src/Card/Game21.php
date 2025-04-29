@@ -55,11 +55,6 @@ class Game21
             ];
     }
 
-    //Skapa spelare/korthand
-    //Skapa poängställning. Array med spelare/bank som key och poäng som value.
-    //Metod för att få fram kortets värde
-
-
     public function getTotal(string $who): int {
         return $this->participants[$who]["total"];
     }
