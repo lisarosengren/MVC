@@ -2,6 +2,7 @@
 
 namespace App\Card;
 
+use Exception;
 use App\Card\CardGraphic;
 
 class DeckOfCards
@@ -198,8 +199,10 @@ class DeckOfCards
 
     public function drawCardGame(): CardGraphic
     {
+        if (!$this->deck) {
+            throw new Exception("Deck is empty");
+        }
         $card = array_pop($this->deck);
-
         return $card;
     }
 }
