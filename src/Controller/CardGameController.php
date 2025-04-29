@@ -13,13 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CardGameController extends AbstractController
 {
-    #[Route("/test", name: "test")]
-    public function test(SessionInterface $session): Response
-    {
-
-        return $this->render('game/test.html.twig');
-    }
-
     #[Route("/game", name: "game_start", methods: ['GET'])]
     public function home(): Response
     {
