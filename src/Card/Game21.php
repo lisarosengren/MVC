@@ -29,21 +29,19 @@ class Game21
     ];
 
     /**
-     * @var array{
-     *     player: array{hand: CardHand, total: int},
-     *     bank: array{hand: CardHand, total: int}
-     * }
+     * @var array<string, array{hand: CardHand, total: int}>
      */
     private array $participants;
 
-    private DeckOfCards $deck;
-
     private string $gameStatus = "Inte avgjort än!";
 
-    public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $newDeck)
+    public function __construct(private DeckOfCards $deck)
     {
-        $this->deck = $newDeck;
         $this->deck->shuffleDeck();
+    }
+
+    public function addParticipants(CardHand $player, CardHand $bank): void
+    {
         $this->participants = [
             "player" => [
                 "hand" => $player,

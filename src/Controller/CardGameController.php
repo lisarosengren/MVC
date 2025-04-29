@@ -23,8 +23,10 @@ class CardGameController extends AbstractController
     public function gameStartPost(
         SessionInterface $session
     ): Response {
-        $session->set("game", new Game21(new CardHand(), new CardHand(), new DeckOFCards()));
+        $session->set("game", new Game21(new DeckOFCards()));
+        $session->get("game")->addParticipants(new CardHand(), new CardHand());
         $session->get("game")->firstDraw("player");
+
 
         return $this->redirectToRoute('game_player');
     }
