@@ -238,3 +238,24 @@ ul {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.finished {
+    font-size: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.two {
+    display: flex;
+    justify-content: space-around;
+}
+
+.player {
+    border: 1px solid #000;
+    border-radius: 2%;
+}
+
+.top {
+    margin-top: 2rem;
+}

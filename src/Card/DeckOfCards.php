@@ -88,7 +88,7 @@ class DeckOfCards
         }
         return "No cards to draw";
     }
-   
+
 
     public function drawCardJson(): string
     {

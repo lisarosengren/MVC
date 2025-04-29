@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\Player;
 use App\Card\DeckOfCards;
+// use App\Card\CardGraphic;
 
 class Game21
 {
@@ -25,18 +26,23 @@ class Game21
         "Queen" => 12,
         "King" => 13,
     ];
-    
+
     /**
      * @var array{
      *     player: array{hand: CardHand, total: int},
      *     bank: array{hand: CardHand, total: int}
      * }
      */
-    public array $participants;
+    private array $participants;
 
-    public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $deck)
+    private DeckOfCards $deck;
+
+    private string $gameStatus = "Inte avgjort än!";
+
+    public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $newDeck)
     {
-
+        $this->deck = $newDeck;
+        $this->deck->shuffleDeck();
         $this->participants = [
             "player" => [
                 "hand" => $player,
@@ -49,35 +55,97 @@ class Game21
             ];
     }
 
-
-
     //Skapa spelare/korthand
-
     //Skapa poängställning. Array med spelare/bank som key och poäng som value.
-
     //Metod för att få fram kortets värde
-    
 
 
+    public function getTotal(string $who): int {
+        return $this->participants[$who]["total"];
+    }
 
-    public function getValue(string $card): int
+    public function getHand(string $who): CardHand {
+        return $this->participants[$who]["hand"];
+    }
+
+    private function getValue(string $card): int
     {
 
         $value = $this->values[strtok($card, " ")];
-     
+
         return $value;
     }
 
-    public function firstDraw($who): void
+    public function firstDraw(string $who): void
     {
-        $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
-        $this->participants["$who"]["hand"]->add($this->deck->drawCardGame());
+        $this->participants[$who]["hand"]->add($this->deck->drawCardGame());
+        $this->participants[$who]["hand"]->add($this->deck->drawCardGame());
+        $this->calculateSum($who);
     }
-    
-    public function calculateSum(CardHand $hand): int
+
+    public function draw(string $who): void
     {
-        
+        $this->participants[$who]["hand"]->add($this->deck->drawCardGame());
+        $this->calculateSum($who);
+    }
+
+    public function calculateSum(string $who): void
+    {
+        $sum = 0;
+        $aces = 0;
+        foreach ($this->participants[$who]["hand"]->getValues() as $card) {
+            $cardValue = $this->getValue($card);
+            if ($cardValue === 1) {
+                $aces += 1;
+                continue;
+            }
+            $sum += $this->getValue($card);
+        }
+        if ($aces > 0) {
+            if ($sum + $aces + 13 <= 21) {
+                $sum += 13 + $aces;
+            } else {
+                $sum += $aces;
+            }
+        }
+        $this->participants[$who]["total"] = $sum;
+
+        if ($sum > 21) {
+            $this->gameStatus = "$who förlorade!";
+        }
+    }
+
+    public function banksTurn(): void
+    {
+        $this->firstDraw("bank");
+        $this->calculateSum("bank");
+
+        while ($this->participants["bank"]["total"] < 17) {
+            $this->draw("bank");
+            $this->calculateSum("bank");
+        }
+        if ($this->participants["bank"]["total"] === 21) {
+            $this->gameStatus = "Banken vann!";
+            return;
+        }
+        if ($this->participants["bank"]["total"] > 21) {
+            $this->gameStatus = "Spelaren vann!";
+            return;
+        }
+        $this->winner();
+    }
+
+    private function winner(): void 
+    {
+        if ($this->participants["bank"]["total"] >= $this->participants["player"]["total"]) {
+            $this->gameStatus = "Banken vann!";
+            return;
+        }
+        $this->gameStatus = "Spelaren vann!";
+    }
+
+    public function getStatus(): string
+    {
+        return $this->gameStatus;
     }
 }
-
-

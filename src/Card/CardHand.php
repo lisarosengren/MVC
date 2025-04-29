@@ -27,4 +27,16 @@ class CardHand
         }
         return $values;
     }
+
+    /**
+     * @return array<string>
+     */
+    public function getValues(): array
+    {
+        $values = [];
+        foreach ($this->hand as $card) {
+            $values[] = $card->getValue();
+        }
+        return $values;
+    }
 }

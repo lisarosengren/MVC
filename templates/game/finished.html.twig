@@ -1,0 +1,45 @@
+{# templates/game/finished.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Spelet är slut{% endblock %}
+
+{% block body %}
+
+<div class="card">
+    <div class="two">
+        <div class="player">
+            <h4 class="center">Din hand</h4>
+                <div class="finished">
+                {% for card in game.getHand("player").getString() %}
+                    {{card|striptags('<div>')|raw}}
+                {% endfor %}
+                </div>
+            <h4>din poäng: {{game.getTotal("player")}}</h4>
+        </div>
+        <div class="player">
+            <h4 class="center">Bankens hand</h4>
+                <div class="finished">
+                {% for card in game.getHand("bank").getString() %}
+                    {{card|striptags('<div>')|raw}}
+                {% endfor %}
+                </div>
+            <h4>bankens poäng: {{game.getTotal("bank")}}</h4>
+        </div>
+    </div>
+
+    {% if game.getStatus() is same as "Spelaren vann!" %}
+        <h2 class="top">Hurra! Du vann!</h2>
+    {% else %}
+        <h2 class="top">Buuu. Banken vann.</h2>
+    {% endif %}
+
+    <form method="post" action="">
+        <p>
+            <input type="submit" name="game" value="Spela igen"
+                onClick="this.form.action='{{ path('game_start_post') }}';"
+            >
+        </p>
+    </form>
+</div>
+{% endblock %}

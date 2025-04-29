@@ -1,4 +1,4 @@
-{# templates/card/player.html.twig #}
+{# templates/game/player.html.twig #}
 
 {% extends "base.html.twig" %}
 
@@ -9,22 +9,32 @@
 <div class="card">
 <h4 class="center">Din hand</h4>
     <div class="draw">
-        {% for card in player_cards %}
+        {% for card in game.getHand("player").getString() %}
             {{card|striptags('<div>')|raw}}
         {% endfor %}
     </div>
 
-
+{% if game.getTotal("player") < 21 %}
+    <form method="post" action="">
+        <p>
+            <input type="submit" name="draw" value="Dra ett kort"
+                onClick="this.form.action='{{ path('game_draw') }}';"
+            >
+            <input type="submit" name="save" value="Stanna ({{game.getTotal("player")}})"
+                onClick="this.form.action='{{ path('game_stop') }}';"
+            >
+        </p>
+    </form>
+{% else %}
+<h2>Du fick mer än 21 och har förlorat!</h2>
 <form method="post" action="">
     <p>
-        <input type="submit" name="draw" value="Dra ett kort"
-            onClick="this.form.action='{{ path('card_draw') }}';"
-        >
-        <input type="submit" name="save" value="Stanna ({{player_tot}})"
-            onClick="this.form.action='{{ path('card_draw') }}';"
+        <input type="submit" name="draw" value="Spela igen"
+            onClick="this.form.action='{{ path('game_start_post') }}';"
         >
     </p>
 </form>
+{% endif %}
 
 
 

@@ -24,7 +24,9 @@
             onClick="this.form.action='{{ path('api_draw_many', {num: 2}) }}';">
 
         <input type="submit" name="sorterad" value="Visar sorterad kortlek"
-            onClick="this.form.action='{{ path('api_deck') }}';this.form.method='get';"
+            onClick="this.form.action='{{ path('api_deck') }}';this.form.method='get';">
+        <input type="submit" name="sorterad" value="Visar status i 21"
+            onClick="this.form.action='{{ path('api_game') }}';this.form.method='get';">
 
         
     </p>
