@@ -14,7 +14,7 @@
         {% endfor %}
     </div>
 
-{% if game.getTotal("player") =< 21 %}
+{% if game.getTotal("player") <= 21 %}
     <form method="post" action="">
         <p>
             <input type="submit" name="draw" value="Dra ett kort"

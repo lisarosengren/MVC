@@ -6,7 +6,9 @@ use App\Card\Player;
 use App\Card\DeckOfCards;
 
 // use App\Card\CardGraphic;
-
+/**
+ * The class Game21 represents the game 21.
+ */
 class Game21
 {
     /**
