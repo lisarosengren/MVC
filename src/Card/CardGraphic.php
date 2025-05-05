@@ -2,6 +2,8 @@
 
 namespace App\Card;
 
+use Exception;
+
 class CardGraphic extends Card
 {
     protected string $value;
@@ -70,6 +72,11 @@ class CardGraphic extends Card
 
     public function getAsString(): string
     {
-        return $this->representation[$this->value];
+        if (array_key_exists($this->value, $this->representation)) {
+            return $this->representation[$this->value];
+        };
+
+        throw new Exception("The cards value is not represented by an image. Use format 'Queen of Clubs.'");
+
     }
 }

@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class DiceHandTest extends TestCase
 {
-   /**
-     * Stub the dices to assure the value can be asserted.
-     */
-    public function testAddStubbedDices()
+    /**
+      * Stub the dices to assure the value can be asserted.
+      */
+    public function testAddStubbedDices(): void
     {
         // Create a stub for the Dice class.
         $stub = $this->createMock(Dice::class);
