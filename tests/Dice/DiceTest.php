@@ -66,4 +66,22 @@ class DiceTest extends TestCase
 
         $this->assertEquals($exp, $res);
     }
+
+
+    /**
+     * Create a mocked object that always returns 6.
+     */
+    public function testStubRollDiceLastRoll()
+    {
+        // Create a stub for the Dice class.
+        $stub = $this->createMock(Dice::class);
+
+        // Configure the stub.
+        $stub->method('roll')
+            ->willReturn(6);
+
+        $res = $stub->roll();
+        $exp = 6;
+        $this->assertEquals($exp, $res);
+    }
 }
