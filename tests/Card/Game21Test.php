@@ -2,6 +2,7 @@
 
 namespace App\Card;
 
+use App\Card\CardHand;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +18,10 @@ class Game21Test extends TestCase
      */
     protected function setUp(): void
     {
-        $this->game = new Game21();
+        $player = new CardHand();
+        $bank = new CardHand();
+        $deck = new DeckOfCards();
+        $this->game = new Game21($player, $bank, $deck);
     }
 
 
@@ -41,9 +45,10 @@ class Game21Test extends TestCase
         $this->assertObjectHasProperty("deck", $this->game);
         $this->assertObjectHasProperty("player", $this->game);
         $this->assertObjectHasProperty("bank", $this->game);
-
-
     }
+
+
+    
 
 //     /**
 //      * Verify that the shuffle method shuffles the cards.
