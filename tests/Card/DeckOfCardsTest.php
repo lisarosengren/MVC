@@ -2,6 +2,7 @@
 
 namespace App\Card;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -114,8 +115,36 @@ class DeckOfCardTest extends TestCase
             $this->deck->drawCard();
         }
 
-        $res = $this->deck->drawCard();
+        $res = $this->deck->drawCardJson();
         $this->assertEquals("No cards to draw", $res);
+    }
+
+    /**
+     * Verify that getString returns all the cards value as an array
+     * with strings with utf-8 representations
+     */
+    public function testGetString(): void
+    {
+        $res = $this->deck->getString();
+        $this->assertContains("<div class='black'>&#127187</div>", $res);
+    }
+
+
+    /**
+     * Verify that drawCardGame returns the card that is being
+     * drawn and that it throws an exception is there's no cards left.
+     */
+    public function testdrawCardGame(): void
+    {
+        $res = $this->deck->drawCardGame();
+        $this->assertInstanceOf("\App\Card\CardGraphic", $res);
+
+        // Test if there's no cards left
+        for ($i = 1; $i <= 51; $i++) {
+            $this->deck->drawCardGame();
+        }
+        $this->expectException(Exception::class);
+        $res = $this->deck->drawCardGame();
 
     }
 }
