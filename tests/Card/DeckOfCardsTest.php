@@ -87,8 +87,35 @@ class DeckOfCardTest extends TestCase
      */
     public function testdrawCard(): void
     {
-        // Test with full deck.
         $res = $this->deck->drawCard();
         $this->assertEquals("<div class='red'>&#127182</div>", $res);
+
+        // Test if there's no cards left
+        for ($i = 1; $i <= 51; $i++) {
+            $this->deck->drawCard();
+        }
+
+        $res = $this->deck->drawCard();
+        $this->assertEquals("No cards to draw", $res);
+
+    }
+
+    /**
+     * Verify that drawCardJson returns the cards value as a string
+     * and that the last card is removed from the deck.
+     */
+    public function testdrawCardJson(): void
+    {
+        $res = $this->deck->drawCardJson();
+        $this->assertEquals("King of Diamonds", $res);
+
+        // Test if there's no cards left
+        for ($i = 1; $i <= 51; $i++) {
+            $this->deck->drawCard();
+        }
+
+        $res = $this->deck->drawCard();
+        $this->assertEquals("No cards to draw", $res);
+
     }
 }
