@@ -46,22 +46,17 @@ class Game21Test extends TestCase
         $this->assertObjectHasProperty("player", $this->game);
         $this->assertObjectHasProperty("bank", $this->game);
     }
+   
 
+    /**
+     * Verify that the getTotal method returns total from the participant chosen.
+     */
+    public function TestGetTotal(): void
+    {
+        $res = $this->game->getTotal("player");
 
-    
-
-//     /**
-//      * Verify that the shuffle method shuffles the cards.
-//      */
-//     public function testShuffle(): void
-//     {
-//         $notExp = $this->deck->getValues();
-
-//         $this->deck->shuffleDeck();
-//         $res = $this->deck->getValues();
-
-//         $this->assertNotEquals($notExp, $res);
-//     }
+        $this->assertEquals(0, $res);
+    }
 
 
 //     /**
