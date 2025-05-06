@@ -79,4 +79,16 @@ class DeckOfCardTest extends TestCase
         $this->assertEquals(52, $res);
     }
 
+
+    /**
+     * Verify that drawCard returns the cards value as a string
+     * with utf-8 representation of card
+     * and that the last card is removed from the deck.
+     */
+    public function testdrawCard(): void
+    {
+        // Test with full deck.
+        $res = $this->deck->drawCard();
+        $this->assertEquals("<div class='red'>&#127182</div>", $res);
+    }
 }
