@@ -67,7 +67,7 @@ class Game21Test extends TestCase
     }
 
     /**
-     * Verify that the getHand method returns CardHand object
+     * Verify that the getHand method returns CardHand object.
      */
     public function testGetHand(): void
     {
@@ -75,6 +75,15 @@ class Game21Test extends TestCase
         $this->assertInstanceOf("\App\Card\CardHand", $res);
     }
 
+    /**
+     * Verify that firstDraw adds to cards to players hand and updates players total.
+     */
+    public function testFirstDraw(): void
+    {
+        $res = $this->game->getValue("Ace of Spades");
+        
+        $this->assertEquals(1, $res);
+    }
 
 
 

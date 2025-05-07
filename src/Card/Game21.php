@@ -121,7 +121,7 @@ class Game21
     public function banksTurn(): void
     {
         $this->firstDraw("bank");
-        $this->calculateSum("bank");
+
 
         while ($this->participants["bank"]["total"] < 17) {
             $this->draw("bank");
