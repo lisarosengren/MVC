@@ -2,7 +2,6 @@
 
 namespace App\Card;
 
-use App\Card\CardHand;
 use Exception;
 use TypeError;
 use PHPUnit\Framework\TestCase;
@@ -80,10 +79,60 @@ class Game21Test extends TestCase
      */
     public function testFirstDraw(): void
     {
-        $res = $this->game->getValue("Ace of Spades");
-        
-        $this->assertEquals(1, $res);
+        // Verify two cards in the hand.
+        $this->game->firstDraw("player");
+        $res = count($this->game->getHand("player")->getValues());
+        $this->assertEquals(2, $res);
+
+        // Verify that total is not 0.
+        $res = $this->game->getTotal("player");
+        $this->assertNotEquals(0, $res);
     }
+
+    /**
+     * Verify that calculateSum updates participants total, and gameStatus if sum >21.
+     */
+    public function testCalculateSum(): void
+    {
+        // Create stubs for the CardHand class.
+        $stubPlayer = $this->createMock(CardHand::class);
+        $stubPlayer2 = $this->createMock(CardHand::class);
+        $stubBank = $this->createMock(CardHand::class);
+        // Configure the stubs.
+        $stubPlayer->method('getValues')
+                ->willReturn(["Ace of Spades", "Ace of Clubs"]);
+        $stubBank->method('getValues')
+        ->willReturn(["Queen of Spades", "Queen of Clubs"]);
+
+        // Create Game21 with stubs as player and bank.
+        $deck = new DeckOfCards();
+        $stubGame = new Game21($stubPlayer, $stubBank, $deck);
+        
+        // Verify that calculateSum updates to right total if two aces.
+        $stubGame->calculateSum("player");
+        $res = $stubGame->getTotal("player");
+        $this->assertEquals(15, $res);
+        
+        // Verify that calculateSum updates to right total if two queens,
+        // and that gameStatus updates.
+        $stubGame->calculateSum("bank");
+        $res = $stubGame->getTotal("bank");
+        $this->assertEquals(24, $res);
+        $res = $stubGame->getStatus();
+        $this->assertEquals("bank förlorade!", $res);
+
+        // Verify that calculateSum updates to right total if ace plus queen.
+        $stubPlayer2->method('getValues')
+        ->willReturn(["Ace of Spades", "Queen of Clubs"]);
+        // Create Game21 with stubs as player and bank.
+        $deck = new DeckOfCards();
+        $stubGame = new Game21($stubPlayer2, $stubBank, $deck);
+        $stubGame->calculateSum("player");
+        $res = $stubGame->getTotal("player");
+        $this->assertEquals(13, $res);
+    }
+
+
 
 
 
