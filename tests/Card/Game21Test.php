@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\CardHand;
 use Exception;
+use TypeError;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -51,11 +52,19 @@ class Game21Test extends TestCase
     /**
      * Verify that the getTotal method returns total from the participant chosen.
      */
-    public function TestGetTotal(): void
+    public function testGetTotal(): void
     {
         $res = $this->game->getTotal("player");
-
         $this->assertEquals(0, $res);
+
+        // Verify that exception is thrown if method is called with wrong argument
+        $this->expectException(Exception::class);
+        $res = $this->game->getTotal("clayer");
+
+        // Verify that exception is thrown if method is called with wrong type argument
+        $this->expectException(TypeError::class);
+        $res = $this->game->getTotal(1234);
+
     }
 
 

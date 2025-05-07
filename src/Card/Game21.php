@@ -2,6 +2,7 @@
 
 namespace App\Card;
 
+use Exception;
 use App\Card\Player;
 use App\Card\DeckOfCards;
 
@@ -59,7 +60,10 @@ class Game21
 
     public function getTotal(string $who): int
     {
-        return $this->participants[$who]["total"];
+        if (array_key_exists($who, $this->participants)) {
+            return $this->participants[$who]["total"];
+        }
+        throw new Exception("Spelaren existerar inte.");
     }
 
     public function getHand(string $who): CardHand
