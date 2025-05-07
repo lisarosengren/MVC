@@ -92,7 +92,11 @@ class Game21
         return $this->participants[$who]["hand"];
     }
 
-
+    /**
+     * Method to get the points for a card.
+     * @param string $card The string value of the card.
+     * @return int The value as points.
+     */
     private function getValue(string $card): int
     {
 
@@ -101,6 +105,11 @@ class Game21
         return $value;
     }
 
+    /**
+     * Method for the first step in the game, draw two cards,
+     * updates the participants total score.
+     * @param string $who The participant.
+     */
     public function firstDraw(string $who): void
     {
         $this->participants[$who]["hand"]->add($this->deck->drawCardGame());
@@ -108,12 +117,20 @@ class Game21
         $this->calculateSum($who);
     }
 
+    /**
+     * Method to draw one card and update total.
+     * @param string $who The participant.
+     */
     public function draw(string $who): void
     {
         $this->participants[$who]["hand"]->add($this->deck->drawCardGame());
         $this->calculateSum($who);
     }
 
+    /**
+     * Method to calculate a participants total.
+     * @param string $who The participant.
+     */
     public function calculateSum(string $who): void
     {
         $sum = 0;
@@ -140,6 +157,10 @@ class Game21
         }
     }
 
+    /**
+     * Method for the banks part of the game and
+     * to get the winner.
+     */
     public function banksTurn(): void
     {
         $this->firstDraw("bank");
@@ -159,6 +180,9 @@ class Game21
         $this->winner();
     }
 
+    /**
+     * Method to calculate the winner.
+     */
     private function winner(): void
     {
         if ($this->participants["bank"]["total"] >= $this->participants["player"]["total"]) {
@@ -168,6 +192,10 @@ class Game21
         $this->gameStatus = "Spelaren vann!";
     }
 
+    /**
+     * Method to get the status of the game.
+     * @return string the status.
+     */
     public function getStatus(): string
     {
         return $this->gameStatus;

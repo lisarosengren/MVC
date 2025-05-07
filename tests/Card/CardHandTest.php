@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CardHandTest extends TestCase
 {
-    private ?CardHand $hand;
+    private CardHand $hand;
 
     /**
      * Create new hand for the tests.
