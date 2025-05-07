@@ -13,6 +13,8 @@ use App\Card\DeckOfCards;
 class Game21
 {
     /**
+     * Array with keys as first word of cards values,
+     * value as the integer point
      * @var array<string, int> $values
      */
     private array $values = [
@@ -32,12 +34,20 @@ class Game21
     ];
 
     /**
+     * Array with the participants in the game. Bank and player.
+     * Holds their CardHands and total points.
      * @var array<string, array{hand: CardHand, total: int}>
      */
     private array $participants;
 
+    /**
+     * String representing the status of the game.
+     */
     private string $gameStatus = "Inte avgjort än!";
 
+    /**
+     * The constructor. Updates the deck and the participants.
+     */
     public function __construct(private CardHand $player, private CardHand $bank, private DeckOfCards $deck)
     {
         $this->deck->shuffleDeck();
@@ -58,6 +68,12 @@ class Game21
             ];
     }
 
+    /**
+     * Method to get the points from the choosen participant.
+     *
+     * @param string $who The participant.
+     * @return int The points.
+     */
     public function getTotal(string $who): int
     {
         if (array_key_exists($who, $this->participants)) {
@@ -66,10 +82,16 @@ class Game21
         throw new Exception("Spelaren existerar inte.");
     }
 
+    /**
+     * Get-method to get the participants CardHands.
+     * @param string $who The participant.
+     * @return CardHand The chosen participants hand.
+     */
     public function getHand(string $who): CardHand
     {
         return $this->participants[$who]["hand"];
     }
+
 
     private function getValue(string $card): int
     {
