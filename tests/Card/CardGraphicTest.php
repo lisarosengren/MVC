@@ -32,7 +32,7 @@ class CardGraphicTest extends TestCase
         $card = new CardGraphic("Ace Of Spades");
 
         $this->expectException(Exception::class);
-        $res = $card->getAsString();
+        $card->getAsString();
     }
 
 

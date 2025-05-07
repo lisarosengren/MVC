@@ -49,7 +49,7 @@ class Game21Test extends TestCase
 
         // Verify that exception is thrown if method is called with wrong argument
         $this->expectException(Exception::class);
-        $res = $this->game->getTotal("clayer");
+        $this->game->getTotal("clayer");
     }
 
     /**
@@ -58,9 +58,10 @@ class Game21Test extends TestCase
     public function testGetTotalWrongType(): void
     {
         $this->expectException(Exception::class);
-        $res = $this->game->getTotal(1234);
+        // Stan is complaining about wrong type, but this is a test.
+        // @phpstan-ignore-next-line
+        $this->game->getTotal(1234);
     }
-
 
 
     /**

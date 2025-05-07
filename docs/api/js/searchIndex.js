@@ -133,72 +133,72 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "The\u0020constructor.\u0020Updates\u0020the\u0020deck\u0020and\u0020the\u0020participants.",
             "url": "classes/App-Card-Game21.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AaddParticipants\u0028\u0029",
             "name": "addParticipants",
-            "summary": "",
+            "summary": "Adds\u0020the\u0020player\u0020and\u0020the\u0020bank\u0020to\u0020the\u0020participants\u0020array.",
             "url": "classes/App-Card-Game21.html#method_addParticipants"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetTotal\u0028\u0029",
             "name": "getTotal",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020the\u0020points\u0020from\u0020the\u0020choosen\u0020participant.",
             "url": "classes/App-Card-Game21.html#method_getTotal"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetHand\u0028\u0029",
             "name": "getHand",
-            "summary": "",
+            "summary": "Get\u002Dmethod\u0020to\u0020get\u0020the\u0020participants\u0020CardHands.",
             "url": "classes/App-Card-Game21.html#method_getHand"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020the\u0020points\u0020for\u0020a\u0020card.",
             "url": "classes/App-Card-Game21.html#method_getValue"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AfirstDraw\u0028\u0029",
             "name": "firstDraw",
-            "summary": "",
+            "summary": "Method\u0020for\u0020the\u0020first\u0020step\u0020in\u0020the\u0020game,\u0020draw\u0020two\u0020cards,\nupdates\u0020the\u0020participants\u0020total\u0020score.",
             "url": "classes/App-Card-Game21.html#method_firstDraw"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
-            "summary": "",
+            "summary": "Method\u0020to\u0020draw\u0020one\u0020card\u0020and\u0020update\u0020total.",
             "url": "classes/App-Card-Game21.html#method_draw"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AcalculateSum\u0028\u0029",
             "name": "calculateSum",
-            "summary": "",
+            "summary": "Method\u0020to\u0020calculate\u0020a\u0020participants\u0020total.",
             "url": "classes/App-Card-Game21.html#method_calculateSum"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AbanksTurn\u0028\u0029",
             "name": "banksTurn",
-            "summary": "",
+            "summary": "Method\u0020for\u0020the\u0020banks\u0020part\u0020of\u0020the\u0020game\u0020and\nto\u0020get\u0020the\u0020winner.",
             "url": "classes/App-Card-Game21.html#method_banksTurn"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003Awinner\u0028\u0029",
             "name": "winner",
-            "summary": "",
+            "summary": "Method\u0020to\u0020calculate\u0020the\u0020winner.",
             "url": "classes/App-Card-Game21.html#method_winner"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003AgetStatus\u0028\u0029",
             "name": "getStatus",
-            "summary": "",
+            "summary": "Method\u0020to\u0020get\u0020the\u0020status\u0020of\u0020the\u0020game.",
             "url": "classes/App-Card-Game21.html#method_getStatus"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A\u0024values",
             "name": "values",
-            "summary": "",
+            "summary": "Array\u0020with\u0020keys\u0020as\u0020first\u0020word\u0020of\u0020cards\u0020values,\nvalue\u0020as\u0020the\u0020integer\u0020point",
             "url": "classes/App-Card-Game21.html#property_values"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A\u0024participants",
             "name": "participants",
-            "summary": "",
+            "summary": "Array\u0020with\u0020the\u0020participants\u0020in\u0020the\u0020game.\u0020Bank\u0020and\u0020player.",
             "url": "classes/App-Card-Game21.html#property_participants"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A\u0024gameStatus",
             "name": "gameStatus",
-            "summary": "",
+            "summary": "String\u0020representing\u0020the\u0020status\u0020of\u0020the\u0020game.",
             "url": "classes/App-Card-Game21.html#property_gameStatus"
         },                {
             "fqsen": "\\App\\Card\\Game21\u003A\u003A\u0024player",
@@ -495,6 +495,11 @@ Search.appendIndex(
             "name": "getString",
             "summary": "",
             "url": "classes/App-Dice-DiceHand.html#method_getString"
+        },                {
+            "fqsen": "\\App\\Dice\\DiceHand\u003A\u003Asum\u0028\u0029",
+            "name": "sum",
+            "summary": "",
+            "url": "classes/App-Dice-DiceHand.html#method_sum"
         },                {
             "fqsen": "\\App\\Dice\\DiceHand\u003A\u003A\u0024hand",
             "name": "hand",

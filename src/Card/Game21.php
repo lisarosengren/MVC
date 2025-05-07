@@ -53,7 +53,10 @@ class Game21
         $this->deck->shuffleDeck();
         $this->addParticipants();
     }
-
+    
+    /**
+     * Adds the player and the bank to the participants array.
+     */
     public function addParticipants(): void
     {
         $this->participants = [
