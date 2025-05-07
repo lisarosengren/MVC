@@ -22,14 +22,6 @@ class CardHandTest extends TestCase
 
 
     /**
-     * Erase the new hand after the tests.
-     */
-    protected function tearDown(): void
-    {
-        $this->hand = null;
-    }
-
-    /**
      * Construct object and verify that the object has the expected
      * properties.
      */
