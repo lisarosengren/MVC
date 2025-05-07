@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DeckOfCardTest extends TestCase
 {
-    private ?DeckOfCards $deck;
+    private DeckOfCards $deck;
 
     /**
      * Create new deck for the tests.
@@ -20,14 +20,6 @@ class DeckOfCardTest extends TestCase
         $this->deck = new DeckOfCards();
     }
 
-
-    /**
-     * Erase the new deck after the tests.
-     */
-    protected function tearDown(): void
-    {
-        $this->deck = null;
-    }
 
     /**
      * Construct object and verify that the object has the expected
