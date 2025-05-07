@@ -64,8 +64,20 @@ class Game21Test extends TestCase
         // Verify that exception is thrown if method is called with wrong type argument
         $this->expectException(TypeError::class);
         $res = $this->game->getTotal(1234);
-
     }
+
+    /**
+     * Verify that the getHand method returns CardHand object
+     */
+    public function testGetHand(): void
+    {
+        $res = $this->game->getHand("player");
+        $this->assertInstanceOf("\App\Card\CardHand", $res);
+    }
+
+
+
+
 
 
 //     /**
