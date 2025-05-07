@@ -132,6 +132,23 @@ class Game21Test extends TestCase
         $this->assertEquals(13, $res);
     }
 
+    /**
+     * Verify that Winner updates gameStatus with the right value.
+     */
+    // public function testWinner(): void
+    // {
+    //     // When bank won.
+    //     $this->game->firstDraw("bank");
+    //     $res = $this->game->winner();
+    //     $res = $this->game->getStatus();
+    //     $this->assertEquals("Banken vann!", $res);
+
+    //     // When player won.
+    //     $this->game->firstDraw("player");
+    //     $res = $this->game->winner();
+    //     $res = $this->game->getStatus();
+    //     $this->assertEquals("Spelaren vann!", $res);
+    // }
 
 
 

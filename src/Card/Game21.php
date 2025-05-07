@@ -125,7 +125,6 @@ class Game21
 
         while ($this->participants["bank"]["total"] < 17) {
             $this->draw("bank");
-            $this->calculateSum("bank");
         }
         if ($this->participants["bank"]["total"] === 21) {
             $this->gameStatus = "Banken vann!";
