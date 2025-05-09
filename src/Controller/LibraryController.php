@@ -157,6 +157,28 @@ final class LibraryController extends AbstractController
             $entityManager->remove($book);
         }
 
+        $databas = new Library();
+        $databas->setTitle("Databasteknik");
+        $databas->setIsbn(9789144069197);
+        $databas->setAuthor("Thomas Padron-McCarthy, Tore Risch");
+        $databas->setImage('build/images/databasteknik.jpg');
+        $entityManager->persist($databas);
+
+        $python = new Library();
+        $python->setTitle("Python for Everybody");
+        $python->setIsbn(9781530051120);
+        $python->setAuthor("Charles Severance");
+        $python->setImage('build/images/python.jpg');
+        $entityManager->persist($python);
+
+        $php = new Library();
+        $php->setTitle("Webbutveckling med PHP och MySQL");
+        $php->setIsbn(9789144105567);
+        $php->setAuthor("Montathar Faraon");
+        $php->setImage('build/images/php.jpg');
+        $entityManager->persist($php);
+
+
         $entityManager->flush();
     
         return $this->redirectToRoute('library_show_all');

@@ -8,12 +8,8 @@
 <h1>Bibliotek</h1>
 <p>Det här är min landningssida för biblioteksapplikationen.</p>
 
-<form class="center" method="post" action="{{ path('game_start_post') }}">
-    <p>
-        <input type="submit" name="start" value="Starta Spelet">
-    </p>
-</form>
-<a href="{{ path('game_doc') }}"><p class="center">dokumentation</p></a>
+<a href="{{ path('library_create') }}"><p>Lägg till en bok</p></a>
+<a href="{{ path('library_show_all') }}"><p>Visa alla böcker</p></a>
 
 
 {% endblock %}
