@@ -59,7 +59,7 @@ final class ProductController extends AbstractController
     ): Response {
         $product = $productRepository
             ->find($id);
-    
+
         return $this->json($product);
     }
 
@@ -70,16 +70,16 @@ final class ProductController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
-    
+
         if (!$product) {
             throw $this->createNotFoundException(
                 'No product found for id '.$id
             );
         }
-    
+
         $entityManager->remove($product);
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('product_show_all');
     }
 
@@ -91,16 +91,16 @@ final class ProductController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
-    
+
         if (!$product) {
             throw $this->createNotFoundException(
                 'No product found for id '.$id
             );
         }
-    
+
         $product->setValue($value);
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('product_show_all');
     }
 
@@ -123,11 +123,11 @@ final class ProductController extends AbstractController
         int $value
     ): Response {
         $products = $productRepository->findByMinimumValue($value);
-    
+
         $data = [
             'products' => $products
         ];
-    
+
         return $this->render('product/view.html.twig', $data);
     }
 
@@ -137,7 +137,7 @@ final class ProductController extends AbstractController
         int $value
     ): Response {
         $products = $productRepository->findByMinimumValue2($value);
-    
+
         return $this->json($products);
     }
 

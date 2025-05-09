@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LibraryController extends AbstractController
 {
-
     #[Route("/library", name: "library_start", methods: ['GET'])]
     public function home(): Response
     {
@@ -20,7 +19,7 @@ final class LibraryController extends AbstractController
     }
 
     #[Route('/library/create', name: 'library_create', methods: ['GET'])]
-    public function create(): Response 
+    public function create(): Response
     {
         return $this->render('library/create.html.twig');
     }
@@ -48,11 +47,11 @@ final class LibraryController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $library = new Library();
-        $library->setTitle($title);
-        $library->setIsbn($isbn);
-        $library->setAuthor($author);
-        $library->setImage($image);
-        
+        $library->setTitle((string) $title);
+        $library->setIsbn((int) $isbn);
+        $library->setAuthor((string) $author);
+        $library->setImage((string) $image);
+
 
         // tell Doctrine you want to (eventually) save the Product
         // (no queries yet)
@@ -70,7 +69,7 @@ final class LibraryController extends AbstractController
         LibraryRepository $libraryRepository
     ): Response {
         $library = $libraryRepository->findAll();
-        
+
         $data = [
             'library' => $library
         ];
@@ -84,7 +83,7 @@ final class LibraryController extends AbstractController
         int $id
     ): Response {
         $book = $libraryRepository->find($id);
-        
+
         $data = [
             'book' => $book
         ];
@@ -100,10 +99,12 @@ final class LibraryController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $library = $entityManager->getRepository(Library::class)->find($id);
-    
-        $entityManager->remove($library);
-        $entityManager->flush();
-    
+        if ($library !== null) {
+            $entityManager->remove($library);
+            $entityManager->flush();
+        }
+
+
         return $this->redirectToRoute('library_show_all');
     }
 
@@ -113,7 +114,7 @@ final class LibraryController extends AbstractController
         int $id
     ): Response {
         $book = $libraryRepository->find($id);
-        
+
         $data = [
             'book' => $book
         ];
@@ -135,13 +136,13 @@ final class LibraryController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $library = $entityManager->getRepository(Library::class)->find($id);
-    
-        $library->setTitle($title);
-        $library->setIsbn($isbn);
-        $library->setAuthor($author);
-        $library->setImage($image);
+
+        $library->setTitle((string) $title);
+        $library->setIsbn((int) $isbn);
+        $library->setAuthor((string) $author);
+        $library->setImage((string) $image);
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('show_one', ['id' => $id]);
     }
 
@@ -152,8 +153,8 @@ final class LibraryController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $library = $libraryRepository->findAll();
-    
-        foreach ($library as $book){
+
+        foreach ($library as $book) {
             $entityManager->remove($book);
         }
 
@@ -180,7 +181,7 @@ final class LibraryController extends AbstractController
 
 
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('library_show_all');
     }
 
@@ -233,7 +234,7 @@ final class LibraryController extends AbstractController
     // ): Response {
     //     $product = $productRepository
     //         ->find($id);
-    
+
     //     return $this->json($product);
     // }
 
@@ -244,16 +245,16 @@ final class LibraryController extends AbstractController
     // ): Response {
     //     $entityManager = $doctrine->getManager();
     //     $product = $entityManager->getRepository(Product::class)->find($id);
-    
+
     //     if (!$product) {
     //         throw $this->createNotFoundException(
     //             'No product found for id '.$id
     //         );
     //     }
-    
+
     //     $entityManager->remove($product);
     //     $entityManager->flush();
-    
+
     //     return $this->redirectToRoute('product_show_all');
     // }
 
@@ -265,16 +266,16 @@ final class LibraryController extends AbstractController
     // ): Response {
     //     $entityManager = $doctrine->getManager();
     //     $product = $entityManager->getRepository(Product::class)->find($id);
-    
+
     //     if (!$product) {
     //         throw $this->createNotFoundException(
     //             'No product found for id '.$id
     //         );
     //     }
-    
+
     //     $product->setValue($value);
     //     $entityManager->flush();
-    
+
     //     return $this->redirectToRoute('product_show_all');
     // }
 
@@ -297,11 +298,11 @@ final class LibraryController extends AbstractController
     //     int $value
     // ): Response {
     //     $products = $productRepository->findByMinimumValue($value);
-    
+
     //     $data = [
     //         'products' => $products
     //     ];
-    
+
     //     return $this->render('product/view.html.twig', $data);
     // }
 
@@ -311,7 +312,7 @@ final class LibraryController extends AbstractController
     //     int $value
     // ): Response {
     //     $products = $productRepository->findByMinimumValue2($value);
-    
+
     //     return $this->json($products);
     // }
 

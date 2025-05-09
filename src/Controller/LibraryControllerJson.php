@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +30,7 @@ class LibraryControllerJson extends AbstractController
         int $isbn
     ): Response {
         $book = $libraryRepository->findByIsbn($isbn);
-    
+
         if (!$book) {
             $book = "Det finns ingen bok som matchar ISBN.";
         }
