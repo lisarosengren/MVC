@@ -137,11 +137,16 @@ final class LibraryController extends AbstractController
         $entityManager = $doctrine->getManager();
         $library = $entityManager->getRepository(Library::class)->find($id);
 
-        $library->setTitle((string) $title);
-        $library->setIsbn((int) $isbn);
-        $library->setAuthor((string) $author);
-        $library->setImage((string) $image);
-        $entityManager->flush();
+        if ($library !== null) {
+            $library->setTitle((string) $title);
+            $library->setIsbn((int) $isbn);
+            $library->setAuthor((string) $author);
+            $library->setImage((string) $image);
+            $entityManager->flush();
+        }
+
+
+
 
         return $this->redirectToRoute('show_one', ['id' => $id]);
     }
