@@ -27,7 +27,12 @@
             onClick="this.form.action='{{ path('api_deck') }}';this.form.method='get';">
         <input type="submit" name="sorterad" value="Visar status i 21"
             onClick="this.form.action='{{ path('api_game') }}';this.form.method='get';">
+        
+        <input type="submit" name="books" value="Visar alla böcker"
+            onClick="this.form.action='{{ path('api_books') }}';this.form.method='get';">
 
+        <input type="submit" name="isbn" value="Visar boken med ISBN 9789144069197"
+            onClick="this.form.action='{{ path('book_by_isbn', {isbn: 9789144069197}) }}';this.form.method='get';">
         
     </p>
 </form>
