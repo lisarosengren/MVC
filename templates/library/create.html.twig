@@ -1,0 +1,29 @@
+{# templates/library/create.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Lägg till{% endblock %}
+
+{% block body %}
+<h1 class="center">Lägg till en bok</h1>
+
+<form class="create" method="post" action="{{ path('library_create_post') }}">
+    <p>
+        <label for="title">Titel:</label>
+        <input type="text" name="title" id="title" required>
+        <label for="isbn">ISBN:</label>
+        <input type="number" name="isbn" id="isbn" required>
+        <label for="author">Författare:</label>
+        <input type="text" name="author" id="author" required>
+        <label for="image">Bild:</label>
+        <input type="text" name="image" id="image">
+
+
+        <br>
+        <input class="submit" type="submit" name="start" value="Lägg till">
+    </p>
+</form>
+
+
+
+{% endblock %}

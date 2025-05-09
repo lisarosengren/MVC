@@ -1,0 +1,30 @@
+{# templates/library/one.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{ book.Title }}{% endblock %}
+
+{% block body %}
+<div class="about">
+<img class="menu" src="{{ asset(book.image) }}" alt="bild på bok" width=200>
+<div class="article">
+<h1>{{book.Title}}</h1>
+
+<p>Författare: {{book.author}}<br>ISBN: {{book.isbn}}</p>
+</div> 
+
+
+
+</div>
+<div class="nogrow edit">
+<form method="post" action="">
+    <input class="update" type="submit" name="update" value="Uppdatera bok"
+    onClick="this.form.action='{{ path('update_get', {id: book.getId}) }}';this.form.method='get';">
+    <br>
+    <input class="delete" type="submit" name="delete" value="Radera bok"
+        onClick="this.form.action='{{ path('library_delete', {id: book.getId}) }}';"><br>
+</form>
+
+<a href="{{ path('library_show_all') }}"><button class="back">Se alla böcker</button></a>
+</div>
+{% endblock %}

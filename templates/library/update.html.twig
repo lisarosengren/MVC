@@ -1,0 +1,27 @@
+{# templates/library/update.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Uppdatera {{book.getTitle}}{% endblock %}
+
+{% block body %}
+<h1 class="center">Uppdatera {{book.getTitle}}</h1>
+
+<form class="create" method="post" action="{{ path('update_post',  {id: book.getId}) }}">
+    <p>
+        <label for="title">Titel:</label>
+        <input type="text" name="title" id="title" value="{{book.getTitle}}" required>
+        <label for="isbn">ISBN:</label>
+        <input type="number" name="isbn" id="isbn" value="{{book.getIsbn}}" required>
+        <label for="author">Författare:</label>
+        <input type="text" name="author" id="author" value="{{book.getAuthor}}" required>
+        <label for="image">Bild:</label>
+        <input type="text" name="image" id="image" value="{{book.getImage}}">
+
+
+        <br>
+        <input class="submit" type="submit" name="uppdatera" value="Uppdatera">
+    </p>
+</form>
+
+{% endblock %}

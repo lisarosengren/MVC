@@ -7,6 +7,7 @@ use App\Repository\LibraryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class LibraryController extends AbstractController
@@ -17,6 +18,150 @@ final class LibraryController extends AbstractController
     {
         return $this->render('library/home.html.twig');
     }
+
+    #[Route('/library/create', name: 'library_create', methods: ['GET'])]
+    public function create(): Response 
+    {
+        return $this->render('library/create.html.twig');
+    }
+
+
+
+
+
+    #[Route('/library/create', name: 'library_create_post', methods: ['POST'])]
+    public function createPost(
+        ManagerRegistry $doctrine,
+        Request $request
+    ): Response {
+
+        $title = $request->request->get('title');
+        $isbn = $request->request->get('isbn');
+        $author = $request->request->get('author');
+        $image = $request->request->get('image');
+
+        if ($image === null) {
+            $image = 'build/images/saknas.gif';
+        }
+
+
+        $entityManager = $doctrine->getManager();
+
+        $library = new Library();
+        $library->setTitle($title);
+        $library->setIsbn($isbn);
+        $library->setAuthor($author);
+        $library->setImage($image);
+        
+
+        // tell Doctrine you want to (eventually) save the Product
+        // (no queries yet)
+        $entityManager->persist($library);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return $this->redirectToRoute('library_show_all');
+    }
+
+
+    #[Route('/library/show', name: 'library_show_all')]
+    public function showAll(
+        LibraryRepository $libraryRepository
+    ): Response {
+        $library = $libraryRepository->findAll();
+        
+        $data = [
+            'library' => $library
+        ];
+
+        return $this->render('library/all.html.twig', $data);
+    }
+
+    #[Route('/library/show/{id}', name: 'show_one')]
+    public function showOne(
+        LibraryRepository $libraryRepository,
+        int $id
+    ): Response {
+        $book = $libraryRepository->find($id);
+        
+        $data = [
+            'book' => $book
+        ];
+
+        return $this->render('library/one.html.twig', $data);
+    }
+
+
+    #[Route('/library/delete/{id}', name: 'library_delete', methods: ['POST'])]
+    public function libraryDelete(
+        ManagerRegistry $doctrine,
+        int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $library = $entityManager->getRepository(Library::class)->find($id);
+    
+        $entityManager->remove($library);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('library_show_all');
+    }
+
+    #[Route('/library/update/{id}', name: 'update_get', methods: ['GET'])]
+    public function updateGet(
+        LibraryRepository $libraryRepository,
+        int $id
+    ): Response {
+        $book = $libraryRepository->find($id);
+        
+        $data = [
+            'book' => $book
+        ];
+
+        return $this->render('library/update.html.twig', $data);
+    }
+
+    #[Route('/library/update/{id}', name: 'update_post', methods: ['POST'])]
+    public function updatePost(
+        ManagerRegistry $doctrine,
+        Request $request,
+        int $id
+    ): Response {
+
+        $title = $request->request->get('title');
+        $isbn = $request->request->get('isbn');
+        $author = $request->request->get('author');
+        $image = $request->request->get('image');
+
+        $entityManager = $doctrine->getManager();
+        $library = $entityManager->getRepository(Library::class)->find($id);
+    
+        $library->setTitle($title);
+        $library->setIsbn($isbn);
+        $library->setAuthor($author);
+        $library->setImage($image);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('show_one', ['id' => $id]);
+    }
+
+    #[Route('/library/reset', name: 'library_reset')]
+    public function libraryReset(
+        ManagerRegistry $doctrine,
+        LibraryRepository $libraryRepository
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $library = $libraryRepository->findAll();
+    
+        foreach ($library as $book){
+            $entityManager->remove($book);
+        }
+
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('library_show_all');
+    }
+
 
     // #[Route('/product', name: 'app_product')]
     // public function index(): Response

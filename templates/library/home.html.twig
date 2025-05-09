@@ -1,0 +1,19 @@
+{# templates/library/home.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Bibliotek{% endblock %}
+
+{% block body %}
+<h1>Bibliotek</h1>
+<p>Det här är min landningssida för biblioteksapplikationen.</p>
+
+<form class="center" method="post" action="{{ path('game_start_post') }}">
+    <p>
+        <input type="submit" name="start" value="Starta Spelet">
+    </p>
+</form>
+<a href="{{ path('game_doc') }}"><p class="center">dokumentation</p></a>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{# templates/library/all.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Alla böcker{% endblock %}
+
+{% block body %}
+<h1 class="center">Alla böcker</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>Titel</td>
+            <td>Författare</td>
+            <td>ISBN</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in library %}
+        <tr>
+            <td><a href="{{ path('show_one', {id: book.getId}) }}">{{ book.getTitle|e }}</a></td><td>{{ book.getAuthor|e }}</td><td>{{ book.getIsbn|e }}</td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
+<div class="nogrow">
+<a class="center library" href="{{ path('library_create') }}"><button>Lägg till bok</button></a>
+</div>
+
+{% endblock %}
