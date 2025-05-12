@@ -39,7 +39,7 @@ final class LibraryController extends AbstractController
         $author = $request->request->get('author');
         $image = $request->request->get('image');
 
-        if ($image === null) {
+        if ($image === "") {
             $image = 'build/images/saknas.gif';
         }
 
@@ -48,7 +48,7 @@ final class LibraryController extends AbstractController
 
         $library = new Library();
         $library->setTitle((string) $title);
-        $library->setIsbn((int) $isbn);
+        $library->setIsbn((string) $isbn);
         $library->setAuthor((string) $author);
         $library->setImage((string) $image);
 
@@ -139,7 +139,7 @@ final class LibraryController extends AbstractController
 
         if ($library !== null) {
             $library->setTitle((string) $title);
-            $library->setIsbn((int) $isbn);
+            $library->setIsbn((string) $isbn);
             $library->setAuthor((string) $author);
             $library->setImage((string) $image);
             $entityManager->flush();
@@ -165,21 +165,21 @@ final class LibraryController extends AbstractController
 
         $databas = new Library();
         $databas->setTitle("Databasteknik");
-        $databas->setIsbn(9789144069197);
+        $databas->setIsbn("9789144069197");
         $databas->setAuthor("Thomas Padron-McCarthy, Tore Risch");
         $databas->setImage('build/images/databasteknik.jpg');
         $entityManager->persist($databas);
 
         $python = new Library();
         $python->setTitle("Python for Everybody");
-        $python->setIsbn(9781530051120);
+        $python->setIsbn("9781530051120");
         $python->setAuthor("Charles Severance");
         $python->setImage('build/images/python.jpg');
         $entityManager->persist($python);
 
         $php = new Library();
         $php->setTitle("Webbutveckling med PHP och MySQL");
-        $php->setIsbn(9789144105567);
+        $php->setIsbn("9789144105567");
         $php->setAuthor("Montathar Faraon");
         $php->setImage('build/images/php.jpg');
         $entityManager->persist($php);
