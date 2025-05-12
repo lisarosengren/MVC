@@ -151,7 +151,7 @@ final class LibraryController extends AbstractController
         return $this->redirectToRoute('show_one', ['id' => $id]);
     }
 
-    #[Route('/library/reset', name: 'library_reset')]
+    #[Route('/library/reset', name: 'library_reset', methods: ['POST'])]
     public function libraryReset(
         ManagerRegistry $doctrine,
         LibraryRepository $libraryRepository

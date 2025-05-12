@@ -26,7 +26,11 @@
     </tbody>
 </table>
 <div class="nogrow">
-<a class="center library" href="{{ path('library_create') }}"><button>Lägg till bok</button></a>
-</div>
-
+    <form method="post" action="">
+        <input class="back" type="submit" name="add" value="Lägg till bok"
+        onClick="this.form.action='{{ path('library_create') }}';this.form.method='get';">
+        <br>
+        <input class="delete" type="submit" name="reset" value="Återställ databasen"
+            onClick="this.form.action='{{ path('library_reset') }}';"><br>
+    </form>
 {% endblock %}

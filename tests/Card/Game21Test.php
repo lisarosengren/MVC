@@ -143,7 +143,7 @@ class Game21Test extends TestCase
         $stubBank1 = $this->createMock(CardHand::class);
         $stubBank2 = $this->createMock(CardHand::class);
         $stubBank3 = $this->createMock(CardHand::class);
-        $stubBank4 = $this->createMock(CardHand::class);
+
 
         // Configure the stubs.
         $stubPlayer->method('getValues')
