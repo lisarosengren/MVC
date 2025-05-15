@@ -6,7 +6,13 @@
 
 {% block body %}
 <h1>Introduktion</h1>
-
+<ul><li><strong>Codestyle</strong> - Jag är lite osäker på exakt vad som syftas på med codestyle här. Jag tänker att det kan vara både sättet man bygger upp koden på, med dependency injection och själva upplägget till indentering, hur man namnger skriftmässigt(camelcase, snakecase etc) till innehållsmässigt (tydliga och beskrivande namn). Eller alltihopa. Dependency injection gör att koden blir mer flexibel och enklare att testa. HUR man skriver påverkar läsbarhet och gör det enklare att förstå vad tanken är.</li>
+<li><strong>Coverage</strong> - Handlar om hur mycket av koden som täcks av tester. Testerna kan vara av varierande kvalitet, men bra tester är en enorm tillgång när man vill ändra eller uppdatera i koden. Just nu har jag knappt 37% coverage på min kod, det beror främst på att mina controllers inte har några tester kopplade till sig.</li>
+<li><strong>Complexity</strong> - Complexity är ett mått på antal beslutspunkter. Det är bra att ha få beslutspunkter. T.ex if-satser och liknande. En metod som inte kan ta olika vägar har komplexitet 1.</li>
+<li><strong>Cohesion</strong> - Det här är ett betyg på hur tätt relaterad och sammanhållen en klass eller metod är. Den ska ha ett fokuserat och begränsat syfte och inte vara spretig med flera uppdrag. Jag har lite svårt att förstå hur phpmetrics funkar gällande den här. Min DeckControllerJson har fått värde 4. Den har fyra routes, men alla har med DeckOfCards att göra, visar upp olika delar. Så den hänger ju ihop? Eller? </li>
+<li><strong>Coupling</strong> - Coupling handlar om kopplingar till andra klasser. Hur många klasser är klassen beroende av och hur många andra klasser är beroende av klassen. Delas upp i "utgående" och "ingående" klasser. En klass som innehåller övergripande logik kanske behöver ha många ingående andra klasser. Det finns ett instabilitetsindex som räknas ut genom att ta Ingående/(Ingående+utgående). Alla mina Controllerklasser har fått 1 och räknas som instabila.</li>
+<li><strong>CRAP</strong> - Change Risk Analyzer and Predictor (Change Risk Anti Pattern). Är ett mätvärde på hur komplex och lätt att underhålla koden är. Utgår ifrån cyclomatisk komplexitetz rader kod och hur testad den är. Ju högre värde desto sämre. </li>
+</ul>
 
 
 {% endblock %}
