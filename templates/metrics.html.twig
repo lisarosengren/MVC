@@ -17,10 +17,12 @@
 </ul>
 </p>
 <h1>Phpmetrics</h1>
-<p>Jag har fått 5 violations, 3 av dem gäller "Stable Abstractions Principle" som jag inte riktigt förstår på vilket sätt mina namespaces bryter mot, så jag låter dem bero tills vidare. De två andra handlar om kod som är "probably bugged", både ligger under 0.5 bugs. Jag tittar på bollarna i rapporten och tänker att mina svagaste punkter är de tre stora röda, DeckOfCards, DeckController, DeckControllerJson.</p>
+<p>Jag har fått 5 violations, 3 av dem gäller "Stable Abstractions Principle" som jag inte riktigt förstår på vilket sätt mina namespaces bryter mot, så jag låter dem bero tills vidare. De två andra handlar om kod som är "probably bugged", båda ligger under 0.5 bugs. Jag tittar på bollarna i rapporten och tänker att mina svagaste punkter är de tre stora röda, DeckOfCards, DeckController, DeckControllerJson.</p>
 <img src="{{ asset('build/images/metrics_before.png') }}" alt="metrics before" width=300>
 <h1>Scrutinizer</h1>
-<p></p>
-
+<p><img class="no-border" src="https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/quality-score.png?b=main" alt="Scrutinizer rate"> <img class="no-border" src="https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/coverage.png?b=main" alt="Coverage"> <img class="no-border" src="https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/build.png?b=main" alt="Build"></p>
+<p>Jag har låg kodtäckning, det beror på att jag inte har testat databasklasserna och mina controllers. Jag har fått a på alla mina metoder utom en som har fått b. Den innehåller för många rader, det är främst en lång array. Min högsta komplexitet är 6. Man skulle nog behöva testa controllersen, göra en smartare sortering (den långa metoden) och få ner komplexiteten.</p>
+<h1>Förbättringar</h1>
+<p>Jag ska åtgärda issues i Scrutinizer. Det tror jag kan ta bort några teoretiska buggar i Scrutinizer. Jag väljer den åtgärden för att försöka följa best practice och för att det är tydliga förslag. Jag ska lägga till kommentarer i klasserna som har röda bollar i metrics. Det tror jag kommer att förbättra deras maintainabilityindex. Jag väljer den åtgärden för att jag tror att den kommer ge en del effekt samtidigt som jag får läsa min kod igen och eventuellt hitta fler förbättringar att ha i bakhuvudet framåt. Jag har en metod, getSortedValues i DeckOfCards, som har fått B i betyg i Scrutinizer. Den är för lång. Jag ska dela upp metoden och hoppas kunna få A på alla metoder och därmed uppnå 10 i index.</p>
 
 {% endblock %}
