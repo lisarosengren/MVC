@@ -88,11 +88,12 @@ class DeckControllerJson
             "cardsLeft" => $session->get("deck")->numberOfCards()
         ];
 
-        if ($data["cardsLeft"] > 0) {
+        if ($data["cardsLeft"] > $num) {
             $cards = [];
             for ($i = 1; $i <= $num; $i++) {
                 $cards[] = $session->get("deck")->drawCardJson();
             }
+            $data["cards"] = $cards;
         }
 
         $response = new JsonResponse($data);

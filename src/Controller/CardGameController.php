@@ -33,8 +33,10 @@ class CardGameController extends AbstractController
     #[Route("/game/player", name: "game_player")]
     public function player(SessionInterface $session): Response
     {
+        $test = new DeckOfCards();
         $data = [
-            "game" => $session->get("game")
+            "game" => $session->get("game"),
+            'test' => $test-> newDeckArray()
         ];
         return $this->render('game/player.html.twig', $data);
     }
