@@ -11,6 +11,10 @@ class Card
         $this->value = $value;
     }
 
+    /**
+     * Method to get get the cards value.
+     * @return string The value.
+     */
     public function getValue(): string
     {
         return $this->value;
