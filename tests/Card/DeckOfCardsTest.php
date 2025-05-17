@@ -135,7 +135,7 @@ class DeckOfCardTest extends TestCase
             $this->deck->drawCardGame();
         }
         $this->expectException(Exception::class);
-        $res = $this->deck->drawCardGame();
+        $this->deck->drawCardGame();
 
     }
 }
