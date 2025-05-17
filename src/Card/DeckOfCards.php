@@ -116,7 +116,7 @@ class DeckOfCards
 
     public function drawCardGame(): CardGraphic
     {
-        if (!$this->deck) {
+        if (empty($this->deck)) {
             throw new Exception("Deck is empty");
         }
         $card = array_pop($this->deck);

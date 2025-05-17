@@ -36,7 +36,6 @@ class CardGameController extends AbstractController
         $test = new DeckOfCards();
         $data = [
             "game" => $session->get("game"),
-            'test' => $test-> newDeckArray()
         ];
         return $this->render('game/player.html.twig', $data);
     }
