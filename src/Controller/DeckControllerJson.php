@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class DeckControllerJson
 {
+    /**
+     * Route for /api/deck.
+     * Get the sorted values of the deck.
+     * @param SessionInterface $session The session.
+     * @return Response JsonResponse.
+     */
     #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
     public function jsonDeck(SessionInterface $session): Response
     {
@@ -18,12 +24,7 @@ class DeckControllerJson
         }
 
         $deck = $session->get("deck")->getSortedValues();
-
         $data = $deck;
-
-
-        // return new JsonResponse($data);
-
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -31,6 +32,12 @@ class DeckControllerJson
         return $response;
     }
 
+    /**
+     * Route for /api/deck/shuffle.
+     * Shuffles the deck and gets the values.
+     * @param SessionInterface $session The session.
+     * @return Response JsonResponse.
+     */
     #[Route("/api/deck/shuffle", name: "api_shuffle", methods: ['POST'])]
     public function jsonShuffle(SessionInterface $session): Response
     {
@@ -39,12 +46,8 @@ class DeckControllerJson
         }
 
         $session->get("deck")->shuffleDeck();
-
         $data = $session->get("deck")->getValues();
         ;
-
-
-        // return new JsonResponse($data);
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
@@ -53,6 +56,12 @@ class DeckControllerJson
         return $response;
     }
 
+    /**
+     * Route for /api/deck/draw.
+     * Calls the drawCardJson method.
+     * @param SessionInterface $session The session.
+     * @return Response JsonResponse.
+     */    
     #[Route("/api/deck/draw", name: "api_draw", methods: ['POST'])]
     public function jsonDraw(SessionInterface $session): Response
     {
@@ -66,8 +75,6 @@ class DeckControllerJson
             "cards left" => $session->get("deck")->numberOfCards()
         ];
 
-        // return new JsonResponse($data);
-
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -75,6 +82,13 @@ class DeckControllerJson
         return $response;
     }
 
+    /**
+     * Route for /api/deck/draw/{num<\d+>}.
+     * Draws the chosen number of cards.
+     * @param SessionInterface $session The session.
+     * @param int $num the chosen number.
+     * @return Response JsonResponse.
+     */    
     #[Route("/api/deck/draw/{num<\d+>}", name: "api_draw_many", methods: ['POST'])]
     public function jsonDrawMany(SessionInterface $session, int $num): Response
     {
