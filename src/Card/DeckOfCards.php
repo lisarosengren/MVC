@@ -25,6 +25,8 @@ class DeckOfCards
     }
 
     /**
+     * Creates an array with the cards that is supposed to be in the deck.
+     * Protected so it's possible to create a subclass with other cards.
      * @return array<string>
      */
     protected function newDeckArray(): array
@@ -41,16 +43,27 @@ class DeckOfCards
         return $deck;
     }
 
+    /**
+     * Method to shuffle the deck.
+     */
     public function shuffleDeck(): void
     {
         shuffle($this->deck);
     }
 
+    /**
+     * Method to get the amount of cards in the deck.
+     * @return int The amount.
+     */
     public function numberOfCards(): int
     {
         return count($this->deck);
     }
 
+    /**
+     * Method to draw a card.
+     * @return string the cards utf-8 string or a message if there's no cards to draw.
+     */
     public function drawCard(): string
     {
         $card = array_pop($this->deck);
@@ -60,7 +73,10 @@ class DeckOfCards
         return "No cards to draw";
     }
 
-
+    /**
+     * Method to draw a card.
+     * @return string the cards value or a message if there's no cards to draw.
+     */
     public function drawCardJson(): string
     {
         $card = array_pop($this->deck);
@@ -71,6 +87,7 @@ class DeckOfCards
     }
 
     /**
+     * Method to get the values of the cards in the deck.
      * @return array<string>
      */
     public function getValues(): array
@@ -83,6 +100,7 @@ class DeckOfCards
     }
 
     /**
+     * Method to get the values of the cards in the deck sorted on color and value.
      * @return array<string>
      */
     public function getSortedValues(): array
@@ -103,6 +121,7 @@ class DeckOfCards
     }
 
     /**
+     * Method to get the utf-8 values of the cards in the deck.
      * @return array<string>
      */
     public function getString(): array
@@ -114,6 +133,10 @@ class DeckOfCards
         return $values;
     }
 
+    /**
+     * Method to draw a card.
+     * @return CardGraphic the card.
+     */
     public function drawCardGame(): CardGraphic
     {
         if (empty($this->deck)) {
