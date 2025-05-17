@@ -31,7 +31,7 @@ class LibraryControllerJson extends AbstractController
     ): Response {
         $book = $libraryRepository->findByIsbn($isbn);
 
-        if (!$book) {
+        if (empty($book)) {
             $book = "Det finns ingen bok som matchar ISBN.";
         }
 

@@ -33,7 +33,6 @@ class CardGameController extends AbstractController
     #[Route("/game/player", name: "game_player")]
     public function player(SessionInterface $session): Response
     {
-        $test = new DeckOfCards();
         $data = [
             "game" => $session->get("game"),
         ];
