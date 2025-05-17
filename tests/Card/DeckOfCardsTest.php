@@ -27,7 +27,6 @@ class DeckOfCardTest extends TestCase
      */
     public function testCreateDeckOfCards(): void
     {
-        // $deck = new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $this->deck);
 
         $res = $this->deck->getValues();

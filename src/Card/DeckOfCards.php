@@ -27,7 +27,7 @@ class DeckOfCards
     /**
      * @return array<string>
      */
-    public function newDeckArray(): array
+    protected function newDeckArray(): array
     {
         $values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
         $colors = ["Spades", "Hearts", "Clubs", "Diamonds"];
