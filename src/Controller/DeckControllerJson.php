@@ -61,7 +61,7 @@ class DeckControllerJson
      * Calls the drawCardJson method.
      * @param SessionInterface $session The session.
      * @return Response JsonResponse.
-     */    
+     */
     #[Route("/api/deck/draw", name: "api_draw", methods: ['POST'])]
     public function jsonDraw(SessionInterface $session): Response
     {
@@ -88,7 +88,7 @@ class DeckControllerJson
      * @param SessionInterface $session The session.
      * @param int $num the chosen number.
      * @return Response JsonResponse.
-     */    
+     */
     #[Route("/api/deck/draw/{num<\d+>}", name: "api_draw_many", methods: ['POST'])]
     public function jsonDrawMany(SessionInterface $session, int $num): Response
     {
