@@ -1,0 +1,14 @@
+{# templates/home.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    {% for exit in game.getHand("player").getString() %}
+        {{card|striptags('<div>')|raw}}
+    {% endfor %}
+
+
+{% endblock %}
