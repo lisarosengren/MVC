@@ -5,19 +5,19 @@ namespace App\Proj;
 class Game
 {
     private array $rooms = array(
-        "bedroom" => array("img" => "{{ asset('build/images/sovrum.jpg') }}",
+        "bedroom" => array("img" => 'sovrum',
             "exits" => array(
             "south" => Null,
             "north" => Null,
             "west" => Null,
             "east" => "kitchen")),
-        "kitchen" => array("img" => "{{ asset('build/images/kok.jpg') }}",
+        "kitchen" => array("img" => 'kok',
             "exits" => array(
             "south" => Null,
             "north" => "livingroom",
             "west" => "bedroom",
             "east" => Null)),
-        "livingroom" => array("img" => "{{ asset('build/images/vrum.jpg') }}",
+        "livingroom" => array("img" => 'vrum',
             "exits" => array(
             "south" => "kitchen",
             "north" => Null,
@@ -25,7 +25,7 @@ class Game
             "east" => Null))
     );
 
-    protected string $currentRoom;
+    protected array $currentRoom;
 
 
     public function __construct()
@@ -36,7 +36,7 @@ class Game
     /**
      * Method to set currentRoom
      */
-    public function setCurrentRoom(string $room): void
+    private function setCurrentRoom(string $room): void
     {
         $this->currentRoom = $this->rooms[$room];
     }
@@ -46,7 +46,7 @@ class Game
      */
     public function getCurrentExits(): array
     {
-        return $this->rooms[$this->currentRoom]["exits"];
+        return $this->currentRoom["exits"];
     }
 
     /**
@@ -54,7 +54,7 @@ class Game
      */
     public function getCurrentImage(): string
     {
-        return $this->rooms[$this->currentRoom]["img"];
+        return $this->currentRoom["img"];
     }
 
     /**
@@ -62,6 +62,9 @@ class Game
      */
     public function move($exit): void
     {
-        $this->currentRoom = $this->room[$currentRoom]["exits"][$exit];
+        var_dump($exit);
+        var_dump($this->currentRoom["exits"]);
+
+        $this->currentRoom = $this->rooms[$this->currentRoom["exits"][$exit]];
     }
 }

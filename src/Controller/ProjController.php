@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-// use App\Card\Game21;
+use App\Proj\Game;
 // use App\Card\DeckOfCards;
 // use App\Card\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,17 +34,22 @@ class ProjController extends AbstractController
     }
 
 
+    #[Route("proj/game/move", name: "game_move", methods: ['POST'])]
+    public function gameMove(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        echo "gameMove called";
+        $move = $request->request->get('exit');
 
-    // #[Route("/game", name: "game_start_post", methods: ['POST'])]
-    // public function gameStartPost(
-    //     SessionInterface $session
-    // ): Response {
-    //     $session->set("game", new Game21(new CardHand(), new CardHand(), new DeckOFCards()));
-    //     $session->get("game")->firstDraw("player");
+        $session->get("game")->move($move);
 
+        $data = [
+            "game" => $session->get("game"),
+        ];
 
-    //     return $this->redirectToRoute('game_player');
-    // }
+        return $this->redirectToRoute('game', $data);
+    }
 
     // #[Route("/game/player", name: "game_player")]
     // public function player(SessionInterface $session): Response

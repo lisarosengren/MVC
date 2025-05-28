@@ -5,10 +5,22 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+    
+    <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="mvc screenshot" width=300>
 
-    {% for exit in game.getHand("player").getString() %}
-        {{card|striptags('<div>')|raw}}
-    {% endfor %}
+{{ game.getCurrentImage() }}
+    <form method="post" action="{{ path('game_move') }}">
+        {% for exit, room in game.getCurrentExits() %}
+            {% if room is not null %}
 
+        <input type="hidden" id="exit" name="exit" value={{ exit }}>
+        <input class= "submit" type="submit" value = "Gå {{ exit }}">
 
+        {% endif %}
+        {% endfor %}
+    </form>
+    <img src="{{ asset('build/images/me.jpg') }}" alt="jag" width=200>
 {% endblock %}
+
+
+
