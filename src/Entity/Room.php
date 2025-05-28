@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RoomRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +15,7 @@ class Room
 {
     #[ORM\Id]
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $name = null;
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -33,10 +35,17 @@ class Room
     #[ORM\Column(length: 25, nullable: true)]
     private ?string $east = null;
 
-    public function getId(): ?int
+    /**
+     * @var Collection<int, Item>
+     */
+    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'room')]
+    private Collection $items;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->items = new ArrayCollection();
     }
+
 
     public function getName(): ?string
     {
@@ -118,6 +127,36 @@ class Room
     public function setEast(?string $east): static
     {
         $this->east = $east;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Item>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(Item $item): static
+    {
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+            $item->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): static
+    {
+        if ($this->items->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getRoom() === $this) {
+                $item->setRoom(null);
+            }
+        }
 
         return $this;
     }

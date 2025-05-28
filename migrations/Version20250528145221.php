@@ -1,0 +1,92 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20250528145221 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql(<<<'SQL'
+            CREATE TEMPORARY TABLE __temp__item AS SELECT name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal FROM item
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE item
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE item (name VARCHAR(25) NOT NULL, room_id VARCHAR(255) NOT NULL, examine VARCHAR(255) NOT NULL, examine_reveal VARCHAR(25) DEFAULT NULL, deadly BOOLEAN NOT NULL, pickable BOOLEAN NOT NULL, combination VARCHAR(25) DEFAULT NULL, comb_text VARCHAR(255) DEFAULT NULL, comb_reveal VARCHAR(25) DEFAULT NULL, PRIMARY KEY(name), CONSTRAINT FK_1F1B251E54177093 FOREIGN KEY (room_id) REFERENCES room (id) NOT DEFERRABLE INITIALLY IMMEDIATE)
+        SQL);
+        $this->addSql(<<<'SQL'
+            INSERT INTO item (name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal) SELECT name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal FROM __temp__item
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE __temp__item
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE INDEX IDX_1F1B251E54177093 ON item (room_id)
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TEMPORARY TABLE __temp__room AS SELECT name, image, description, north, south, west, east FROM room
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE room
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE room (id VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, north VARCHAR(25) DEFAULT NULL, south VARCHAR(25) DEFAULT NULL, west VARCHAR(25) DEFAULT NULL, east VARCHAR(25) DEFAULT NULL, PRIMARY KEY(id))
+        SQL);
+        $this->addSql(<<<'SQL'
+            INSERT INTO room (id, image, description, north, south, west, east) SELECT name, image, description, north, south, west, east FROM __temp__room
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE __temp__room
+        SQL);
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql(<<<'SQL'
+            CREATE TEMPORARY TABLE __temp__item AS SELECT name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal FROM item
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE item
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE item (name VARCHAR(25) NOT NULL, examine VARCHAR(255) NOT NULL, examine_reveal VARCHAR(25) DEFAULT NULL, deadly BOOLEAN NOT NULL, pickable BOOLEAN NOT NULL, combination VARCHAR(25) DEFAULT NULL, comb_text VARCHAR(255) DEFAULT NULL, comb_reveal VARCHAR(25) DEFAULT NULL, PRIMARY KEY(name))
+        SQL);
+        $this->addSql(<<<'SQL'
+            INSERT INTO item (name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal) SELECT name, examine, examine_reveal, deadly, pickable, combination, comb_text, comb_reveal FROM __temp__item
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE __temp__item
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TEMPORARY TABLE __temp__room AS SELECT id, image, description, north, south, west, east FROM room
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE room
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE TABLE room (name VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, north VARCHAR(25) DEFAULT NULL, south VARCHAR(25) DEFAULT NULL, west VARCHAR(25) DEFAULT NULL, east VARCHAR(25) DEFAULT NULL, PRIMARY KEY(name))
+        SQL);
+        $this->addSql(<<<'SQL'
+            INSERT INTO room (name, image, description, north, south, west, east) SELECT id, image, description, north, south, west, east FROM __temp__room
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE __temp__room
+        SQL);
+    }
+}
