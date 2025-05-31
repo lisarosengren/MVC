@@ -60,13 +60,10 @@ class ProjController extends AbstractController
      
         $text = $session->get("game")->pickUp($request->request->get('pick'));
 
-
         $this->addFlash(
             'notice',
             $text
         );
-
-
         return $this->redirectToRoute('game');
     }
 
@@ -75,8 +72,7 @@ class ProjController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-       
-
+    
         $text = $session->get("game")->examine($request->request->get('examine'));
        
         if ($text[0] === "Game Over") {
@@ -98,11 +94,23 @@ class ProjController extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $game = $session->get("game");
-        $text = $game->examine($request->request->get('examine'));
-        
+        $text = $session->get("game")->combine($request->request->get('item'), $request->request->get('combo'));
 
-        return $this->redirectToRoute('game', $data);
+        if ($text[0] === "Vinnare") {
+            $data = [
+                "text" => $text[1],
+            ];
+            return $this->render('proj/win.html.twig', $data);
+        }
+
+
+
+        $this->addFlash(
+            'notice',
+            $text[0]
+        );
+
+        return $this->redirectToRoute('game');
     }
 
 

@@ -98,4 +98,32 @@ class Game
         return [$itemObject->getExamine()]; 
     }
 
+    public function combine(string $item, string $combo): array
+    {
+        $itemObject = $itemObject = $this->gameFoundation->getItem($item);
+        $text = [];
+        
+
+
+        if (!$itemObject->getCombo()) {
+            $text[] = "Nix, ingen bra kombo.";
+            return $text;
+        }
+        if ($itemObject->getCombo()->getId() !== $combo) {
+            $text[] = "Nix, ingen bra kombo.";
+            return $text;         
+        }
+        if ($itemObject->isLast()) {
+            $text[] = "Vinnare";
+        }
+        if ($itemObject->getCombinationReveal()) {
+            $itemObject->getCombinationReveal()->setHidden(FALSE);
+        }
+        $this->currentRoom->removeItem($itemObject);
+        unset($this->inventory[$combo]);
+        $text[] = $itemObject->getCombText();
+        
+        return $text;
+    }
+
 }
