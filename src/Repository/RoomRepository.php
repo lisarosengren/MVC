@@ -16,6 +16,19 @@ class RoomRepository extends ServiceEntityRepository
         parent::__construct($registry, Room::class);
     }
 
+    /**
+     * Method to get all rooms with their connected items
+     * @return Room[] Returns an array of Room objects
+     */
+    public function loadAllWithItems(): array
+{
+    return $this->createQueryBuilder('r')
+        ->leftJoin('r.items', 'i')
+        ->addSelect('i')
+        ->getQuery()
+        ->getResult();
+}
+
     //    /**
     //     * @return Room[] Returns an array of Room objects
     //     */

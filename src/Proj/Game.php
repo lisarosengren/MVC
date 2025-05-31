@@ -2,69 +2,85 @@
 
 namespace App\Proj;
 
+
+use App\Entity\Room;
+use App\Entity\Items;
+use App\Proj\GameFoundation;
+
 class Game
 {
-    private array $rooms = array(
-        "bedroom" => array("img" => 'sovrum',
-            "exits" => array(
-            "south" => Null,
-            "north" => Null,
-            "west" => Null,
-            "east" => "kitchen")),
-        "kitchen" => array("img" => 'kok',
-            "exits" => array(
-            "south" => Null,
-            "north" => "livingroom",
-            "west" => "bedroom",
-            "east" => Null)),
-        "livingroom" => array("img" => 'vrum',
-            "exits" => array(
-            "south" => "kitchen",
-            "north" => Null,
-            "west" => Null,
-            "east" => Null))
-    );
+ 
+    private Room $currentRoom;
 
-    protected array $currentRoom;
+    private Gamefoundation $gameFoundation;
+
+    private array $inventory = [];
 
 
-    public function __construct()
+    public function __construct(Gamefoundation $data)
     {
-        $this->currentRoom = $this->rooms["bedroom"]; 
+        $this->gameFoundation = $data;
+        $this->currentRoom = $this->gameFoundation->getStartRoom();
+    
     }
 
     /**
      * Method to set currentRoom
      */
-    private function setCurrentRoom(string $room): void
+    public function setCurrentRoom(Room $room): void
     {
-        $this->currentRoom = $this->rooms[$room];
+        $this->currentRoom = $room;
     }
 
-    /**
-     * Method to get current rooms exits
-     */
-    public function getCurrentExits(): array
+    public function getCurrentRoom(): Room 
     {
-        return $this->currentRoom["exits"];
+        return $this->currentRoom;
     }
+
+    public function addToInventory(Item $item): void
+    {
+        $this->inventory[$item.getId()] = $item;
+    }
+
+    public function getInventory(): array
+    {
+        return $this->inventory;
+    }
+
+    // /**
+    //  * Method to get current rooms exits
+    //  */
+    // public function getCurrentExits(): array
+    // {
+    //     return $this->currentRoom["exits"];
+    // }
 
     /**
      * Method to get current rooms image
      */
     public function getCurrentImage(): string
     {
-        return $this->currentRoom["img"];
+        return $this->currentRoom->getImage();
     }
 
-    /**
-     * Method to change room
-     */
     public function move($exit): void
     {
-        var_dump($exit);
-        var_dump($this->currentRoom["exits"]);
-
-        $this->currentRoom = $this->rooms[$this->currentRoom["exits"][$exit]];
+        $this->currentRoom = $this->currentRoom->getExits()[$exit];
     }
+    
+    public function pickUp(string $item): string
+    {
+        if (count($this->inventory) >= 2) {
+            return "Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!";
+        }
+        $itemObject = $this->gameFoundation->getItem($item);
+        if ($itemObject->isPickable()) {
+            $this->currentRoom->removeItem($itemObject);
+            $this->inventory[$item] = $itemObject;
+
+            return "Du plockade upp $item";
+        }
+        return "$item går inte att plocka upp!";
+    }
+
 }

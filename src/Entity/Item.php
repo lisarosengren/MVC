@@ -10,13 +10,10 @@ class Item
 {
     #[ORM\Id]
     #[ORM\Column(length: 25, unique: true)]
-    private ?string $name = null;
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $examine = null;
-
-    #[ORM\Column(length: 25, nullable: true)]
-    private ?string $examine_reveal = null;
 
     #[ORM\Column]
     private ?bool $deadly = null;
@@ -24,28 +21,37 @@ class Item
     #[ORM\Column]
     private ?bool $pickable = null;
 
-    #[ORM\Column(length: 25, nullable: true)]
-    private ?string $combination = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comb_text = null;
 
-    #[ORM\Column(length: 25, nullable: true)]
-    private ?string $comb_reveal = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $combination = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $room = null;
 
-    
-    public function getName(): ?string
+    #[ORM\Column]
+    private ?bool $isLast = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $hidden = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?item $examineReveal = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?item $combinationReveal = null;
+
+   
+    public function getId(): ?string
     {
-        return $this->name;
+        return $this->id;
     }
 
-    public function setName(string $name): static
+    public function setId(string $id): static
     {
-        $this->name = $name;
+        $this->id = $id;
 
         return $this;
     }
@@ -58,18 +64,6 @@ class Item
     public function setExamine(string $examine): static
     {
         $this->examine = $examine;
-
-        return $this;
-    }
-
-    public function getExamineReveal(): ?string
-    {
-        return $this->examine_reveal;
-    }
-
-    public function setExamineReveal(?string $examine_reveal): static
-    {
-        $this->examine_reveal = $examine_reveal;
 
         return $this;
     }
@@ -98,18 +92,6 @@ class Item
         return $this;
     }
 
-    public function getCombination(): ?string
-    {
-        return $this->combination;
-    }
-
-    public function setCombination(?string $combination): static
-    {
-        $this->combination = $combination;
-
-        return $this;
-    }
-
     public function getCombText(): ?string
     {
         return $this->comb_text;
@@ -118,18 +100,6 @@ class Item
     public function setCombText(?string $comb_text): static
     {
         $this->comb_text = $comb_text;
-
-        return $this;
-    }
-
-    public function getCombReveal(): ?string
-    {
-        return $this->comb_reveal;
-    }
-
-    public function setCombReveal(?string $comb_reveal): static
-    {
-        $this->comb_reveal = $comb_reveal;
 
         return $this;
     }
@@ -145,4 +115,77 @@ class Item
 
         return $this;
     }
+
+    public function isLast(): ?bool
+    {
+        return $this->isLast;
+    }
+
+    public function setIsLast(bool $isLast): static
+    {
+        $this->isLast = $isLast;
+
+        return $this;
+    }
+
+    public function isHidden(): ?bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(?bool $hidden): static
+    {
+        $this->hidden = $hidden;
+
+        return $this;
+    }
+
+    public function getItem(): ?self
+    {
+        return $this->item;
+    }
+
+    public function setItem(?self $item): static
+    {
+        $this->item = $item;
+
+        return $this;
+    }
+
+    public function getExamineReveal(): ?item
+    {
+        return $this->examineReveal;
+    }
+
+    public function setExamineReveal(?item $examineReveal): static
+    {
+        $this->examineReveal = $examineReveal;
+
+        return $this;
+    }
+
+    public function getCombination(): ?string
+    {
+        return $this->combination;
+    }
+
+    public function setCombination(?string $combination): self
+    {
+        $this->combination = $combination;
+        
+        return $this;
+    }
+
+    public function getCombinationReveal(): ?item
+    {
+        return $this->combinationReveal;
+    }
+
+    public function setCombinationReveal(?item $combinationReveal): static
+    {
+        $this->combinationReveal = $combinationReveal;
+
+        return $this;
+    }
+
 }

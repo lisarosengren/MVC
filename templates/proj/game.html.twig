@@ -5,21 +5,60 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+
     
     <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="mvc screenshot" width=300>
 
+    <p>{{ game.getCurrentRoom().getDescription()}}<br>
+    Du kan gå åt olika håll och eventuellt interagera med olika föremål.</p>
+
+
+    {{ include('flash.html.twig') }}
+
+
+
 {{ game.getCurrentImage() }}
     <form method="post" action="{{ path('game_move') }}">
-        {% for exit, room in game.getCurrentExits() %}
-            {% if room is not null %}
+        
+        {% for exit in game.getCurrentRoom.getExits() |keys %}
+        
+        <button class= "submit" name="exit" type="submit" value = {{ exit }}>
+            Gå {{ exit }}      
+        </button>
 
-        <input type="hidden" id="exit" name="exit" value={{ exit }}>
-        <input class= "submit" type="submit" value = "Gå {{ exit }}">
-
-        {% endif %}
         {% endfor %}
+
     </form>
-    <img src="{{ asset('build/images/me.jpg') }}" alt="jag" width=200>
+
+
+        {% for item in game.getCurrentRoom.getItems() %}
+            {{item.getId}}
+<form method="post" action="{{ path('game_pickup') }}">
+        <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
+            Plocka upp {{ item.getId }}      
+        </button>
+</form>
+
+<form method="post" action="{{ path('game_examine') }}">
+        <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
+            Undersök {{ item.getId }}      
+        </button>
+</form>
+
+<form method="post" action="{{ path('game_combine') }}">
+        <select name ="combo">
+            {% for thing in game.getInventory() %}
+                <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" name="item" value={{ item.getId }}>
+</form>
+
+        {% endfor %}
+
+
+
+
 {% endblock %}
 
 

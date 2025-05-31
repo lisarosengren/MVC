@@ -3,6 +3,11 @@
 namespace App\Controller;
 
 use App\Proj\Game;
+use App\Proj\GameFoundation;
+use App\Entity\Room;
+use App\Repository\RoomRepository;
+use App\Repository\ItemRepository;
+
 // use App\Card\DeckOfCards;
 // use App\Card\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,19 +19,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjController extends AbstractController
 {
     #[Route("/proj", name: "proj", methods: ['GET'])]
-    public function home(SessionInterface $session): Response
+    public function home(SessionInterface $session,
+        RoomRepository $roomRepository,
+        ItemRepository $itemRepository): Response
     {
-        $session->set("game", new Game());
-
-
+        $gameFoundation = new GameFoundation($roomRepository->loadAllWithItems(), $itemRepository->findAll());
+        $session->set("game", new Game($gameFoundation));
 
         return $this->render('proj/home.html.twig');
     }
 
     #[Route("/proj/game", name: "game", methods: ['GET'])]
-    public function game(SessionInterface $session): Response
+    public function game(SessionInterface $session,
+            RoomRepository $roomRepository, ItemRepository $itemRepository): Response
     {
-
         $data = [
             "game" => $session->get("game"),
         ];
@@ -39,7 +45,6 @@ class ProjController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        echo "gameMove called";
         $move = $request->request->get('exit');
 
         $session->get("game")->move($move);
@@ -50,6 +55,61 @@ class ProjController extends AbstractController
 
         return $this->redirectToRoute('game', $data);
     }
+
+    #[Route("proj/game/pickup", name: "game_pickup", methods: ['POST'])]
+    public function gamePickUp(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+     
+        $game = $session->get("game");
+        $text = $game->pickUp($request->request->get('pick'));
+
+        $data = [
+            "game" => $game,
+        ];
+
+            $this->addFlash(
+                'notice',
+                $text
+            );
+
+
+        return $this->redirectToRoute('game', $data);
+    }
+
+    #[Route("proj/game/examine", name: "game_examine", methods: ['POST'])]
+    public function gameExamine(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+
+
+        $data = [
+            "game" => $session->get("game"),
+        ];
+
+        return $this->redirectToRoute('game', $data);
+    }
+    #[Route("proj/game/combine", name: "game_combine", methods: ['POST'])]
+    public function gameCombine(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+
+
+        $data = [
+            "game" => $session->get("game"),
+        ];
+
+        return $this->redirectToRoute('game', $data);
+    }
+
+
+
+
+
+
 
     // #[Route("/game/player", name: "game_player")]
     // public function player(SessionInterface $session): Response
