@@ -83,4 +83,19 @@ class Game
         return "$item går inte att plocka upp!";
     }
 
+
+    public function examine(string $item): array
+    {
+        $itemObject = $this->gameFoundation->getItem($item);
+        if ($itemObject->isDeadly()) {
+            return ["Game Over", $itemObject->getExamine()];
+        }
+        if ($itemObject->getExamineReveal()) {
+            $itemObject->getExamineReveal()->setHidden(FALSE);
+            $this->currentRoom->removeItem($itemObject);
+        }
+
+        return [$itemObject->getExamine()]; 
+    }
+
 }

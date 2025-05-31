@@ -32,27 +32,34 @@
 
 
         {% for item in game.getCurrentRoom.getItems() %}
-            {{item.getId}}
-<form method="post" action="{{ path('game_pickup') }}">
-        <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
-            Plocka upp {{ item.getId }}      
-        </button>
-</form>
+            {% if not item.isHidden() %}
 
-<form method="post" action="{{ path('game_examine') }}">
-        <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
-            Undersök {{ item.getId }}      
-        </button>
-</form>
+                <form method="post" action="{{ path('game_pickup') }}">
+                        <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
+                            Plocka upp {{ item.getId }}      
+                        </button>
+                </form>
 
-<form method="post" action="{{ path('game_combine') }}">
-        <select name ="combo">
-            {% for thing in game.getInventory() %}
-                <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" name="item" value={{ item.getId }}>
-</form>
+                <form method="post" action="{{ path('game_examine') }}">
+                        <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
+                            Undersök {{ item.getId }}      
+                        </button>
+                </form>
+
+
+                {% if game.getInventory() %}
+                    <form method="post" action="{{ path('game_combine') }}">
+                            <button class= "submit" name="item" type="submit" value = {{ item.getId }}>
+                                Kombinera {{ item.getId }} med       
+                            </button>
+                            <select name ="combo">
+                                {% for thing in game.getInventory() %}
+                                    <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
+                                {% endfor %}
+                            </select>
+                    </form>
+                {% endif %}
+            {% endif %}
 
         {% endfor %}
 

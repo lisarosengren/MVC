@@ -24,9 +24,6 @@ class Item
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comb_text = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $combination = null;
-
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $room = null;
@@ -42,6 +39,9 @@ class Item
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?item $combinationReveal = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?item $combo = null;
 
    
     public function getId(): ?string
@@ -164,18 +164,6 @@ class Item
         return $this;
     }
 
-    public function getCombination(): ?string
-    {
-        return $this->combination;
-    }
-
-    public function setCombination(?string $combination): self
-    {
-        $this->combination = $combination;
-        
-        return $this;
-    }
-
     public function getCombinationReveal(): ?item
     {
         return $this->combinationReveal;
@@ -184,6 +172,18 @@ class Item
     public function setCombinationReveal(?item $combinationReveal): static
     {
         $this->combinationReveal = $combinationReveal;
+
+        return $this;
+    }
+
+    public function getCombo(): ?item
+    {
+        return $this->combo;
+    }
+
+    public function setCombo(?item $combo): static
+    {
+        $this->combo = $combo;
 
         return $this;
     }

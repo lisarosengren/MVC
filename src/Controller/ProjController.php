@@ -49,11 +49,7 @@ class ProjController extends AbstractController
 
         $session->get("game")->move($move);
 
-        $data = [
-            "game" => $session->get("game"),
-        ];
-
-        return $this->redirectToRoute('game', $data);
+        return $this->redirectToRoute('game');
     }
 
     #[Route("proj/game/pickup", name: "game_pickup", methods: ['POST'])]
@@ -62,20 +58,16 @@ class ProjController extends AbstractController
         SessionInterface $session
     ): Response {
      
-        $game = $session->get("game");
-        $text = $game->pickUp($request->request->get('pick'));
-
-        $data = [
-            "game" => $game,
-        ];
-
-            $this->addFlash(
-                'notice',
-                $text
-            );
+        $text = $session->get("game")->pickUp($request->request->get('pick'));
 
 
-        return $this->redirectToRoute('game', $data);
+        $this->addFlash(
+            'notice',
+            $text
+        );
+
+
+        return $this->redirectToRoute('game');
     }
 
     #[Route("proj/game/examine", name: "game_examine", methods: ['POST'])]
@@ -83,13 +75,22 @@ class ProjController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
+       
 
+        $text = $session->get("game")->examine($request->request->get('examine'));
+       
+        if ($text[0] === "Game Over") {
+            $data = [
+                "text" => $text[1],
+            ];
+            return $this->render('proj/game_over.html.twig', $data);
+        }
 
-        $data = [
-            "game" => $session->get("game"),
-        ];
-
-        return $this->redirectToRoute('game', $data);
+        $this->addFlash(
+            'notice',
+            $text[0]
+        );
+        return $this->redirectToRoute('game');
     }
     #[Route("proj/game/combine", name: "game_combine", methods: ['POST'])]
     public function gameCombine(
@@ -97,10 +98,9 @@ class ProjController extends AbstractController
         SessionInterface $session
     ): Response {
 
-
-        $data = [
-            "game" => $session->get("game"),
-        ];
+        $game = $session->get("game");
+        $text = $game->examine($request->request->get('examine'));
+        
 
         return $this->redirectToRoute('game', $data);
     }
