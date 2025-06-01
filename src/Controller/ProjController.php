@@ -8,8 +8,6 @@ use App\Entity\Room;
 use App\Repository\RoomRepository;
 use App\Repository\ItemRepository;
 
-// use App\Card\DeckOfCards;
-// use App\Card\CardHand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,8 +101,6 @@ class ProjController extends AbstractController
             return $this->render('proj/win.html.twig', $data);
         }
 
-
-
         $this->addFlash(
             'notice',
             $text[0]
@@ -113,8 +109,38 @@ class ProjController extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+    #[Route("proj/game/drop", name: "game_drop", methods: ['POST'])]
+    public function gameDrop(
+        Request $request,
+        SessionInterface $session
+    ): Response {
 
+        $text = $session->get("game")->drop($request->request->get('item'));
 
+        $this->addFlash(
+            'text',
+            $text
+        );
+
+        return $this->redirectToRoute('game');
+    }
+
+    #[Route("proj/game/examine_pocket", name: "game_examine_pocket", methods: ['POST'])]
+    public function examinePocket(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+
+        $item = $request->request->get('item');
+        $text = $session->get("game")->getInventory()[$item]->getDescription();
+
+        $this->addFlash(
+            'text',
+            $text
+        );
+
+        return $this->redirectToRoute('game');
+    }
 
 
 

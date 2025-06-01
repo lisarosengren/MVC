@@ -47,17 +47,11 @@ class Game
         return $this->inventory;
     }
 
-    // /**
-    //  * Method to get current rooms exits
-    //  */
-    // public function getCurrentExits(): array
-    // {
-    //     return $this->currentRoom["exits"];
-    // }
+    public function getInventoryItem($item): Item
+    {
+        return $this->inventory[$item];
+    }
 
-    /**
-     * Method to get current rooms image
-     */
     public function getCurrentImage(): string
     {
         return $this->currentRoom->getImage();
@@ -80,9 +74,9 @@ class Game
 
             return "Du plockade upp $item";
         }
-        return "$item går inte att plocka upp!";
+        $ucItem = ucfirst($item);
+        return "$ucItem går inte att plocka upp!";
     }
-
 
     public function examine(string $item): array
     {
@@ -101,9 +95,7 @@ class Game
     public function combine(string $item, string $combo): array
     {
         $itemObject = $itemObject = $this->gameFoundation->getItem($item);
-        $text = [];
-        
-
+        $text = [];     
 
         if (!$itemObject->getCombo()) {
             $text[] = "Nix, ingen bra kombo.";
@@ -126,4 +118,11 @@ class Game
         return $text;
     }
 
+    public function drop(string $item): string
+    {
+    $this->currentRoom->additem($this->inventory[$item]);
+    unset($this->inventory[$item]);
+
+        return "Du har lagt ifrån dig $item";
+    }
 }

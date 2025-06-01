@@ -13,7 +13,7 @@ class ControllerTwig extends AbstractController
     #[Route("/lucky", name: "lucky")]
     public function number(): Response
     {
-        $nameList = ["Chariman Meow", "Cindy Clawford", "Fidel Catstro", "Dolly Purrton", "Paw McCartney", "Cat Stevens", "Puma Thurman"];
+        $nameList = ["Chariman Meow", "Cindy Clawford", "Fidel Catstro", "Dolly Purrton", "Paw McCartney", "Cat Stevens", "Puma Furman"];
         $number = random_int(0, 6);
         $name = $nameList[$number];
 

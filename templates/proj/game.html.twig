@@ -16,8 +16,6 @@
     {{ include('flash.html.twig') }}
 
 
-
-{{ game.getCurrentImage() }}
     <form method="post" action="{{ path('game_move') }}">
         
         {% for exit in game.getCurrentRoom.getExits() |keys %}
@@ -60,13 +58,24 @@
                     </form>
                 {% endif %}
             {% endif %}
-
         {% endfor %}
 
+        <p>I dina fickor:</p>
+
+            <form method="post" action="{{ path('game_examine_pocket') }}">
+                        {% for item in game.getInventory() %}
+                <button class= "submit" name="item" type="submit" value = {{ item.getId() }}>
+                    Undersök {{ item.getId }}
+                    </button>
+                <button class= "submit" name="item" type="submit" value = {{ item.getId() }} onClick="this.form.action='{{ path('game_drop') }}'">
+                    Lägg ifrån dig {{ item.getId }}
+                </button>
+                        {% endfor %}
+            </form>
 
 
 
+ 
+                
+        
 {% endblock %}
-
-
-
