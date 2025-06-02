@@ -21,8 +21,8 @@ class Item
     #[ORM\Column]
     private ?bool $pickable = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $comb_text = null;
+    #[ORM\Column(name: "comb_text", length: 255, nullable: true)]
+    private ?string $combText = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
@@ -35,13 +35,13 @@ class Item
     private ?bool $hidden = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?item $examineReveal = null;
+    private ?Item $examineReveal = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?item $combinationReveal = null;
+    private ?Item $combinationReveal = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?item $combo = null;
+    private ?Item $combo = null;
 
 
     public function getId(): ?string
@@ -94,12 +94,12 @@ class Item
 
     public function getCombText(): ?string
     {
-        return $this->comb_text;
+        return $this->combText;
     }
 
-    public function setCombText(?string $comb_text): static
+    public function setCombText(?string $combText): static
     {
-        $this->comb_text = $comb_text;
+        $this->combText = $combText;
 
         return $this;
     }
@@ -140,36 +140,36 @@ class Item
         return $this;
     }
 
-    public function getExamineReveal(): ?item
+    public function getExamineReveal(): ?Item
     {
         return $this->examineReveal;
     }
 
-    public function setExamineReveal(?item $examineReveal): static
+    public function setExamineReveal(?Item $examineReveal): static
     {
         $this->examineReveal = $examineReveal;
 
         return $this;
     }
 
-    public function getCombinationReveal(): ?item
+    public function getCombinationReveal(): ?Item
     {
         return $this->combinationReveal;
     }
 
-    public function setCombinationReveal(?item $combinationReveal): static
+    public function setCombinationReveal(?Item $combinationReveal): static
     {
         $this->combinationReveal = $combinationReveal;
 
         return $this;
     }
 
-    public function getCombo(): ?item
+    public function getCombo(): ?Item
     {
         return $this->combo;
     }
 
-    public function setCombo(?item $combo): static
+    public function setCombo(?Item $combo): static
     {
         $this->combo = $combo;
 

@@ -28,26 +28,20 @@ class Room
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'room')]
     private Collection $items;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $second_description = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $start = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?room $north = null;
+    private ?Room $north = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?room $south = null;
+    private ?Room $south = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?room $west = null;
+    private ?Room $west = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?room $east = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $visited = null;
+    private ?Room $east = null;
 
     public function __construct()
     {
@@ -122,18 +116,6 @@ class Room
         return $this;
     }
 
-    public function getSecondDescription(): ?string
-    {
-        return $this->second_description;
-    }
-
-    public function setSecondDescription(string $second_description): static
-    {
-        $this->second_description = $second_description;
-
-        return $this;
-    }
-
     public function isStart(): ?bool
     {
         return $this->start;
@@ -146,65 +128,54 @@ class Room
         return $this;
     }
 
-    public function getNorth(): ?room
+    public function getNorth(): ?Room
     {
         return $this->north;
     }
 
-    public function setNorth(?room $north): static
+    public function setNorth(?Room $north): static
     {
         $this->north = $north;
 
         return $this;
     }
 
-    public function getSouth(): ?room
+    public function getSouth(): ?Room
     {
         return $this->south;
     }
 
-    public function setSouth(?room $south): static
+    public function setSouth(?Room $south): static
     {
         $this->south = $south;
 
         return $this;
     }
 
-    public function getWest(): ?room
+    public function getWest(): ?Room
     {
         return $this->west;
     }
 
-    public function setWest(?room $west): static
+    public function setWest(?Room $west): static
     {
         $this->west = $west;
 
         return $this;
     }
 
-    public function getEast(): ?room
+    public function getEast(): ?Room
     {
         return $this->east;
     }
 
-    public function setEast(?room $east): static
+    public function setEast(?Room $east): static
     {
         $this->east = $east;
 
         return $this;
     }
 
-    public function isVisited(): ?bool
-    {
-        return $this->visited;
-    }
-
-    public function setVisited(?bool $visited): static
-    {
-        $this->visited = $visited;
-
-        return $this;
-    }
 
     public function getExits(): array
     {
