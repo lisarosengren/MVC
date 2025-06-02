@@ -21,13 +21,13 @@ class RoomRepository extends ServiceEntityRepository
      * @return Room[] Returns an array of Room objects
      */
     public function loadAllWithItems(): array
-{
-    return $this->createQueryBuilder('r')
-        ->leftJoin('r.items', 'i')
-        ->addSelect('i')
-        ->getQuery()
-        ->getResult();
-}
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.items', 'i')
+            ->addSelect('i')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Room[] Returns an array of Room objects

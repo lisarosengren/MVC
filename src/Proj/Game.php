@@ -2,14 +2,12 @@
 
 namespace App\Proj;
 
-
 use App\Entity\Room;
 use App\Entity\Item;
 use App\Proj\GameFoundation;
 
 class Game
 {
- 
     private Room $currentRoom;
 
     private Gamefoundation $gameFoundation;
@@ -21,7 +19,7 @@ class Game
     {
         $this->gameFoundation = $data;
         $this->currentRoom = $this->gameFoundation->getStartRoom();
-    
+
     }
 
     /**
@@ -32,7 +30,7 @@ class Game
         $this->currentRoom = $room;
     }
 
-    public function getCurrentRoom(): Room 
+    public function getCurrentRoom(): Room
     {
         return $this->currentRoom;
     }
@@ -61,7 +59,7 @@ class Game
     {
         $this->currentRoom = $this->currentRoom->getExits()[$exit];
     }
-    
+
     public function pickUp(string $item): string
     {
         if (count($this->inventory) >= 2) {
@@ -85,17 +83,17 @@ class Game
             return ["Game Over", $itemObject->getExamine()];
         }
         if ($itemObject->getExamineReveal()) {
-            $itemObject->getExamineReveal()->setHidden(FALSE);
+            $itemObject->getExamineReveal()->setHidden(false);
             $this->currentRoom->removeItem($itemObject);
         }
 
-        return [$itemObject->getExamine()]; 
+        return [$itemObject->getExamine()];
     }
 
     public function combine(string $item, string $combo): array
     {
         $itemObject = $itemObject = $this->gameFoundation->getItem($item);
-        $text = [];     
+        $text = [];
 
         if (!$itemObject->getCombo()) {
             $text[] = "Nix, ingen bra kombo.";
@@ -103,25 +101,25 @@ class Game
         }
         if ($itemObject->getCombo()->getId() !== $combo) {
             $text[] = "Nix, ingen bra kombo.";
-            return $text;         
+            return $text;
         }
         if ($itemObject->isLast()) {
             $text[] = "Vinnare";
         }
         if ($itemObject->getCombinationReveal()) {
-            $itemObject->getCombinationReveal()->setHidden(FALSE);
+            $itemObject->getCombinationReveal()->setHidden(false);
         }
         $this->currentRoom->removeItem($itemObject);
         unset($this->inventory[$combo]);
         $text[] = $itemObject->getCombText();
-        
+
         return $text;
     }
 
     public function drop(string $item): string
     {
-    $this->currentRoom->additem($this->inventory[$item]);
-    unset($this->inventory[$item]);
+        $this->currentRoom->additem($this->inventory[$item]);
+        unset($this->inventory[$item]);
 
         return "Du har lagt ifrån dig $item";
     }

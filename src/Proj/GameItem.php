@@ -2,20 +2,19 @@
 
 namespace App\Proj;
 
-
 class GameItem
 {
     private string $name;
 
     private string $examine;
 
-    
+
 
 
 
     public function __construct()
     {
-        
+
 
 
 

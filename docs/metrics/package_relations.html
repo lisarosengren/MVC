@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-05-19 11:28:58        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-06-02 07:50:26        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -289,7 +289,8 @@
             "Symfony\\Bundle\\FrameworkBundle\\Controller",
             "Doctrine\\Persistence",
             "App\\Entity",
-            "App\\Repository"
+            "App\\Repository",
+            "App\\Proj"
         ]
     },
     {
@@ -317,7 +318,16 @@
     {
         "name": "App\\Entity",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "Doctrine\\Common\\Collections"
+        ]
+    },
+    {
+        "name": "App\\Proj",
+        "size": 3000,
+        "relations": [
+            "App\\Entity"
+        ]
     },
     {
         "name": "App",
@@ -333,6 +343,11 @@
     },
     {
         "name": "App\\Dice",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "Doctrine\\Common\\Collections",
         "size": 3000,
         "relations": []
     },

@@ -2,9 +2,14 @@
 
 {% extends "proj.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}MVC Kmom10{% endblock %}
 
 {% block body %}
-    <h1>Här startar spelet</h1>
-    
+    <div class="game">
+        <h1>Hitta inköpslistan!</h1>
+        <p>Du vaknar i sovrummet och känner dig hungrig. Du drar dig till minnes att du är i stort behov av att handla mat. Vad du inte kommer ihåg är var du lagt inköpslistan.</p>
+
+        <a class="start" href="{{ path('game') }}">Starta spelet</a>
+        
+    </div>
 {% endblock %}

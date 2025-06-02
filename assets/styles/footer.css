@@ -1,0 +1,15 @@
+footer {
+  background-color: #1E4359;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  color: #CEECF2;
+  border-top: #000 solid 3px;
+}
+
+.sf-minitoolbar {
+  display: none !important;
+}

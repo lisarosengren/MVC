@@ -43,7 +43,7 @@ class Item
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?item $combo = null;
 
-   
+
     public function getId(): ?string
     {
         return $this->id;

@@ -7,7 +7,6 @@ use App\Proj\GameFoundation;
 use App\Entity\Room;
 use App\Repository\RoomRepository;
 use App\Repository\ItemRepository;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjController extends AbstractController
 {
     #[Route("/proj", name: "proj", methods: ['GET'])]
-    public function home(SessionInterface $session,
+    public function home(
+        SessionInterface $session,
         RoomRepository $roomRepository,
-        ItemRepository $itemRepository): Response
-    {
+        ItemRepository $itemRepository
+    ): Response {
         $gameFoundation = new GameFoundation($roomRepository->loadAllWithItems(), $itemRepository->findAll());
         $session->set("game", new Game($gameFoundation));
 
@@ -54,11 +54,11 @@ class ProjController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-     
+
         $text = $session->get("game")->pickUp($request->request->get('pick'));
 
         $this->addFlash(
-            'notice',
+            'text',
             $text
         );
         return $this->redirectToRoute('game');
@@ -69,9 +69,9 @@ class ProjController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-    
+
         $text = $session->get("game")->examine($request->request->get('examine'));
-       
+
         if ($text[0] === "Game Over") {
             $data = [
                 "text" => $text[1],
@@ -80,7 +80,7 @@ class ProjController extends AbstractController
         }
 
         $this->addFlash(
-            'notice',
+            'text',
             $text[0]
         );
         return $this->redirectToRoute('game');
@@ -101,7 +101,7 @@ class ProjController extends AbstractController
         }
 
         $this->addFlash(
-            'notice',
+            'text',
             $text[0]
         );
 
@@ -131,7 +131,7 @@ class ProjController extends AbstractController
     ): Response {
 
         $item = $request->request->get('item');
-        $text = $session->get("game")->getInventory()[$item]->getDescription();
+        $text = $session->get("game")->getInventory()[$item]->getExamine();
 
         $this->addFlash(
             'text',
@@ -141,6 +141,17 @@ class ProjController extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+    #[Route("proj/about", name: "proj_about")]
+    public function about(): Response {
+
+        return $this->render('proj/about.html.twig');
+    }
+
+    #[Route("proj/api", name: "proj_api")]
+    public function projApi(): Response {
+
+        return $this->render('proj/api.html.twig');
+    }
 
 
 

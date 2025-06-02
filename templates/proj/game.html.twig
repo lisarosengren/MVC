@@ -1,81 +1,88 @@
 {# templates/home.html.twig #}
 
-{% extends "base.html.twig" %}
+{% extends "proj.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}MVC Kmom10{% endblock %}
 
 {% block body %}
 
-    
+    <div class="game play">
     <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="mvc screenshot" width=300>
 
-    <p>{{ game.getCurrentRoom().getDescription()}}<br>
-    Du kan gå åt olika håll och eventuellt interagera med olika föremål.</p>
-
+    <p>{{ game.getCurrentRoom().getDescription()}}</p>
 
     {{ include('flash.html.twig') }}
 
 
-    <form method="post" action="{{ path('game_move') }}">
-        
-        {% for exit in game.getCurrentRoom.getExits() |keys %}
-        
-        <button class= "submit" name="exit" type="submit" value = {{ exit }}>
-            Gå {{ exit }}      
-        </button>
+ 
+    <hr>    
 
-        {% endfor %}
-
-    </form>
+    <div class="actions-pockets">
+    <div class="actions">
+        <div class ="item">
+            <form method="post" action="{{ path('game_move') }}">    
+                {% for exit in game.getCurrentRoom.getExits() |keys %}
+                <button class= "submit" name="exit" type="submit" value = {{ exit }}>
+                    Gå {{ exit }}      
+                </button>
+                {% endfor %}
+            </form>
+        </div>
 
 
         {% for item in game.getCurrentRoom.getItems() %}
             {% if not item.isHidden() %}
-
-                <form method="post" action="{{ path('game_pickup') }}">
-                        <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
-                            Plocka upp {{ item.getId }}      
-                        </button>
-                </form>
-
-                <form method="post" action="{{ path('game_examine') }}">
-                        <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
-                            Undersök {{ item.getId }}      
-                        </button>
-                </form>
-
-
-                {% if game.getInventory() %}
-                    <form method="post" action="{{ path('game_combine') }}">
-                            <button class= "submit" name="item" type="submit" value = {{ item.getId }}>
-                                Kombinera {{ item.getId }} med       
+                <div class="item">
+                    <form method="post" action="{{ path('game_pickup') }}">
+                            <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
+                                Plocka upp {{ item.getId }}      
                             </button>
-                            <select name ="combo">
-                                {% for thing in game.getInventory() %}
-                                    <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
-                                {% endfor %}
-                            </select>
                     </form>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
 
-        <p>I dina fickor:</p>
+                    <form method="post" action="{{ path('game_examine') }}">
+                            <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
+                                Undersök {{ item.getId }}      
+                            </button>
+                    </form>
+                    {% if game.getInventory() %}
+                        <form method="post" action="{{ path('game_combine') }}">
+                                <button class= "submit" name="item" type="submit" value = {{ item.getId }}>
+                                    Kombinera {{ item.getId }} med       
+                                </button>
+                                <select name ="combo">
+                                    {% for thing in game.getInventory() %}
+                                        <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        
+        <div class="pockets">
+        <p>I dina fickor:<br>
+
+        {% if not game.getInventory()%}
+        <br>Bara lite ludd...
+        {% endif %}
+        </p>
 
             <form method="post" action="{{ path('game_examine_pocket') }}">
-                        {% for item in game.getInventory() %}
-                <button class= "submit" name="item" type="submit" value = {{ item.getId() }}>
-                    Undersök {{ item.getId }}
+                {% for item in game.getInventory() %}
+                    <p>{{ item.getId() }}</p>
+                    <button class= "submit" name="item" type="submit" value = {{ item.getId() }}>
+                        Undersök
+                        </button>
+                    <button class= "submit" name="item" type="submit" value = {{ item.getId() }} onClick="this.form.action='{{ path('game_drop') }}'">
+                        Lägg ifrån dig
                     </button>
-                <button class= "submit" name="item" type="submit" value = {{ item.getId() }} onClick="this.form.action='{{ path('game_drop') }}'">
-                    Lägg ifrån dig {{ item.getId }}
-                </button>
                         {% endfor %}
             </form>
-
-
-
- 
-                
+        </div>
+    </div>
+    </div>                
         
 {% endblock %}
