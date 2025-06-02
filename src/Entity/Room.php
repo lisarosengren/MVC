@@ -61,7 +61,7 @@ class Room
         return $this->id;
     }
 
-    public function setId(string $name): static
+    public function setId(string $id): static
     {
         $this->id = $id;
 

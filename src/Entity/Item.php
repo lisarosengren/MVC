@@ -140,18 +140,6 @@ class Item
         return $this;
     }
 
-    public function getItem(): ?self
-    {
-        return $this->item;
-    }
-
-    public function setItem(?self $item): static
-    {
-        $this->item = $item;
-
-        return $this;
-    }
-
     public function getExamineReveal(): ?item
     {
         return $this->examineReveal;

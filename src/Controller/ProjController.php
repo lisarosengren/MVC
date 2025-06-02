@@ -28,8 +28,7 @@ class ProjController extends AbstractController
     }
 
     #[Route("/proj/game", name: "game", methods: ['GET'])]
-    public function game(SessionInterface $session,
-            RoomRepository $roomRepository, ItemRepository $itemRepository): Response
+    public function game(SessionInterface $session): Response
     {
         $data = [
             "game" => $session->get("game"),

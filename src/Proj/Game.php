@@ -4,7 +4,7 @@ namespace App\Proj;
 
 
 use App\Entity\Room;
-use App\Entity\Items;
+use App\Entity\Item;
 use App\Proj\GameFoundation;
 
 class Game
