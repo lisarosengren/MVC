@@ -13,14 +13,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Room
 {
     #[ORM\Id]
-    #[ORM\Column(length: 255, unique: true)]
-    private ?string $id = null;
+    #[ORM\Column(length: 255, unique: true, nullable: false)]
+    private string $id = "";
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $image = "";
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $description = "";
 
     /**
      * @var Collection<int, Item>
@@ -28,8 +28,8 @@ class Room
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'room')]
     private Collection $items;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $start = null;
+    #[ORM\Column(nullable: false)]
+    private bool $start = false;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Room $north = null;
@@ -49,7 +49,7 @@ class Room
     }
 
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -61,7 +61,7 @@ class Room
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -73,7 +73,7 @@ class Room
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -116,12 +116,12 @@ class Room
         return $this;
     }
 
-    public function isStart(): ?bool
+    public function isStart(): bool
     {
         return $this->start;
     }
 
-    public function setStart(?bool $start): static
+    public function setStart(bool $start): static
     {
         $this->start = $start;
 
@@ -176,6 +176,10 @@ class Room
         return $this;
     }
 
+
+    /**
+     * @return array <string, Room>
+     */
 
     public function getExits(): array
     {

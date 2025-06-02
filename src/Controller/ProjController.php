@@ -16,7 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjController extends AbstractController
 {
     #[Route("/proj", name: "proj", methods: ['GET'])]
-    public function home(
+    public function home(): Response
+    {
+
+        return $this->render('proj/home.html.twig');
+    }
+
+    #[Route("/proj/init", name: "game_init", methods: ['GET'])]
+    public function gameInit(
         SessionInterface $session,
         RoomRepository $roomRepository,
         ItemRepository $itemRepository
@@ -24,8 +31,9 @@ class ProjController extends AbstractController
         $gameFoundation = new GameFoundation($roomRepository->loadAllWithItems(), $itemRepository->findAll());
         $session->set("game", new Game($gameFoundation));
 
-        return $this->render('proj/home.html.twig');
+        return $this->redirectToRoute('game');
     }
+
 
     #[Route("/proj/game", name: "game", methods: ['GET'])]
     public function game(SessionInterface $session): Response
