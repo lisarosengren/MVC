@@ -12,34 +12,86 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
 {
+    /**
+     * The name of the Room.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\Id]
     #[ORM\Column(length: 255, unique: true, nullable: false)]
     private string $id = "";
 
+    /**
+     * The image string of the Room.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\Column(length: 255, nullable: false)]
     private string $image = "";
 
+    /**
+     * The description of the Room.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\Column(length: 255, nullable: false)]
     private string $description = "";
 
     /**
+     * If the Room is the start room.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
+    #[ORM\Column(nullable: false)]
+    private bool $start = false;
+
+
+    /**
+     * The items connected to the Room.
      * @var Collection<int, Item>
      */
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'room')]
     private Collection $items;
 
-    #[ORM\Column(nullable: false)]
-    private bool $start = false;
 
+
+    /**
+     * The Room connected to the exit.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Room $north = null;
 
+    /**
+     * The Room connected to the exit.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Room $south = null;
 
+    /**
+     * The Room connected to the exit.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Room $west = null;
 
+    /**
+     * The Room connected to the exit.
+     *
+     * No UI created for setting property.
+     * Use sqlite to update table.
+     */
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Room $east = null;
 
@@ -49,40 +101,27 @@ class Room
     }
 
 
+    /**
+     * Get the name of the Room
+     * @return string
+     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
+    /**
+     * Get the image string of the Room.
+     * @return string
+     */
     public function getImage(): string
     {
         return $this->image;
     }
 
-    public function setImage(string $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
 
@@ -121,23 +160,9 @@ class Room
         return $this->start;
     }
 
-    public function setStart(bool $start): static
-    {
-        $this->start = $start;
-
-        return $this;
-    }
-
     public function getNorth(): ?Room
     {
         return $this->north;
-    }
-
-    public function setNorth(?Room $north): static
-    {
-        $this->north = $north;
-
-        return $this;
     }
 
     public function getSouth(): ?Room
@@ -145,37 +170,15 @@ class Room
         return $this->south;
     }
 
-    public function setSouth(?Room $south): static
-    {
-        $this->south = $south;
-
-        return $this;
-    }
-
     public function getWest(): ?Room
     {
         return $this->west;
-    }
-
-    public function setWest(?Room $west): static
-    {
-        $this->west = $west;
-
-        return $this;
     }
 
     public function getEast(): ?Room
     {
         return $this->east;
     }
-
-    public function setEast(?Room $east): static
-    {
-        $this->east = $east;
-
-        return $this;
-    }
-
 
     /**
      * @return array <string, Room>

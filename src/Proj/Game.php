@@ -127,7 +127,7 @@ class Game
      */
     public function combine(string $item, string $combo): array
     {
-        $itemObject = $itemObject = $this->gameFoundation->getItem($item);
+        $itemObject = $this->gameFoundation->getItem($item);
         $text = [];
 
         if (!$itemObject->getCombo() || $itemObject->getCombo()->getId() !== $combo || !$itemObject->getCombText()) {

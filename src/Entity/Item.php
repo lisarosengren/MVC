@@ -49,23 +49,9 @@ class Item
         return $this->id;
     }
 
-    public function setId(string $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getExamine(): string
     {
         return $this->examine;
-    }
-
-    public function setExamine(string $examine): static
-    {
-        $this->examine = $examine;
-
-        return $this;
     }
 
     public function isDeadly(): bool
@@ -73,35 +59,14 @@ class Item
         return $this->deadly;
     }
 
-    public function setDeadly(bool $deadly): static
-    {
-        $this->deadly = $deadly;
-
-        return $this;
-    }
-
     public function isPickable(): bool
     {
         return $this->pickable;
     }
 
-    public function setPickable(bool $pickable): static
-    {
-        $this->pickable = $pickable;
-
-        return $this;
-    }
-
     public function getCombText(): ?string
     {
         return $this->combText;
-    }
-
-    public function setCombText(?string $combText): static
-    {
-        $this->combText = $combText;
-
-        return $this;
     }
 
     public function getRoom(): ?Room
@@ -121,13 +86,6 @@ class Item
         return $this->isLast;
     }
 
-    public function setIsLast(bool $isLast): static
-    {
-        $this->isLast = $isLast;
-
-        return $this;
-    }
-
     public function isHidden(): bool
     {
         return $this->hidden;
@@ -145,35 +103,13 @@ class Item
         return $this->examineReveal;
     }
 
-    public function setExamineReveal(?Item $examineReveal): static
-    {
-        $this->examineReveal = $examineReveal;
-
-        return $this;
-    }
-
     public function getCombinationReveal(): ?Item
     {
         return $this->combinationReveal;
-    }
-
-    public function setCombinationReveal(?Item $combinationReveal): static
-    {
-        $this->combinationReveal = $combinationReveal;
-
-        return $this;
     }
 
     public function getCombo(): ?Item
     {
         return $this->combo;
     }
-
-    public function setCombo(?Item $combo): static
-    {
-        $this->combo = $combo;
-
-        return $this;
-    }
-
 }
