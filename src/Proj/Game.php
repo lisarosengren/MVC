@@ -22,7 +22,6 @@ class Game
     {
         $this->gameFoundation = $data;
         $this->currentRoom = $this->gameFoundation->getStartRoom();
-
     }
 
     /**
@@ -131,7 +130,7 @@ class Game
         $itemObject = $itemObject = $this->gameFoundation->getItem($item);
         $text = [];
 
-        if (!$itemObject->getCombo() || $itemObject->getCombo()->getId() !== $combo) {
+        if (!$itemObject->getCombo() || $itemObject->getCombo()->getId() !== $combo || !$itemObject->getCombText()) {
             $text[] = "Nix, ingen bra kombo.";
             return $text;
         }

@@ -10,16 +10,16 @@ class Item
 {
     #[ORM\Id]
     #[ORM\Column(length: 25, unique: true)]
-    private ?string $id = null;
+    private string $id = "";
 
-    #[ORM\Column(length: 255)]
-    private ?string $examine = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $examine = "";
 
-    #[ORM\Column]
-    private ?bool $deadly = null;
+    #[ORM\Column(nullable: false)]
+    private bool $deadly = false;
 
-    #[ORM\Column]
-    private ?bool $pickable = null;
+    #[ORM\Column(nullable: false)]
+    private bool $pickable = false;
 
     #[ORM\Column(name: "comb_text", length: 255, nullable: true)]
     private ?string $combText = null;
@@ -28,11 +28,11 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $room = null;
 
-    #[ORM\Column]
-    private ?bool $isLast = null;
+    #[ORM\Column(nullable: false)]
+    private bool $isLast = false;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $hidden = null;
+    #[ORM\Column(nullable: false)]
+    private bool $hidden = false;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Item $examineReveal = null;
@@ -44,7 +44,7 @@ class Item
     private ?Item $combo = null;
 
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -56,7 +56,7 @@ class Item
         return $this;
     }
 
-    public function getExamine(): ?string
+    public function getExamine(): string
     {
         return $this->examine;
     }
@@ -68,7 +68,7 @@ class Item
         return $this;
     }
 
-    public function isDeadly(): ?bool
+    public function isDeadly(): bool
     {
         return $this->deadly;
     }
@@ -80,7 +80,7 @@ class Item
         return $this;
     }
 
-    public function isPickable(): ?bool
+    public function isPickable(): bool
     {
         return $this->pickable;
     }
@@ -116,7 +116,7 @@ class Item
         return $this;
     }
 
-    public function isLast(): ?bool
+    public function isLast(): bool
     {
         return $this->isLast;
     }
@@ -128,12 +128,12 @@ class Item
         return $this;
     }
 
-    public function isHidden(): ?bool
+    public function isHidden(): bool
     {
         return $this->hidden;
     }
 
-    public function setHidden(?bool $hidden): static
+    public function setHidden(bool $hidden): static
     {
         $this->hidden = $hidden;
 

@@ -28,5 +28,4 @@ class RoomRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 }

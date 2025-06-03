@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2025-06-02 20:18:48        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2025-06-03 09:10:37        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -353,6 +353,21 @@
         ]
     },
     {
+        "name": "\\App\\Controller\\ProjControllerGameAction",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\Request",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "\\App\\Controller\\LibraryController",
         "size": 3000,
         "relations": [
@@ -363,11 +378,6 @@
             "\\App\\Entity\\Library",
             "\\App\\Repository\\LibraryRepository"
         ]
-    },
-    {
-        "name": "\\Symfony\\Component\\HttpFoundation\\Request",
-        "size": 3000,
-        "relations": []
     },
     {
         "name": "\\App\\Entity\\Library",
@@ -463,14 +473,17 @@
             "\\App\\Repository\\RoomRepository",
             "\\App\\Repository\\ItemRepository",
             "\\App\\Proj\\GameFoundation",
-            "\\App\\Proj\\Game",
-            "\\Symfony\\Component\\HttpFoundation\\Request"
+            "\\App\\Proj\\Game"
         ]
     },
     {
         "name": "\\App\\Proj\\GameFoundation",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "\\App\\Entity\\Room",
+            "\\Exception",
+            "\\App\\Entity\\Item"
+        ]
     },
     {
         "name": "\\App\\Proj\\Game",
@@ -531,12 +544,12 @@
         "relations": []
     },
     {
-        "name": "\\App\\Card\\CardGraphic",
+        "name": "\\Exception",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Exception",
+        "name": "\\App\\Card\\CardGraphic",
         "size": 3000,
         "relations": []
     },
