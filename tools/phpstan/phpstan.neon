@@ -7,5 +7,5 @@ parameters:
     bootstrapFiles:
         #- .phpstan.constants.php
     ignoreErrors:
-    - '#Property App\\Entity\\Room::\$.* is never assigned App\\Entity\\Room#'
-    - '#Property App\\Entity\\Item::\$.* is never assigned App\\Entity\\Item#'
+    - '#Property App\\Entity\\Room::\$.* is never assigned .*#'
+    - '#Property App\\Entity\\Item::\$.* is never assigned .*#'

@@ -18,7 +18,7 @@ class RoomRepository extends ServiceEntityRepository
 
     /**
      * Method to get all rooms with their connected items
-     * @return Room[] Returns an array of Room objects
+     * @return array<Room> Returns an array of Room objects
      */
     public function loadAllWithItems(): array
     {

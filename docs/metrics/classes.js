@@ -1908,28 +1908,13 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setId",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getImage",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setImage",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getDescription",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setDescription",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
@@ -1957,18 +1942,8 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setStart",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getNorth",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setNorth",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
@@ -1977,28 +1952,13 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setSouth",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getWest",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setWest",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getEast",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setEast",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
@@ -2009,12 +1969,12 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             }
         ],
-        "nbMethodsIncludingGettersSetters": 21,
+        "nbMethodsIncludingGettersSetters": 13,
         "nbMethods": 4,
         "nbMethodsPrivate": 0,
         "nbMethodsPublic": 4,
         "nbMethodsGetter": 9,
-        "nbMethodsSetters": 8,
+        "nbMethodsSetters": 0,
         "wmc": 11,
         "ccn": 8,
         "ccnMethodMax": 5,
@@ -2027,32 +1987,32 @@ var classes = [
         "parents": [],
         "implements": [],
         "lcom": 1,
-        "length": 136,
-        "vocabulary": 25,
-        "volume": 631.56,
-        "difficulty": 11.25,
-        "effort": 7105.1,
-        "level": 0.09,
-        "bugs": 0.21,
-        "time": 395,
-        "intelligentContent": 56.14,
-        "number_operators": 46,
-        "number_operands": 90,
+        "length": 88,
+        "vocabulary": 17,
+        "volume": 359.7,
+        "difficulty": 12.08,
+        "effort": 4346.34,
+        "level": 0.08,
+        "bugs": 0.12,
+        "time": 241,
+        "intelligentContent": 29.77,
+        "number_operators": 30,
+        "number_operands": 58,
         "number_operators_unique": 5,
-        "number_operands_unique": 20,
-        "cloc": 21,
-        "loc": 148,
-        "lloc": 127,
-        "mi": 60.97,
-        "mIwoC": 33.42,
-        "commentWeight": 27.55,
+        "number_operands_unique": 12,
+        "cloc": 119,
+        "loc": 206,
+        "lloc": 87,
+        "mi": 84.9,
+        "mIwoC": 38.72,
+        "commentWeight": 46.18,
         "kanDefect": 0.64,
         "relativeStructuralComplexity": 25,
-        "relativeDataComplexity": 3.41,
-        "relativeSystemComplexity": 28.41,
-        "totalStructuralComplexity": 525,
-        "totalDataComplexity": 71.67,
-        "totalSystemComplexity": 596.67,
+        "relativeDataComplexity": 2.03,
+        "relativeSystemComplexity": 27.03,
+        "totalStructuralComplexity": 325,
+        "totalDataComplexity": 26.33,
+        "totalSystemComplexity": 351.33,
         "package": "App\\Entity\\",
         "pageRank": 0.05,
         "afferentCoupling": 2,
@@ -2073,18 +2033,8 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setId",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getExamine",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setExamine",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
@@ -2093,28 +2043,13 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setDeadly",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "isPickable",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setPickable",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getCombText",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setCombText",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
@@ -2133,11 +2068,6 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setIsLast",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "isHidden",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
@@ -2153,37 +2083,22 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "setExamineReveal",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
                 "name": "getCombinationReveal",
                 "role": "getter",
-                "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setCombinationReveal",
-                "role": "setter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
                 "name": "getCombo",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
-            },
-            {
-                "name": "setCombo",
-                "role": "setter",
-                "_type": "Hal\\Metric\\FunctionMetric"
             }
         ],
-        "nbMethodsIncludingGettersSetters": 22,
+        "nbMethodsIncludingGettersSetters": 13,
         "nbMethods": 0,
         "nbMethodsPrivate": 0,
         "nbMethodsPublic": 0,
         "nbMethodsGetter": 11,
-        "nbMethodsSetters": 11,
+        "nbMethodsSetters": 2,
         "wmc": 0,
         "ccn": 1,
         "ccnMethodMax": 0,
@@ -2191,32 +2106,32 @@ var classes = [
         "parents": [],
         "implements": [],
         "lcom": 0,
-        "length": 101,
-        "vocabulary": 21,
-        "volume": 443.62,
-        "difficulty": 3.58,
-        "effort": 1587.71,
-        "level": 0.28,
-        "bugs": 0.15,
-        "time": 88,
-        "intelligentContent": 123.95,
-        "number_operators": 33,
-        "number_operands": 68,
+        "length": 47,
+        "vocabulary": 12,
+        "volume": 168.49,
+        "difficulty": 3.2,
+        "effort": 539.18,
+        "level": 0.31,
+        "bugs": 0.06,
+        "time": 30,
+        "intelligentContent": 52.65,
+        "number_operators": 15,
+        "number_operands": 32,
         "number_operators_unique": 2,
-        "number_operands_unique": 19,
-        "cloc": 14,
-        "loc": 128,
-        "lloc": 114,
-        "mi": 60.97,
-        "mIwoC": 36.46,
-        "commentWeight": 24.51,
+        "number_operands_unique": 10,
+        "cloc": 129,
+        "loc": 198,
+        "lloc": 69,
+        "mi": 91.62,
+        "mIwoC": 44.16,
+        "commentWeight": 47.46,
         "kanDefect": 0.15,
         "relativeStructuralComplexity": 0,
-        "relativeDataComplexity": 22.5,
-        "relativeSystemComplexity": 22.5,
+        "relativeDataComplexity": 13.15,
+        "relativeSystemComplexity": 13.15,
         "totalStructuralComplexity": 0,
-        "totalDataComplexity": 495,
-        "totalSystemComplexity": 495,
+        "totalDataComplexity": 171,
+        "totalSystemComplexity": 171,
         "package": "App\\Entity\\",
         "pageRank": 0.1,
         "afferentCoupling": 3,
@@ -2394,24 +2309,24 @@ var classes = [
         "parents": [],
         "implements": [],
         "lcom": 1,
-        "length": 121,
+        "length": 119,
         "vocabulary": 23,
-        "volume": 547.35,
-        "difficulty": 14.82,
-        "effort": 8113.67,
+        "volume": 538.3,
+        "difficulty": 14.65,
+        "effort": 7884.57,
         "level": 0.07,
         "bugs": 0.18,
-        "time": 451,
-        "intelligentContent": 36.92,
-        "number_operators": 37,
-        "number_operands": 84,
+        "time": 438,
+        "intelligentContent": 36.75,
+        "number_operators": 36,
+        "number_operands": 83,
         "number_operators_unique": 6,
         "number_operands_unique": 17,
         "cloc": 57,
         "loc": 141,
         "lloc": 84,
-        "mi": 79.17,
-        "mIwoC": 37.51,
+        "mi": 79.22,
+        "mIwoC": 37.56,
         "commentWeight": 41.66,
         "kanDefect": 0.64,
         "relativeStructuralComplexity": 256,

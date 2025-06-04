@@ -1,38 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="22" assertions="41" errors="0" warnings="0" failures="0" skipped="0" time="0.049295">
-    <testsuite name="Project Test Suite" tests="22" assertions="41" errors="0" warnings="0" failures="0" skipped="0" time="0.049295">
-      <testsuite name="App\Card\CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" tests="2" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.008892">
-        <testcase name="testCreateCard" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="17" assertions="2" time="0.007545"/>
-        <testcase name="testGetAsStringException" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="30" assertions="1" time="0.001347"/>
+  <testsuite name="" tests="34" assertions="53" errors="6" warnings="0" failures="0" skipped="0" time="0.073328">
+    <testsuite name="Project Test Suite" tests="34" assertions="53" errors="6" warnings="0" failures="0" skipped="0" time="0.073328">
+      <testsuite name="App\Card\CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" tests="2" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.008760">
+        <testcase name="testCreateCard" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="17" assertions="2" time="0.007475"/>
+        <testcase name="testGetAsStringException" class="App\Card\CardGraphicTest" classname="App.Card.CardGraphicTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardGraphicTest.php" line="30" assertions="1" time="0.001284"/>
       </testsuite>
-      <testsuite name="App\Card\CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.002249">
-        <testcase name="testCreateCardHand" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="28" assertions="1" time="0.000827"/>
-        <testcase name="testAdd" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="36" assertions="1" time="0.000372"/>
-        <testcase name="testGetString" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="49" assertions="1" time="0.001050"/>
+      <testsuite name="App\Card\CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.002140">
+        <testcase name="testCreateCardHand" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="28" assertions="1" time="0.000803"/>
+        <testcase name="testAdd" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="36" assertions="1" time="0.000356"/>
+        <testcase name="testGetString" class="App\Card\CardHandTest" classname="App.Card.CardHandTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardHandTest.php" line="49" assertions="1" time="0.000981"/>
       </testsuite>
-      <testsuite name="App\Card\CardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000388">
-        <testcase name="testCreateCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="16" assertions="2" time="0.000388"/>
+      <testsuite name="App\Card\CardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000358">
+        <testcase name="testCreateCard" class="App\Card\CardTest" classname="App.Card.CardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/CardTest.php" line="16" assertions="2" time="0.000358"/>
       </testsuite>
-      <testsuite name="App\Card\DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" tests="8" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.011468">
-        <testcase name="testCreateDeckOfCards" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="28" assertions="2" time="0.002891"/>
-        <testcase name="testShuffle" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="39" assertions="1" time="0.004186"/>
-        <testcase name="testGetSortedValues" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="53" assertions="1" time="0.000930"/>
-        <testcase name="testNumberOfCards" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="67" assertions="1" time="0.000498"/>
-        <testcase name="testdrawCard" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="80" assertions="2" time="0.000789"/>
-        <testcase name="testdrawCardJson" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="99" assertions="2" time="0.000789"/>
-        <testcase name="testGetString" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="117" assertions="1" time="0.000675"/>
-        <testcase name="testdrawCardGame" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="128" assertions="2" time="0.000709"/>
+      <testsuite name="App\Card\DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" tests="8" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.011492">
+        <testcase name="testCreateDeckOfCards" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="28" assertions="2" time="0.002959"/>
+        <testcase name="testShuffle" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="39" assertions="1" time="0.004189"/>
+        <testcase name="testGetSortedValues" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="53" assertions="1" time="0.001004"/>
+        <testcase name="testNumberOfCards" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="67" assertions="1" time="0.000542"/>
+        <testcase name="testdrawCard" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="80" assertions="2" time="0.000710"/>
+        <testcase name="testdrawCardJson" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="99" assertions="2" time="0.000715"/>
+        <testcase name="testGetString" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="117" assertions="1" time="0.000706"/>
+        <testcase name="testdrawCardGame" class="App\Card\DeckOfCardTest" classname="App.Card.DeckOfCardTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/DeckOfCardsTest.php" line="128" assertions="2" time="0.000666"/>
       </testsuite>
-      <testsuite name="App\Card\Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" tests="8" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.026299">
-        <testcase name="testCreateDeckOfCards" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="31" assertions="6" time="0.002032"/>
-        <testcase name="testGetTotal" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="45" assertions="2" time="0.000675"/>
-        <testcase name="testGetTotalWrongType" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="58" assertions="1" time="0.000614"/>
-        <testcase name="testGetHand" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="70" assertions="1" time="0.000593"/>
-        <testcase name="testFirstDraw" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="79" assertions="2" time="0.000717"/>
-        <testcase name="testCalculateSum" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="94" assertions="4" time="0.016822"/>
-        <testcase name="testBanksTurn" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="137" assertions="4" time="0.001761"/>
-        <testcase name="testBanksTurnLess" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="196" assertions="1" time="0.003086"/>
+      <testsuite name="App\Card\Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" tests="8" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.026029">
+        <testcase name="testCreateDeckOfCards" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="31" assertions="6" time="0.002064"/>
+        <testcase name="testGetTotal" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="45" assertions="2" time="0.000666"/>
+        <testcase name="testGetTotalWrongType" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="58" assertions="1" time="0.000689"/>
+        <testcase name="testGetHand" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="70" assertions="1" time="0.000597"/>
+        <testcase name="testFirstDraw" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="79" assertions="2" time="0.000843"/>
+        <testcase name="testCalculateSum" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="94" assertions="4" time="0.016359"/>
+        <testcase name="testBanksTurn" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="137" assertions="4" time="0.001729"/>
+        <testcase name="testBanksTurnLess" class="App\Card\Game21Test" classname="App.Card.Game21Test" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Card/Game21Test.php" line="196" assertions="1" time="0.003081"/>
+      </testsuite>
+      <testsuite name="App\Proj\GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" tests="6" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.015504">
+        <testcase name="testCreateGamefoundation" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="49" assertions="3" time="0.006807"/>
+        <testcase name="testGetStartRoom" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="59" assertions="2" time="0.001520"/>
+        <testcase name="testGetStartRoomException" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="69" assertions="1" time="0.002012"/>
+        <testcase name="testGetRooms" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="91" assertions="2" time="0.002310"/>
+        <testcase name="testGetItem" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="101" assertions="2" time="0.001418"/>
+        <testcase name="testGetRoom" class="App\Proj\GameFoundationTest" classname="App.Proj.GameFoundationTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameFoundationTest.php" line="111" assertions="2" time="0.001437"/>
+      </testsuite>
+      <testsuite name="App\Proj\GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" tests="6" assertions="0" errors="6" warnings="0" failures="0" skipped="0" time="0.009045">
+        <testcase name="testCreateGame" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="50" assertions="0" time="0.002876">
+          <error type="TypeError">App\Proj\GameTest::testCreateGame
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
+        <testcase name="testGetStartRoom" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="60" assertions="0" time="0.001263">
+          <error type="TypeError">App\Proj\GameTest::testGetStartRoom
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
+        <testcase name="testGetStartRoomException" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="70" assertions="0" time="0.001219">
+          <error type="TypeError">App\Proj\GameTest::testGetStartRoomException
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
+        <testcase name="testGetRooms" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="92" assertions="0" time="0.001177">
+          <error type="TypeError">App\Proj\GameTest::testGetRooms
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
+        <testcase name="testGetItem" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="102" assertions="0" time="0.001266">
+          <error type="TypeError">App\Proj\GameTest::testGetItem
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
+        <testcase name="testGetRoom" class="App\Proj\GameTest" classname="App.Proj.GameTest" file="/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php" line="112" assertions="0" time="0.001244">
+          <error type="TypeError">App\Proj\GameTest::testGetRoom
+TypeError: Cannot assign App\Proj\Game to property App\Proj\GameTest::$game of type App\Proj\GameTest
+
+/home/lisa/dbwebb-kurser/mvc/me/report/tests/Proj/GameTest.php:43</error>
+        </testcase>
       </testsuite>
     </testsuite>
   </testsuite>

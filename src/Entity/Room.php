@@ -119,6 +119,10 @@ class Room
         return $this->image;
     }
 
+    /**
+     * Get the description string of the Room.
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;
@@ -126,6 +130,7 @@ class Room
 
 
     /**
+     * Get the items connected to the room
      * @return Collection<int, Item>
      */
     public function getItems(): Collection
@@ -133,6 +138,11 @@ class Room
         return $this->items;
     }
 
+    /**
+     * Connect an item to the room
+     * Updates both room collection and item
+     * @param Item $item the item to add
+     */
     public function addItem(Item $item): static
     {
         if (!$this->items->contains($item)) {
@@ -143,6 +153,10 @@ class Room
         return $this;
     }
 
+    /**
+     * Removes an item from the room
+     * @param Item $item the item to remove
+     */
     public function removeItem(Item $item): static
     {
         if ($this->items->removeElement($item)) {
@@ -155,32 +169,62 @@ class Room
         return $this;
     }
 
+    /**
+     * Returns true if its the start room,
+     * false otherwise
+     * @return bool
+     */
     public function isStart(): bool
     {
         return $this->start;
     }
 
+    /**
+     * Returns the Room thats connected to the exit,
+     * if there is one.¨
+     * @return Room|null
+     */
     public function getNorth(): ?Room
     {
         return $this->north;
     }
 
+
+    /**
+     * Returns the Room thats connected to the exit,
+     * if there is one.
+     * @return Room|null
+     */
     public function getSouth(): ?Room
     {
         return $this->south;
     }
 
+
+    /**
+     * Returns the Room thats connected to the exit,
+     * if there is one.
+     * @return Room|null
+     */
     public function getWest(): ?Room
     {
         return $this->west;
     }
 
+
+    /**
+     * Returns the Room thats connected to the exit,
+     * if there is one.
+     * @return Room|null
+     */
     public function getEast(): ?Room
     {
         return $this->east;
     }
 
     /**
+     * Creates an array with existing exits
+     * and their connected rooms.
      * @return array <string, Room>
      */
 
@@ -203,7 +247,6 @@ class Room
         if ($this->east !== null) {
             $exits["öst"] = $this->east;
         }
-
         return $exits;
     }
 }
