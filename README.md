@@ -6,6 +6,8 @@ MVC
 =====
 Det här är min README för mitt kursrepo i kursen MVC.
 
+I kursen har jag skapat en webbplats med hjälp av modeller, vyer och controllers. Resultatet kan du se om du följer nedanstående steg.
+
 Klona mitt repo
 -----------
 Gör såhär för att klona mitt repo:
