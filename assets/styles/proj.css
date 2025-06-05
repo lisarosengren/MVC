@@ -44,5 +44,10 @@ main {
     padding: 1em;
     flex-grow: 1;
     padding-top: 2em;
+    display: flex;
+    flex-direction: column;
 }
 
+.margin {
+    margin: 2em;
+}

@@ -31,7 +31,9 @@ class ProjController extends AbstractController
     ): Response {
         $gameFoundation = new GameFoundation($roomRepository->loadAllWithItems(), $itemRepository->findAll());
         try {
-            $session->set("game", new Game($gameFoundation));
+            $session->set("game", new Game($gameFoundation->getStartRoom()));
+            $session->set("gameFoundation", $gameFoundation);
+
         } catch (Exception) {
             return $this->render('proj/error.html.twig');
         }

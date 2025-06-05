@@ -6,10 +6,11 @@
 
 {% block body %}
     <div class="game">
-        <h1>Hitta inköpslistan!</h1>
-        <p>Du vaknar i sovrummet och känner dig hungrig. Du drar dig till minnes att du är i stort behov av att handla mat. Vad du inte kommer ihåg är var du lagt inköpslistan.</p>
+        <div class="margin">
+            <h1>Hitta inköpslistan!</h1>
+            <p>Du vaknar i sovrummet och känner dig hungrig. Du drar dig till minnes att du är i stort behov av att handla mat. Vad du inte kommer ihåg är var du lagt inköpslistan.</p>
 
-        <a class="start" href="{{ path('game_init') }}">Starta spelet</a>
-        
+            <a class="start" href="{{ path('game_init') }}">Starta spelet</a>
+        </div>
     </div>
 {% endblock %}

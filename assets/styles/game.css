@@ -68,15 +68,17 @@
     color: aquamarine;
 }
 
-
-
 .play {
     background-color: #000;
     margin: -1em;
     margin-top: -2em;
+    margin-bottom: -2em;
     color: #D3D3D3;
     padding:  1em;
+    height: 100%;
+    flex-grow: 1;
 }
+
 
 .submit {
     font-family: "Press Start 2P", system-ui, Arial, Helvetica, sans-serif;

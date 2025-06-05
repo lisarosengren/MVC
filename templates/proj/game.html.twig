@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="game play">
-    <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="mvc screenshot" width=300>
+    <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700>
 
     <p>{{ game.getCurrentRoom().getDescription()}}</p>
 
@@ -21,7 +21,7 @@
     <div class="actions">
         <div class ="item">
             <form method="post" action="{{ path('game_move') }}">    
-                {% for exit in game.getCurrentRoom.getExits() |keys %}
+                {% for exit in game.getExits() |keys %}
                 <button class= "submit" name="exit" type="submit" value = {{ exit }}>
                     Gå {{ exit }}      
                 </button>

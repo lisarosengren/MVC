@@ -34,7 +34,8 @@ class ProjControllerGameAction extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $text = $session->get("game")->pickUp($request->request->get('pick'));
+        $item = $session->get("gameFoundation")->getItem($request->request->get('pick'));
+        $text = $session->get("game")->pickUp($item);
 
         $this->addFlash(
             'text',
@@ -49,7 +50,8 @@ class ProjControllerGameAction extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $text = $session->get("game")->examine($request->request->get('examine'));
+        $item = $session->get("gameFoundation")->getItem($request->request->get('examine'));
+        $text = $session->get("game")->examine($item);
 
         if ($text[0] === "Game Over") {
             $data = [
@@ -70,7 +72,8 @@ class ProjControllerGameAction extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $text = $session->get("game")->combine($request->request->get('item'), $request->request->get('combo'));
+        $item = $item = $session->get("gameFoundation")->getItem($request->request->get('item'));
+        $text = $session->get("game")->combine($item, $request->request->get('combo'));
 
         if ($text[0] === "Vinnare") {
             $data = [

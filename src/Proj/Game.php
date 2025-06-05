@@ -8,9 +8,17 @@ use App\Proj\GameFoundation;
 
 class Game
 {
+    /**
+     * The Room the player is in.
+     */
     private Room $currentRoom;
 
-    private Gamefoundation $gameFoundation;
+    /**
+     * Array with the current rooms exits
+     * and connected Rooms.
+     * @var array<string, Room>
+     */
+    private array $exits;
 
     /**
      * Array with the items stored in the players pockets.
@@ -18,10 +26,11 @@ class Game
      */
     private array $inventory = [];
 
-    public function __construct(Gamefoundation $data)
+    public function __construct(Room $startRoom)
     {
-        $this->gameFoundation = $data;
-        $this->currentRoom = $this->gameFoundation->getStartRoom();
+        $this->currentRoom = $startRoom;
+        $this->exits = $this->setExits($startRoom);
+
     }
 
     /**
@@ -64,32 +73,35 @@ class Game
     /**
      * Method to move to another room. Takes a string as parameter and
      * sets the current room to the room connected to the exit.
+     * Sets the new exits.
      * @param string $exit the name of the exit.
      */
     public function move($exit): void
     {
-        $this->currentRoom = $this->currentRoom->getExits()[$exit];
+        $this->currentRoom = $this->exits[$exit];
+        $this->exits = $this->setExits($this->currentRoom);
     }
 
     /**
      * Method to check if an item is pickable and to
      * remove from the room and add to inventory if it is.
-     * @param string $item the name of the item.
+     * @param Item $item
      * @return string
      */
-    public function pickUp(string $item): string
+    public function pickUp(Item $item): string
     {
+        $itemId = $item->getId();
         if (count($this->inventory) >= 2) {
             return "Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!";
         }
-        $itemObject = $this->gameFoundation->getItem($item);
-        if ($itemObject->isPickable()) {
-            $this->currentRoom->removeItem($itemObject);
-            $this->inventory[$item] = $itemObject;
 
-            return "Du plockade upp $item";
+        if ($item->isPickable()) {
+            $this->currentRoom->removeItem($item);
+            $this->inventory[$itemId] = $item;
+
+            return "Du plockade upp $itemId";
         }
-        $ucItem = ucfirst($item);
+        $ucItem = ucfirst($itemId);
         return "$ucItem går inte att plocka upp!";
     }
 
@@ -100,20 +112,19 @@ class Game
      * of the item being examined. Checks if the item is hiding
      * something that gets revealed, if it is the revealed item gets updated
      * and is possible to interact with in the room
-     * @param string $item the name of the item.
+     * @param Item $item
      * @return array<string>
      */
-    public function examine(string $item): array
+    public function examine(Item $item): array
     {
-        $itemObject = $this->gameFoundation->getItem($item);
-        if ($itemObject->isDeadly()) {
-            return ["Game Over", $itemObject->getExamine()];
+        if ($item->isDeadly()) {
+            return ["Game Over", $item->getExamine()];
         }
-        if ($itemObject->getExamineReveal()) {
-            $itemObject->getExamineReveal()->setHidden(false);
-            $this->currentRoom->removeItem($itemObject);
+        if ($item->getExamineReveal()) {
+            $item->getExamineReveal()->setHidden(false);
+            $this->currentRoom->removeItem($item);
         }
-        return [$itemObject->getExamine()];
+        return [$item->getExamine()];
     }
 
     /**
@@ -121,29 +132,29 @@ class Game
      * and if its combined with the right item. If it's hiding an
      * item that item is getting an update so it's not hidden. Checks if
      * the item is the last one and adds "Vinnare" to the string so the game can end.
-     * @param string $item the name of the item.
+     * @param Item $item the name of the item.
      * @param string $combo the name of the other item.
      * @return array<string>
      */
-    public function combine(string $item, string $combo): array
+    public function combine(Item $item, string $combo): array
     {
-        $itemObject = $this->gameFoundation->getItem($item);
         $text = [];
 
-        if (!$itemObject->getCombo() || $itemObject->getCombo()->getId() !== $combo || !$itemObject->getCombText()) {
+        if (!$item->getCombo() || $item->getCombo()->getId() !== $combo || !$item->getCombText()) {
             $text[] = "Nix, ingen bra kombo.";
             return $text;
         }
-        if ($itemObject->isLast()) {
+        if ($item->isLast()) {
             $text[] = "Vinnare";
+            $text[] = $item->getCombText();
             return $text;
         }
-        if ($itemObject->getCombinationReveal()) {
-            $itemObject->getCombinationReveal()->setHidden(false);
+        if ($item->getCombinationReveal()) {
+            $item->getCombinationReveal()->setHidden(false);
         }
-        $this->currentRoom->removeItem($itemObject);
+        $this->currentRoom->removeItem($item);
         unset($this->inventory[$combo]);
-        $text[] = $itemObject->getCombText();
+        $text[] = $item->getCombText();
 
         return $text;
     }
@@ -160,5 +171,46 @@ class Game
         unset($this->inventory[$item]);
 
         return "Du har lagt ifrån dig $item";
+    }
+
+    /**
+     * Creates an array with existing exits
+     * and their connected rooms.
+     * @param Room $room the room to get exits from.
+     * @return array <string, Room>
+     */
+
+    private function setExits(Room $room): array
+    {
+        // $room = $this->currentRoom;
+        $exits = [];
+
+        if ($room->getWest() !== null) {
+            $exits["väst"] = $room->getWest();
+        }
+
+        if ($room->getNorth() !== null) {
+            $exits["norr"] = $room->getNorth();
+        }
+
+        if ($room->getSouth() !== null) {
+            $exits["söder"] = $room->getSouth();
+        }
+
+        if ($room->getEast() !== null) {
+            $exits["öst"] = $room->getEast();
+        }
+        return $exits;
+    }
+
+
+    /**
+     * Method to get the exits
+     * and connection rooms.
+     * @return array<string, Room>
+     */
+    public function getExits(): array
+    {
+        return $this->exits;
     }
 }

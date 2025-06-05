@@ -17,7 +17,7 @@ class GameFoundation
 
     /**
      * @var array<string, item> Array with
-     * the items inte the game. The name of the
+     * the items in the game. The name of the
      * item is the key.
      */
     private array $items = [];
@@ -66,7 +66,7 @@ class GameFoundation
      * @param string $item the name of the item.
      * @return Item
      */
-    public function getItem($item): Item
+    public function getItem(string $item): Item
     {
         return $this->items[$item];
     }
@@ -76,8 +76,9 @@ class GameFoundation
      * @param string $room the name of the room.
      * @return Room
      */
-    public function getRoom($room): Room
+    public function getRoom(string $room): Room
     {
         return $this->rooms[$room];
     }
+
 }

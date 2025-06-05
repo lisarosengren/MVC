@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GameFoundationTest extends TestCase
 {
-    private GameFoundationTest $game;
     private GameFoundation $gameFoundation;
 
     /**
@@ -25,10 +24,9 @@ class GameFoundationTest extends TestCase
 
         $bedroom->method('getId')->willReturn('bedroom');
         $kitchen->method('getId')->willReturn('kitchen');
-        
-        $bedroom->method('isStart')->willReturn(True);
-        $kitchen->method('isStart')->willReturn(False);
 
+        $bedroom->method('isStart')->willReturn(true);
+        $kitchen->method('isStart')->willReturn(false);
 
         $item1 = $this->createMock(Item::class);
         $item2 = $this->createMock(Item::class);
@@ -38,10 +36,10 @@ class GameFoundationTest extends TestCase
 
         $item1->method('getExamine')->willReturn('en nyckel');
         $item2->method('getExamine')->willReturn('en byrå');
- 
+
         $this->gameFoundation = new GameFoundation([$bedroom, $kitchen], [$item1, $item2]);
     }
-    
+
     /**
      * Construct object and verify that the object has the expected
      * properties.
@@ -66,29 +64,29 @@ class GameFoundationTest extends TestCase
     /**
      * Verify that getStartRoom throws exception if no room is start
      */
-    public function testGetStartRoomException():void
+    public function testGetStartRoomException(): void
     {
         $bedroom = $this->createMock(Room::class);
         $kitchen = $this->createMock(Room::class);
 
         $bedroom->method('getId')->willReturn('bedroom');
         $kitchen->method('getId')->willReturn('kitchen');
-        
-        $bedroom->method('isStart')->willReturn(False);
-        $kitchen->method('isStart')->willReturn(False);
+
+        $bedroom->method('isStart')->willReturn(false);
+        $kitchen->method('isStart')->willReturn(false);
 
         $item1 = $this->createMock(Item::class);
 
         $newGameFoundation = new GameFoundation([$bedroom, $kitchen], [$item1]);
-        
+
         $this->expectException(Exception::class);
-        $res = $newGameFoundation->getStartRoom();
+        $newGameFoundation->getStartRoom();
     }
 
     /**
      * Verify that getRooms returns the rooms
      */
-    public function testGetRooms():void
+    public function testGetRooms(): void
     {
         $res = $this->gameFoundation->getRooms();
         $this->assertContainsOnlyInstancesOf(Room::class, $res);
@@ -98,7 +96,7 @@ class GameFoundationTest extends TestCase
     /**
      * Verify that getItem returns an item, and the right item.
      */
-    public function testGetItem():void
+    public function testGetItem(): void
     {
         $res = $this->gameFoundation->getItem('nyckel');
         $this->assertInstanceOf("\App\Entity\Item", $res);
@@ -108,10 +106,10 @@ class GameFoundationTest extends TestCase
     /**
      * Verify that getItem returns an item, and the right item.
      */
-    public function testGetRoom():void
+    public function testGetRoom(): void
     {
         $res = $this->gameFoundation->getRoom('bedroom');
         $this->assertInstanceOf("\App\Entity\Room", $res);
-        $this->assertEquals(True, $res->isStart());
+        $this->assertEquals(true, $res->isStart());
     }
 }

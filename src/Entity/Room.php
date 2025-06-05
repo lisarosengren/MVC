@@ -222,31 +222,4 @@ class Room
         return $this->east;
     }
 
-    /**
-     * Creates an array with existing exits
-     * and their connected rooms.
-     * @return array <string, Room>
-     */
-
-    public function getExits(): array
-    {
-        $exits = [];
-
-        if ($this->west !== null) {
-            $exits["väst"] = $this->west;
-        }
-
-        if ($this->north !== null) {
-            $exits["norr"] = $this->north;
-        }
-
-        if ($this->south !== null) {
-            $exits["söder"] = $this->south;
-        }
-
-        if ($this->east !== null) {
-            $exits["öst"] = $this->east;
-        }
-        return $exits;
-    }
 }
