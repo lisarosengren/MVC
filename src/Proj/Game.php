@@ -8,96 +8,98 @@ use App\Proj\GameFoundation;
 
 class Game
 {
-    /**
-     * The Room the player is in.
-     */
-    private Room $currentRoom;
+    // /**
+    //  * The Room the player is in.
+    //  */
+    // private Room $currentRoom;
 
-    /**
-     * Array with the current rooms exits
-     * and connected Rooms.
-     * @var array<string, Room>
-     */
-    private array $exits;
+    // /**
+    //  * Array with the current rooms exits
+    //  * and connected Rooms.
+    //  * @var array<string, Room>
+    //  */
+    // private array $exits;
 
-    /**
-     * Array with the items stored in the players pockets.
-     * @var array<string, Item>
-     */
-    private array $inventory = [];
+    // /**
+    //  * Array with the items stored in the players pockets.
+    //  * @var array<string, Item>
+    //  */
+    // private array $inventory = [];
 
-    public function __construct(Room $startRoom)
-    {
-        $this->currentRoom = $startRoom;
-        $this->exits = $this->setExits($startRoom);
+    // public function __construct(Room $startRoom)
+    // {
+    //     $this->currentRoom = $startRoom;
+    //     $this->exits = $this->setExits($startRoom);
 
-    }
+    // }
 
-    /**
-     * Method to get the room the player is in.
-     * @return Room the Room object.
-     */
-    public function getCurrentRoom(): Room
-    {
-        return $this->currentRoom;
-    }
+    // /**
+    //  * Method to get the room the player is in.
+    //  * @return Room the Room object.
+    //  */
+    // public function getCurrentRoom(): Room
+    // {
+    //     return $this->currentRoom;
+    // }
 
-    /**
-     * Method to get an array with items in players pockets.
-     * @return array<Item>
-     */
-    public function getInventory(): array
-    {
-        return $this->inventory;
-    }
+    // /**
+    //  * Method to get an array with items in players pockets.
+    //  * @return array<Item>
+    //  */
+    // public function getInventory(): array
+    // {
+    //     return $this->inventory;
+    // }
 
-    /**
-     * Method to get a specific item from players pockets.
-     * @param string $item the name om the item.
-     * @return Item
-     */
-    public function getInventoryItem(string $item): Item
-    {
-        return $this->inventory[$item];
-    }
+    // /**
+    //  * Method to get a specific item from players pockets.
+    //  * @param string $item the name om the item.
+    //  * @return Item
+    //  */
+    // public function getInventoryItem(string $item): Item
+    // {
+    //     return $this->inventory[$item];
+    // }
 
-    /**
-     * Method to get the image string from the current room
-     * @return string
-     */
-    public function getCurrentImage(): string
-    {
-        return $this->currentRoom->getImage();
-    }
+    // /**
+    //  * Method to get the image string from the current room
+    //  * @return string
+    //  */
+    // public function getCurrentImage(): string
+    // {
+    //     return $this->currentRoom->getImage();
+    // }
 
     /**
      * Method to move to another room. Takes a string as parameter and
      * sets the current room to the room connected to the exit.
      * Sets the new exits.
      * @param string $exit the name of the exit.
+     * @param GameState $state
      */
-    public function move($exit): void
+    public function move(string $exit, GameState $state): void
     {
-        $this->currentRoom = $this->exits[$exit];
-        $this->exits = $this->setExits($this->currentRoom);
+        $nextRoom = $state->getExits()[$exit];
+        $state->setCurrentRoom($nextRoom);
     }
 
     /**
      * Method to check if an item is pickable and to
      * remove from the room and add to inventory if it is.
      * @param Item $item
+     * @param GameState $state
      * @return string
      */
-    public function pickUp(Item $item): string
+    public function pickUp(Item $item, GameState $state): string
     {
         $itemId = $item->getId();
-        if (count($this->inventory) >= 2) {
+        if (count($state->getInventory()) >= 2) {
             return "Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!";
         }
 
         if ($item->isPickable()) {
-            $this->currentRoom->removeItem($item);
-            $this->inventory[$itemId] = $item;
+            $state->getCurrentRoom()->removeItem($item);
+            $state->addToInventory($item);
 
             return "Du plockade upp $itemId";
         }
@@ -113,16 +115,17 @@ class Game
      * something that gets revealed, if it is the revealed item gets updated
      * and is possible to interact with in the room
      * @param Item $item
+     * @param Room $room
      * @return array<string>
      */
-    public function examine(Item $item): array
+    public function examine(Item $item, Room $room): array
     {
         if ($item->isDeadly()) {
             return ["Game Over", $item->getExamine()];
         }
         if ($item->getExamineReveal()) {
             $item->getExamineReveal()->setHidden(false);
-            $this->currentRoom->removeItem($item);
+            $room->removeItem($item);
         }
         return [$item->getExamine()];
     }
@@ -134,9 +137,10 @@ class Game
      * the item is the last one and adds "Vinnare" to the string so the game can end.
      * @param Item $item the name of the item.
      * @param string $combo the name of the other item.
+     * @param GameState $state the GameState to get currentRoom and update inventory
      * @return array<string>
      */
-    public function combine(Item $item, string $combo): array
+    public function combine(Item $item, string $combo, GameState $state): array
     {
         $text = [];
 
@@ -152,65 +156,64 @@ class Game
         if ($item->getCombinationReveal()) {
             $item->getCombinationReveal()->setHidden(false);
         }
-        $this->currentRoom->removeItem($item);
-        unset($this->inventory[$combo]);
+        $state->getCurrentRoom()->removeItem($item);
+        $state->RemoveFromInventory($combo);
         $text[] = $item->getCombText();
 
         return $text;
     }
 
     /**
-     * Method to drop an item from the pockets. Updates the room and the item
-     * so they connect.
+     * Method to drop an item from the pockets.
+     * Calls the addItem on the room so they connect.
      * @param string $item the item to drop.
+     * @param GameState $state
      * @return string
      */
-    public function drop(string $item): string
+    public function drop(string $item, $state): string
     {
-        $this->currentRoom->additem($this->inventory[$item]);
-        unset($this->inventory[$item]);
+        $state->dropItem($item);
 
         return "Du har lagt ifrån dig $item";
     }
 
-    /**
-     * Creates an array with existing exits
-     * and their connected rooms.
-     * @param Room $room the room to get exits from.
-     * @return array <string, Room>
-     */
+    // /**
+    //  * Creates an array with existing exits
+    //  * and their connected rooms.
+    //  * @param Room $room the room to get exits from.
+    //  * @return array <string, Room>
+    //  */
 
-    private function setExits(Room $room): array
-    {
-        // $room = $this->currentRoom;
-        $exits = [];
+    // private function setExits(Room $room): array
+    // {
+    //     $exits = [];
 
-        if ($room->getWest() !== null) {
-            $exits["väst"] = $room->getWest();
-        }
+    //     if ($room->getWest() !== null) {
+    //         $exits["väst"] = $room->getWest();
+    //     }
 
-        if ($room->getNorth() !== null) {
-            $exits["norr"] = $room->getNorth();
-        }
+    //     if ($room->getNorth() !== null) {
+    //         $exits["norr"] = $room->getNorth();
+    //     }
 
-        if ($room->getSouth() !== null) {
-            $exits["söder"] = $room->getSouth();
-        }
+    //     if ($room->getSouth() !== null) {
+    //         $exits["söder"] = $room->getSouth();
+    //     }
 
-        if ($room->getEast() !== null) {
-            $exits["öst"] = $room->getEast();
-        }
-        return $exits;
-    }
+    //     if ($room->getEast() !== null) {
+    //         $exits["öst"] = $room->getEast();
+    //     }
+    //     return $exits;
+    // }
 
 
-    /**
-     * Method to get the exits
-     * and connection rooms.
-     * @return array<string, Room>
-     */
-    public function getExits(): array
-    {
-        return $this->exits;
-    }
+    // /**
+    //  * Method to get the exits
+    //  * and connection rooms.
+    //  * @return array<string, Room>
+    //  */
+    // public function getExits(): array
+    // {
+    //     return $this->exits;
+    // }
 }

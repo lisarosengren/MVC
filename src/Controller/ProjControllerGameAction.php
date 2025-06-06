@@ -23,7 +23,7 @@ class ProjControllerGameAction extends AbstractController
     ): Response {
         $move = $request->request->get('exit');
 
-        $session->get("game")->move($move);
+        $session->get("game")->move($move, $session->get("gameState"));
 
         return $this->redirectToRoute('game');
     }
@@ -35,7 +35,7 @@ class ProjControllerGameAction extends AbstractController
     ): Response {
 
         $item = $session->get("gameFoundation")->getItem($request->request->get('pick'));
-        $text = $session->get("game")->pickUp($item);
+        $text = $session->get("game")->pickUp($item, $session->get("gameState"));
 
         $this->addFlash(
             'text',
@@ -51,7 +51,8 @@ class ProjControllerGameAction extends AbstractController
     ): Response {
 
         $item = $session->get("gameFoundation")->getItem($request->request->get('examine'));
-        $text = $session->get("game")->examine($item);
+        $room = $session->get("gameState")->getCurrentRoom();
+        $text = $session->get("game")->examine($item, $room);
 
         if ($text[0] === "Game Over") {
             $data = [
@@ -66,6 +67,8 @@ class ProjControllerGameAction extends AbstractController
         );
         return $this->redirectToRoute('game');
     }
+
+
     #[Route("proj/game/combine", name: "game_combine", methods: ['POST'])]
     public function gameCombine(
         Request $request,
@@ -73,7 +76,8 @@ class ProjControllerGameAction extends AbstractController
     ): Response {
 
         $item = $session->get("gameFoundation")->getItem($request->request->get('item'));
-        $text = $session->get("game")->combine($item, $request->request->get('combo'));
+        $state = $session->get("gameState");
+        $text = $session->get("game")->combine($item, $request->request->get('combo'), $state);
 
         if ($text[0] === "Vinnare") {
             $data = [
@@ -96,7 +100,8 @@ class ProjControllerGameAction extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $text = $session->get("game")->drop($request->request->get('item'));
+        $state = $session->get("gameState");
+        $text = $session->get("game")->drop($request->request->get('item'), $state);
 
         $this->addFlash(
             'text',
@@ -113,7 +118,7 @@ class ProjControllerGameAction extends AbstractController
     ): Response {
 
         $item = $request->request->get('item');
-        $text = $session->get("game")->getInventory()[$item]->getExamine();
+        $text = $session->get("gameState")->getInventory()[$item]->getExamine();
 
         $this->addFlash(
             'text',

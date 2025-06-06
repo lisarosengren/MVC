@@ -7,9 +7,9 @@
 {% block body %}
 
     <div class="game play">
-    <img src= "{{ asset('build/images/'~game.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700>
+    <img src= "{{ asset('build/images/'~gameState.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700>
 
-    <p>{{ game.getCurrentRoom().getDescription()}}</p>
+    <p>{{ gameState.getCurrentRoom().getDescription()}}</p>
 
     {{ include('flash.html.twig') }}
 
@@ -21,7 +21,7 @@
     <div class="actions">
         <div class ="item">
             <form method="post" action="{{ path('game_move') }}">    
-                {% for exit in game.getExits() |keys %}
+                {% for exit in gameState.getExits() |keys %}
                 <button class= "submit" name="exit" type="submit" value = {{ exit }}>
                     Gå {{ exit }}      
                 </button>
@@ -30,27 +30,28 @@
         </div>
 
 
-        {% for item in game.getCurrentRoom.getItems() %}
+        {% for item in gameState.getCurrentRoom.getItems() %}
             {% if not item.isHidden() %}
                 <div class="item">
-                    <form method="post" action="{{ path('game_pickup') }}">
-                            <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
-                                Plocka upp {{ item.getId }}      
-                            </button>
+                    <form method="post" action="{{ path('game_examine') }}">
+                        <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
+                            Undersök {{ item.getId }}      
+                        </button>
                     </form>
 
-                    <form method="post" action="{{ path('game_examine') }}">
-                            <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
-                                Undersök {{ item.getId }}      
-                            </button>
+                    <form method="post" action="{{ path('game_pickup') }}">
+                        <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
+                            Plocka upp {{ item.getId }}      
+                        </button>
                     </form>
-                    {% if game.getInventory() %}
+
+                    {% if gameState.getInventory() %}
                         <form method="post" action="{{ path('game_combine') }}">
                                 <button class= "submit" name="item" type="submit" value = {{ item.getId }}>
                                     Kombinera {{ item.getId }} med       
                                 </button>
                                 <select name ="combo">
-                                    {% for thing in game.getInventory() %}
+                                    {% for thing in gameState.getInventory() %}
                                         <option value ="{{ thing.getId }}">{{ thing.getId }}</option>
                                     {% endfor %}
                                 </select>
@@ -65,13 +66,13 @@
         <div class="pockets">
         <p>I dina fickor:<br>
 
-        {% if not game.getInventory()%}
+        {% if not gameState.getInventory()%}
         <br>Bara lite ludd...
         {% endif %}
         </p>
 
             <form method="post" action="{{ path('game_examine_pocket') }}">
-                {% for item in game.getInventory() %}
+                {% for item in gameState.getInventory() %}
                     <p>{{ item.getId() }}</p>
                     <button class= "submit" name="item" type="submit" value = {{ item.getId() }}>
                         Undersök

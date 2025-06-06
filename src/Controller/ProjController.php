@@ -5,6 +5,7 @@ namespace App\Controller;
 use Exception;
 use App\Proj\Game;
 use App\Proj\GameFoundation;
+use App\Proj\GameState;
 use App\Repository\RoomRepository;
 use App\Repository\ItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,13 +30,13 @@ class ProjController extends AbstractController
         ItemRepository $itemRepository
     ): Response {
         $gameFoundation = new GameFoundation($roomRepository->loadAllWithItems(), $itemRepository->findAll());
-        try {
-            $session->set("game", new Game($gameFoundation->getStartRoom()));
-            $session->set("gameFoundation", $gameFoundation);
-
-        } catch (Exception) {
-            return $this->render('proj/error.html.twig');
-        }
+        // try {
+        $session->set("gameFoundation", $gameFoundation);
+        $session->set("gameState", new GameState($gameFoundation->getStartRoom()));
+        $session->set("game", new Game());
+        // } catch (Exception) {
+        //     return $this->render('proj/error.html.twig');
+        // }
         return $this->redirectToRoute('game');
     }
 
@@ -44,7 +45,7 @@ class ProjController extends AbstractController
     public function game(SessionInterface $session): Response
     {
         $data = [
-            "game" => $session->get("game"),
+            "gameState" => $session->get("gameState"),
         ];
         return $this->render('proj/game.html.twig', $data);
     }
