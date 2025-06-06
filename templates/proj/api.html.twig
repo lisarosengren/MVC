@@ -1,10 +1,33 @@
-{# templates/home.html.twig #}
+{# templates/proj/api.html.twig #}
 
 {% extends "proj.html.twig" %}
 
 {% block title %}MVC Kmom10{% endblock %}
 
 {% block body %}
-    <h1>Här startar spelet</h1>
+    <h1 class="center">JSON API</h1>
     
+    <div class="api">
+        <form method="post" action="{{ path('api_one_item') }}">
+            <select name ="item">
+                {% for item in items %}
+                    <option value ="{{ item.getId }}">{{ item.getId }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Undersök</button>   
+        </form>
+    </div>
+    <div class="api">
+        <a href="{{ path('api_proj_items') }}">Föremål i spelet</a>
+    </div>
+    <div class="api">
+        <a href="{{ path('api_proj_rooms') }}">Föremål i spelet</a>
+    </div>
+    <div class="api">
+        <a href="{{ path('api_inventory') }}">Föremål i spelet</a>
+    </div>
+    <div class="api">
+        <a href="{{ path('api_current_room') }}">Föremål i spelet</a>
+    </div>
+
 {% endblock %}

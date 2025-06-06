@@ -2,7 +2,8 @@ footer {
   background-color: #1E4359;
   margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   padding: 1em;
   padding-left: 2em;
   padding-right: 2em;

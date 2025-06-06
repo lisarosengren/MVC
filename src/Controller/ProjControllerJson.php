@@ -2,121 +2,116 @@
 
 namespace App\Controller;
 
-use App\Card\DeckOfCards;
+use App\Trait\JsonTrait;
+use App\Repository\RoomRepository;
+use App\Repository\ItemRepository;
+use App\Proj\Game;
+use App\Proj\GameFoundation;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class ProjControllerJson
+class ProjControllerJson extends AbstractController
 {
+    use JsonTrait;
+
     /**
-     * Route for /api/deck.
-     * Get the sorted values of the deck.
-     * @param SessionInterface $session The session.
+     * Route for /proj/api/items
+     * Get the item names belonging to the game
+     * @param ItemRepository $itemRepository
      * @return Response JsonResponse.
      */
-    #[Route("/proj/api/test", name: "api_proj_test", methods: ['GET'])]
-    public function jsonDeck(SessionInterface $session): Response
+    #[Route("/proj/api/items", name: "api_proj_items", methods: ['GET'])]
+    public function jsonItems(ItemRepository $itemRepository): Response
     {
-        if (!$session->has("deck")) {
-            $session->set("deck", new DeckOfCards());
-        }
 
-        $deck = $session->get("deck")->getSortedValues();
-        $data = $deck;
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
+        $items = $itemRepository->findAll();
+        $data = [];
+        foreach ($items as $item) {
+            $data[] = $item->getId();
+        }
+        return $this->jsonRes($data);
     }
 
     /**
-     * Route for /api/deck/shuffle.
-     * Shuffles the deck and gets the values.
-     * @param SessionInterface $session The session.
+     * Route for /proj/api/rooms
+     * Get the room names belonging to the game
+     * @param RoomRepository $roomRepository
      * @return Response JsonResponse.
      */
-    #[Route("/api/deck/shuffle", name: "api_shuffle", methods: ['POST'])]
-    public function jsonShuffle(SessionInterface $session): Response
+    #[Route("/proj/api/rooms", name: "api_proj_rooms", methods: ['GET'])]
+    public function jsonRooms(RoomRepository $roomRepository): Response
     {
-        if (!$session->has("deck")) {
-            $session->set("deck", new DeckOfCards());
+        $rooms = $roomRepository->findAll();
+        $data = [];
+        foreach ($rooms as $room) {
+            $data[] = $room->getId();
         }
-
-        $session->get("deck")->shuffleDeck();
-        $data = $session->get("deck")->getValues();
-        ;
-
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
+        return $this->jsonRes($data);
     }
 
     /**
-     * Route for /api/deck/draw.
-     * Calls the drawCardJson method.
-     * @param SessionInterface $session The session.
+     * Route for /proj/api/one_item/.
+     * Shows the examine text of the item
+     * @param ItemRepository $itemRepository
      * @return Response JsonResponse.
      */
-    #[Route("/api/deck/draw", name: "api_draw", methods: ['POST'])]
-    public function jsonDraw(SessionInterface $session): Response
+    #[Route("/proj/api/one_item/", name: "api_one_item", methods: ['POST'])]
+    public function jsonOneItem(ItemRepository $itemRepository, Request $request): Response
     {
-        if (!$session->has("deck")) {
-            $session->set("deck", new DeckOfCards());
+        $item = $itemRepository->find($request->request->get('item'));
+        $data = "";
+        if ($item) {
+            $data = $item->getExamine();
         }
 
 
-        $data = [
-            "card" => $session->get("deck")->drawCardJson(),
-            "cards left" => $session->get("deck")->numberOfCards()
-        ];
-
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
+        return $this->jsonRes($data);
     }
 
     /**
-     * Route for /api/deck/draw/{num<\d+>}.
-     * Draws the chosen number of cards.
+     * Route for /proj/api/inventory
+     * Lists whats in the players pockets
      * @param SessionInterface $session The session.
-     * @param int $num the chosen number.
      * @return Response JsonResponse.
      */
-    #[Route("/api/deck/draw/{num<\d+>}", name: "api_draw_many", methods: ['POST'])]
-    public function jsonDrawMany(SessionInterface $session, int $num): Response
+    #[Route("/proj/api/inventory", name: "api_inventory", methods: ['GET'])]
+    public function jsonInventory(SessionInterface $session): Response
     {
-        if (!$session->has("deck")) {
-            $session->set("deck", new DeckOfCards());
+        if (!$session->has("game")) {
+            $data = "Det är inget spel igång";
+            return $this->jsonRes($data);
         }
 
-        $cards = "Not enough cards to draw";
-        $data = [
-            "cards" => $cards,
-            "cardsLeft" => $session->get("deck")->numberOfCards()
-        ];
-
-        if ($data["cardsLeft"] > $num) {
-            $cards = [];
-            for ($i = 1; $i <= $num; $i++) {
-                $cards[] = $session->get("deck")->drawCardJson();
-            }
-            $data["cards"] = $cards;
+        $inventory = array_keys($session->get("game")->getInventory());
+        $data = $inventory;
+        if (empty($inventory)) {
+            $data = "Bara lite ludd";
         }
 
-        $response = new JsonResponse($data);
-        $response->setEncodingOptions(
-            $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        );
-        return $response;
+        return $this->jsonRes($data);
     }
 
+    /**
+     * Route for /proj/api/current_room
+     * Shows what room the player is in
+     * @param SessionInterface $session
+     * @return Response JsonResponse
+     */
+    #[Route("/proj/api/current_room", name: "api_current_room", methods: ['GET'])]
+    public function jsonCurrent(SessionInterface $session): Response
+    {
+        if (!$session->has("game")) {
+            $data = "Det är inget spel igång";
+            return $this->jsonRes($data);
+        }
 
+        $data = $session->get("game")->getCurrentRoom()->getId();
+
+        return $this->jsonRes($data);
+    }
 
 }

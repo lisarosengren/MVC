@@ -5,7 +5,6 @@ namespace App\Controller;
 use Exception;
 use App\Proj\Game;
 use App\Proj\GameFoundation;
-use App\Entity\Room;
 use App\Repository\RoomRepository;
 use App\Repository\ItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,9 +57,12 @@ class ProjController extends AbstractController
     }
 
     #[Route("proj/api", name: "proj_api")]
-    public function projApi(): Response
+    public function projApi(ItemRepository $itemRepository): Response
     {
+        $data = [
+            "items" => $itemRepository->findAll()
+        ];
 
-        return $this->render('proj/api.html.twig');
+        return $this->render('proj/api.html.twig', $data);
     }
 }

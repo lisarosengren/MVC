@@ -72,7 +72,7 @@ class ProjControllerGameAction extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $item = $item = $session->get("gameFoundation")->getItem($request->request->get('item'));
+        $item = $session->get("gameFoundation")->getItem($request->request->get('item'));
         $text = $session->get("game")->combine($item, $request->request->get('combo'));
 
         if ($text[0] === "Vinnare") {
