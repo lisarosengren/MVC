@@ -8,68 +8,6 @@ use App\Proj\GameFoundation;
 
 class Game
 {
-    // /**
-    //  * The Room the player is in.
-    //  */
-    // private Room $currentRoom;
-
-    // /**
-    //  * Array with the current rooms exits
-    //  * and connected Rooms.
-    //  * @var array<string, Room>
-    //  */
-    // private array $exits;
-
-    // /**
-    //  * Array with the items stored in the players pockets.
-    //  * @var array<string, Item>
-    //  */
-    // private array $inventory = [];
-
-    // public function __construct(Room $startRoom)
-    // {
-    //     $this->currentRoom = $startRoom;
-    //     $this->exits = $this->setExits($startRoom);
-
-    // }
-
-    // /**
-    //  * Method to get the room the player is in.
-    //  * @return Room the Room object.
-    //  */
-    // public function getCurrentRoom(): Room
-    // {
-    //     return $this->currentRoom;
-    // }
-
-    // /**
-    //  * Method to get an array with items in players pockets.
-    //  * @return array<Item>
-    //  */
-    // public function getInventory(): array
-    // {
-    //     return $this->inventory;
-    // }
-
-    // /**
-    //  * Method to get a specific item from players pockets.
-    //  * @param string $item the name om the item.
-    //  * @return Item
-    //  */
-    // public function getInventoryItem(string $item): Item
-    // {
-    //     return $this->inventory[$item];
-    // }
-
-    // /**
-    //  * Method to get the image string from the current room
-    //  * @return string
-    //  */
-    // public function getCurrentImage(): string
-    // {
-    //     return $this->currentRoom->getImage();
-    // }
-
     /**
      * Method to move to another room. Takes a string as parameter and
      * sets the current room to the room connected to the exit.
@@ -156,7 +94,7 @@ class Game
         if ($item->getCombinationReveal()) {
             $item->getCombinationReveal()->setHidden(false);
         }
-        $state->getCurrentRoom()->removeItem($item);
+        $room = $state->getCurrentRoom()->removeItem($item);
         $state->RemoveFromInventory($combo);
         $text[] = $item->getCombText();
 
@@ -176,44 +114,4 @@ class Game
 
         return "Du har lagt ifrån dig $item";
     }
-
-    // /**
-    //  * Creates an array with existing exits
-    //  * and their connected rooms.
-    //  * @param Room $room the room to get exits from.
-    //  * @return array <string, Room>
-    //  */
-
-    // private function setExits(Room $room): array
-    // {
-    //     $exits = [];
-
-    //     if ($room->getWest() !== null) {
-    //         $exits["väst"] = $room->getWest();
-    //     }
-
-    //     if ($room->getNorth() !== null) {
-    //         $exits["norr"] = $room->getNorth();
-    //     }
-
-    //     if ($room->getSouth() !== null) {
-    //         $exits["söder"] = $room->getSouth();
-    //     }
-
-    //     if ($room->getEast() !== null) {
-    //         $exits["öst"] = $room->getEast();
-    //     }
-    //     return $exits;
-    // }
-
-
-    // /**
-    //  * Method to get the exits
-    //  * and connection rooms.
-    //  * @return array<string, Room>
-    //  */
-    // public function getExits(): array
-    // {
-    //     return $this->exits;
-    // }
 }

@@ -97,116 +97,6 @@ class GameState
         return $this->currentRoom->getImage();
     }
 
-    // FLYTTADE!!!!!
-    // /**
-    //  * Method to move to another room. Takes a string as parameter and
-    //  * sets the current room to the room connected to the exit.
-    //  * Sets the new exits.
-    //  * @param string $exit the name of the exit.
-    //  * @param GameState $state
-    //  */
-    // public function move(string $exit, GameState $state): void
-    // {
-    //     $nextRoom = $state->getExits()[$exit];
-    //     $state->setExits($nextRoom);
-    // }
-    
-    // /**
-    //  * Method to check if an item is pickable and to
-    //  * remove from the room and add to inventory if it is.
-    //  * @param Item $item
-    //  * @return string
-    //  */
-    // public function pickUp(Item $item): string
-    // {
-    //     $itemId = $item->getId();
-    //     if (count($this->inventory) >= 2) {
-    //         return "Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!";
-    //     }
-
-    //     if ($item->isPickable()) {
-    //         $this->currentRoom->removeItem($item);
-    //         $this->inventory[$itemId] = $item;
-
-    //         return "Du plockade upp $itemId";
-    //     }
-    //     $ucItem = ucfirst($itemId);
-    //     return "$ucItem går inte att plocka upp!";
-    // }
-
-    // /**
-    //  * Method that checks if the examination of
-    //  * the item means the end of the game. If not
-    //  * it returns a string with a description
-    //  * of the item being examined. Checks if the item is hiding
-    //  * something that gets revealed, if it is the revealed item gets updated
-    //  * and is possible to interact with in the room
-    //  * @param Item $item
-    //  * @return array<string>
-    //  */
-    // public function examine(Item $item): array
-    // {
-    //     if ($item->isDeadly()) {
-    //         return ["Game Over", $item->getExamine()];
-    //     }
-    //     if ($item->getExamineReveal()) {
-    //         $item->getExamineReveal()->setHidden(false);
-    //         $this->currentRoom->removeItem($item);
-    //     }
-    //     return [$item->getExamine()];
-    // }
-
-    // /**
-    //  * Method that checks if the item is possible to combine
-    //  * and if its combined with the right item. If it's hiding an
-    //  * item that item is getting an update so it's not hidden. Checks if
-    //  * the item is the last one and adds "Vinnare" to the string so the game can end.
-    //  * @param Item $item the name of the item.
-    //  * @param string $combo the name of the other item.
-    //  * @return array<string>
-    //  */
-    // public function combine(Item $item, string $combo): array
-    // {
-    //     $text = [];
-
-    //     if (!$item->getCombo() || $item->getCombo()->getId() !== $combo || !$item->getCombText()) {
-    //         $text[] = "Nix, ingen bra kombo.";
-    //         return $text;
-    //     }
-    //     if ($item->isLast()) {
-    //         $text[] = "Vinnare";
-    //         $text[] = $item->getCombText();
-    //         return $text;
-    //     }
-    //     if ($item->getCombinationReveal()) {
-    //         $item->getCombinationReveal()->setHidden(false);
-    //     }
-    //     $this->currentRoom->removeItem($item);
-    //     unset($this->inventory[$combo]);
-    //     $text[] = $item->getCombText();
-
-    //     return $text;
-    // }
-
-
-
-
-
-    // /**
-    //  * Method to drop an item from the pockets. Updates the room and the item
-    //  * so they connect.
-    //  * @param string $item the item to drop.
-    //  * @return string
-    //  */
-    // public function drop(string $item): string
-    // {
-    //     $this->currentRoom->additem($this->inventory[$item]);
-    //     unset($this->inventory[$item]);
-
-    //     return "Du har lagt ifrån dig $item";
-    // }
-
-
     /**
      * Method to add an item to the current room
      * and delete it from the inventory
@@ -217,9 +107,6 @@ class GameState
         $this->currentRoom->addItem($this->inventory[$item]);
         unset($this->inventory[$item]);
     }
-
-
-
 
     /**
      * Creates an array with existing exits
@@ -250,7 +137,6 @@ class GameState
 
         return $exits;
     }
-
 
     /**
      * Method to get the exits
