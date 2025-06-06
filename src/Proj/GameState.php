@@ -225,8 +225,9 @@ class GameState
      * Creates an array with existing exits
      * and their connected rooms.
      * @param Room $room the room to get exits from.
+     * @return array<string, Room>
      */    
-    private function findExits(Room $room): void
+    private function findExits(Room $room): array
     {
         // $room = $this->currentRoom;
         $exits = [];

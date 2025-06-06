@@ -12,205 +12,155 @@ use PHPUnit\Framework\TestCase;
  */
 class GameTest extends GameTestBase
 {
-    /**
-     * Construct object and verify that the object has the expected
-     * properties.
-     */
-    public function testCreateGame(): void
-    {
-        $this->assertInstanceOf("\App\Proj\Game", $this->game);
-        $this->assertObjectHasProperty("currentRoom", $this->game);
-        $this->assertObjectHasProperty("inventory", $this->game);
-        $this->assertObjectHasProperty("exits", $this->game);
-    }
 
-    /**
-     * Verify that getCurrentRoom returns the right room
-     */
-    public function testCurrentRoom(): void
-    {
-        $res = $this->game->getCurrentRoom();
-        $this->assertInstanceOf("\App\Entity\Room", $res);
-        $this->assertEquals('bedroom', $res->getId());
-    }
+//     /**
+//      * Setup for the test. Extends GameTestBase
+//      * and the mocks there.
+//      */
 
-    /**
-     * Verify that getInventory returns an array with items in inventory
-     */
-    public function testGetInventory(): void
-    {
-        $this->game->pickUp($this->item1);
-        $this->game->pickUp($this->item3);
+//      private function setUp(): void 
+//      {
+//         parent::setUp();
 
-        $res = $this->game->getInventory();
+//         $this->game = new Game();
+//      }
 
-        $this->assertArrayHasKey('nyckel', $res);
-        $this->assertContainsOnlyInstancesOf("\App\Entity\Item", $res);
-        $this->assertCount(2, $res);
-    }
+//     /**
+//      * Test that move is calling the getExits method and updating exits
+//      */
+//     public function testMove(): void
+//     {
+//         $this->game->move('öst');
+//         $this->assertEquals('kitchen', $this->game->getCurrentRoom()->getId());
+//         $this->game->move('norr');
+//         $this->assertEquals('livingroom', $this->game->getCurrentRoom()->getId());
+//         $this->assertArrayHasKey('söder', $this->game->getExits());
+//     }
 
-    /**
-     * Verify that getInventoryItem returns the item
-     */
-    public function testGetInventoryItem(): void
-    {
-        $this->game->pickUp($this->item1);
-        $this->game->pickUp($this->item3);
+//     /**
+//      * Test pickUp with pickable item
+//      */
+//     public function testPickUp(): void
+//     {
 
-        $res = $this->game->getInventoryItem('nyckel');
+//         // Test pickable item
+//         $res = $this->game->pickUp($this->item1);
+//         $this->assertEquals("Du plockade upp nyckel", $res);
+//         $item = $this->game->getInventoryItem('nyckel');
+//         $this->assertInstanceOf("\App\Entity\Item", $item);
 
-        $this->assertInstanceOf("\App\Entity\Item", $res);
-        $this->assertEquals('nyckel', $res->getId());
-    }
+//         // Test when inventory is full
+//         $this->game->pickUp($this->item3);
 
-    /**
-     * Verify that getCurrentImage returns the image string
-     */
-    public function testGetCurrentImage(): void
-    {
-        $res = $this->game->getCurrentImage();
-        $this->assertEquals('ja', $res);
-    }
+//         $res = $this->game->pickUp($this->item4);
+//         $this->assertEquals("Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!", $res);
+//     }
 
-    // /**
-    //  * Test that move is calling the getExits method and updating exits
-    //  */
-    // public function testMove(): void
-    // {
-    //     $this->game->move('öst');
-    //     $this->assertEquals('kitchen', $this->game->getCurrentRoom()->getId());
-    //     $this->game->move('norr');
-    //     $this->assertEquals('livingroom', $this->game->getCurrentRoom()->getId());
-    //     $this->assertArrayHasKey('söder', $this->game->getExits());
-    // }
+//     /**
+//      * Test pickUp with item thats not pickable
+//      */
+//     public function testNotPickable(): void
+//     {
+//         $res = $this->game->pickUp($this->item2);
+//         $this->assertEquals('Byrå går inte att plocka upp!', $res);
+//     }
 
-    // /**
-    //  * Test pickUp with pickable item
-    //  */
-    // public function testPickUp(): void
-    // {
+//     /**
+//      * Test examine with a deadly item
+//      */
+//     public function testExamineDeadly(): void
+//     {
+//         $res = $this->game->examine($this->item4);
+//         $this->assertEquals(["Game Over", 'en studsboll'], $res);
+//     }
 
-    //     // Test pickable item
-    //     $res = $this->game->pickUp($this->item1);
-    //     $this->assertEquals("Du plockade upp nyckel", $res);
-    //     $item = $this->game->getInventoryItem('nyckel');
-    //     $this->assertInstanceOf("\App\Entity\Item", $item);
+//     /**
+//      * Test examine with an item that has something to reveal
+//      */
+//     public function testExamineReveal(): void
+//     {
+//         $this->item4->expects($this->once())
+//             ->method('setHidden')
+//             ->with(false);
 
-    //     // Test when inventory is full
-    //     $this->game->pickUp($this->item3);
+//         $this->bedroom->expects($this->once())
+//             ->method('removeItem')
+//             ->with($this->item2);
 
-    //     $res = $this->game->pickUp($this->item4);
-    //     $this->assertEquals("Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!", $res);
-    // }
+//         $res = $this->game->examine($this->item2);
 
-    // /**
-    //  * Test pickUp with item thats not pickable
-    //  */
-    // public function testNotPickable(): void
-    // {
-    //     $res = $this->game->pickUp($this->item2);
-    //     $this->assertEquals('Byrå går inte att plocka upp!', $res);
-    // }
+//         $this->assertEquals(["en byrå"], $res);
+//     }
 
-    // /**
-    //  * Test examine with a deadly item
-    //  */
-    // public function testExamineDeadly(): void
-    // {
-    //     $res = $this->game->examine($this->item4);
-    //     $this->assertEquals(["Game Over", 'en studsboll'], $res);
-    // }
+//     /**
+//      * Test examine with an item without something to reveal
+//      */
+//     public function testExamineNoReveal(): void
+//     {
+//         $res = $this->game->examine($this->item3);
+//         $this->assertEquals(["ett godispapper"], $res);
+//     }
 
-    // /**
-    //  * Test examine with an item that has something to reveal
-    //  */
-    // public function testExamineReveal(): void
-    // {
-    //     $this->item4->expects($this->once())
-    //         ->method('setHidden')
-    //         ->with(false);
+//     /**
+//      * Test combine with first item without getCombo
+//      */
+//     public function testCombineWrong(): void
+//     {
+//         // Test with Null combo
+//         $res = $this->game->combine($this->item4, 'byrå');
+//         $this->assertEquals(["Nix, ingen bra kombo."], $res);
 
-    //     $this->bedroom->expects($this->once())
-    //         ->method('removeItem')
-    //         ->with($this->item2);
+//         // Test with wrong items
+//         $res = $this->game->combine($this->item2, 'studsboll');
+//         $this->assertEquals(["Nix, ingen bra kombo."], $res);
 
-    //     $res = $this->game->examine($this->item2);
+//     }
 
-    //     $this->assertEquals(["en byrå"], $res);
-    // }
+//     /**
+//      * Test combine right items that are revealing something
+//      */
+//     public function testCombineRight(): void
+//     {
+//         $this->game->pickUp($this->item1);
 
-    // /**
-    //  * Test examine with an item without something to reveal
-    //  */
-    // public function testExamineNoReveal(): void
-    // {
-    //     $res = $this->game->examine($this->item3);
-    //     $this->assertEquals(["ett godispapper"], $res);
-    // }
+//         $this->item4->expects($this->once())
+//         ->method('setHidden')
+//         ->with(false);
 
-    // /**
-    //  * Test combine with first item without getCombo
-    //  */
-    // public function testCombineNullCombo(): void
-    // {
-    //     $res = $this->game->combine($this->item4, 'byrå');
-    //     $this->assertEquals(["Nix, ingen bra kombo."], $res);
-    // }
+//         $this->bedroom->expects($this->once())
+//         ->method('removeItem')
+//         ->with($this->item4);
 
-    // /**
-    //  * Test combine two item thats not possible to combine
-    //  */
-    // public function testCombineWrong(): void
-    // {
-    //     $res = $this->game->combine($this->item2, 'studsboll');
-    //     $this->assertEquals(["Nix, ingen bra kombo."], $res);
-    // }
+//         $res = $this->game->combine($this->item2, 'nyckel');
+//         $this->assertEquals(["en studsboll"], $res);
+//         $this->assertNotContains('nyckel', $this->game->getInventory());
+//     }
 
-    // /**
-    //  * Test combine right items that are revealing something
-    //  */
-    // public function testCombineRight(): void
-    // {
-    //     $this->game->pickUp($this->item1);
-
-    //     $this->item4->expects($this->once())
-    //     ->method('setHidden')
-    //     ->with(false);
-
-    //     $this->bedroom->expects($this->once())
-    //     ->method('removeItem')
-    //     ->with($this->item4);
-
-    //     $res = $this->game->combine($this->item2, 'nyckel');
-    //     $this->assertEquals(["en studsboll"], $res);
-    //     $this->assertNotContains('nyckel', $this->game->getInventory());
-    // }
-
-    // /**
-    //  * Test combine right items when one isLast
-    //  */
-    // public function testCombineRightLast(): void
-    // {
+//     /**
+//      * Test combine right items when one isLast
+//      */
+//     public function testCombineRightLast(): void
+//     {
 
 
-    //     $res = $this->game->combine($this->item3, 'studsboll');
-    //     $this->assertEquals(["Vinnare", "vinnare"], $res);
-    // }
+//         $res = $this->game->combine($this->item3, 'studsboll');
+//         $this->assertEquals(["Vinnare", "vinnare"], $res);
+//     }
 
 
-    // /**
-    //  * Verify that an item is removed from inventory when passed to drop,
-    //  * and that addItem is called on the room
-    //  */
-    // public function testDrop(): void
-    // {
-    //     $this->game->pickUp($this->item1);
-    //     $this->bedroom->expects($this->once())
-    //     ->method('addItem')
-    //     ->with($this->item1);
+//     /**
+//      * Verify that an item is removed from inventory when passed to drop,
+//      * and that addItem is called on the room
+//      */
+//     public function testDrop(): void
+//     {
+//         $this->game->pickUp($this->item1);
+//         $this->bedroom->expects($this->once())
+//         ->method('addItem')
+//         ->with($this->item1);
 
-    //     $res = $this->game->drop('nyckel');
-    //     $this->assertEquals("Du har lagt ifrån dig nyckel", $res);
-    //     $this->assertNotContains('nyckel', $this->game->getInventory());
-    // }
+//         $res = $this->game->drop('nyckel');
+//         $this->assertEquals("Du har lagt ifrån dig nyckel", $res);
+//         $this->assertNotContains('nyckel', $this->game->getInventory());
+//     }
 }

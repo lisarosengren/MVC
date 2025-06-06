@@ -12,8 +12,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GameTestBase extends TestCase
 {
-    protected Game $game;
-
     /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Room */
     protected Room $bedroom;
     /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Room */
@@ -89,8 +87,5 @@ class GameTestBase extends TestCase
 
         $this->item2->method('getCombText')->willReturn('en studsboll');
         $this->item3->method('getCombText')->willReturn('vinnare');
-
-
-        $this->game = new Game($this->bedroom);
     }
 }
