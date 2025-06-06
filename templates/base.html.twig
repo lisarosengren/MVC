@@ -27,7 +27,8 @@
             <a {% if app.request.pathinfo == path('game_start') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('game_start') }}">21</a>
             <a {% if app.request.pathinfo == path('library_start') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('library_start') }}">Bibliotek</a>
             <a {% if app.request.pathinfo == path('metrics') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('metrics') }}">Metrics</a>
-        {#    <a {% if app.request.pathinfo == path('pig_init_get') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('pig_init_get') }}">Pig</a> #}
+            <a {% if app.request.pathinfo == path('proj') %} class="active nav" {% else %} class ="nav" {% endif %}  href="{{ path('proj') }}">Kmom10</a>
+        
         </nav>
         <main>
         {% block body %}{% endblock %}

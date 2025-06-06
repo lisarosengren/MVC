@@ -94,7 +94,7 @@ class Game
         if ($item->getCombinationReveal()) {
             $item->getCombinationReveal()->setHidden(false);
         }
-        $room = $state->getCurrentRoom()->removeItem($item);
+        $state->getCurrentRoom()->removeItem($item);
         $state->RemoveFromInventory($combo);
         $text[] = $item->getCombText();
 
