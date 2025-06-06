@@ -1,10 +1,12 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/?branch=main) [![Build Status](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/build.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/build-status/main) [![Code Intelligence Status](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/?branch=main) [![Build Status](https://scrutinizer-ci.com/g/lisarosengren/MVC/badges/build.png?b=main)](https://scrutinizer-ci.com/g/lisarosengren/MVC/build-status/main) 
 
 ![mvc image](.img/mvc.png)
 
 MVC
 =====
 Det här är min README för mitt kursrepo i kursen MVC.
+
+I kursen har jag skapat en webbplats med hjälp av modeller, vyer och controllers. Resultatet kan du se om du följer nedanstående steg.
 
 Klona mitt repo
 -----------
