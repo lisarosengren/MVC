@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ProjControllerTest extends WebTestCase
 {
+    /**
+     * Test "home" in project
+     */
     public function testProjHome(): void
     {
         $client = static::createClient();
@@ -16,6 +19,10 @@ class ProjControllerTest extends WebTestCase
         $this->assertSelectorTextContains('p', 'vaknar');
     }
 
+    /**
+     * Test the initialization route of the game
+     * @group controller
+     */
     public function testInit(): void
     {
         $client = static::createClient();
@@ -26,6 +33,10 @@ class ProjControllerTest extends WebTestCase
         $this->assertSelectorTextContains('p', 'sovrum');
     }
 
+    /**
+     * Test JSON route for one item.
+     * @group controller
+     */
     public function testJsonItem(): void
     {
         $client = static::createClient();

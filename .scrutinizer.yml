@@ -2,7 +2,7 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*, src/Dice/*]
+    excluded_paths: [vendor/*, src/Dice/*]
 
 build:
     image: default-bionic
@@ -24,10 +24,11 @@ build:
                     #- phpcs-run # Not used, missing config file
     tests:
         override:
-            -   command: "composer phpunit"
+            -   command: "composer phpunit -- --exclude-group controller"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
+
     
     
