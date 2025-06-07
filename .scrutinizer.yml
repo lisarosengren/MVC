@@ -17,9 +17,6 @@ build:
                     # version: 8.2.4
                 node:
                     version: 16
-                variables:
-                    APP_ENV: test
-                    DATABASE_URL: 'sqlite:///%kernel.project_dir%/var/test.db'
         analysis:
             tests:
                 override:
