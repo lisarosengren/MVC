@@ -6,7 +6,7 @@ MVC
 =====
 Det här är min README för mitt kursrepo i kursen MVC.
 
-I kursen har jag skapat en webbplats med hjälp av modeller, vyer och controllers. Resultatet kan du se om du följer nedanstående steg.
+I kursen har jag skapat en webbplats med hjälp av modeller, vyer och controllers. Där finns det jag har åtstadkommit i kursen. Allt från lyckokatter till kortspel. Det finns en speciell del som handlar om slutprojektet för kursen, den delen har en annan styling och erbjuder möjligheten att spela ett äventyrsspel! Resultatet kan du se om du följer nedanstående steg.
 
 Klona mitt repo
 -----------
