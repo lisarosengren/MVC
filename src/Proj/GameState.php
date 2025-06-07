@@ -27,7 +27,7 @@ class GameState
     private array $inventory = [];
 
     public function __construct(Room $startRoom)
-    {     
+    {
         $this->setCurrentRoom($startRoom);
     }
 
@@ -113,7 +113,7 @@ class GameState
      * and their connected rooms.
      * @param Room $room the room to get exits from.
      * @return array<string, Room>
-     */    
+     */
     private function findExits(Room $room): array
     {
         // $room = $this->currentRoom;
@@ -121,15 +121,15 @@ class GameState
 
         if ($room->getWest() !== null) {
             $exits["väst"] = $room->getWest();
-       }
+        }
 
         if ($room->getNorth() !== null) {
             $exits["norr"] = $room->getNorth();
-       }
+        }
 
         if ($room->getSouth() !== null) {
             $exits["söder"] = $room->getSouth();
-       }
+        }
 
         if ($room->getEast() !== null) {
             $exits["öst"] = $room->getEast();

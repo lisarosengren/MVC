@@ -6,13 +6,12 @@
 
 {% block body %}
 
-    <div class="game play">
-    <img src= "{{ asset('build/images/'~gameState.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700>
+    <div class="game play fill">
+    <img src= "{{ asset('build/images/'~gameState.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700 >
 
     <p>{{ gameState.getCurrentRoom().getDescription()}}</p>
 
     {{ include('flash.html.twig') }}
-
 
  
     <hr>    
@@ -87,3 +86,4 @@
     </div>                
         
 {% endblock %}
+

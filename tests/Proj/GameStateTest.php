@@ -20,12 +20,12 @@ class GameStateTest extends GameTestBase
      * and the mocks there.
      */
 
-     protected function setUp(): void 
-     {
+    protected function setUp(): void
+    {
         parent::setUp();
 
         $this->gameState = new GameState($this->bedroom);
-     }
+    }
 
     /**
      * Construct object and verify that the object has the expected
@@ -72,10 +72,10 @@ class GameStateTest extends GameTestBase
 
         $this->gameState->addToInventory($this->item1);
         $this->gameState->addToInventory($this->item3);
-        
+
         $res2 = $this->gameState->getInventory();
         $this->assertContainsOnlyInstancesOf("\App\Entity\Item", $res2);
-        $this->assertCount(2, $res2);      
+        $this->assertCount(2, $res2);
     }
 
 
@@ -126,7 +126,7 @@ class GameStateTest extends GameTestBase
         $this->bedroom->expects($this->once())
             ->method('addItem')
             ->with($this->item1);
-        
+
         $this->gameState->dropItem($this->item1->getId());
 
         $this->assertArrayNotHasKey('nyckel', $this->gameState->getInventory());
@@ -136,7 +136,7 @@ class GameStateTest extends GameTestBase
      * Verify setCurrenRoom updates the exits
      * and the currentRoom
      */
-    public function testSetCurrentRoom():void
+    public function testSetCurrentRoom(): void
     {
         //Test med bedroom
         $this->gameState->setCurrentRoom($this->bedroom);

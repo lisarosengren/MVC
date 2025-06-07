@@ -16,6 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProjControllerGameAction extends AbstractController
 {
+    /**
+     * Route for when the player is moving
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response Redirects to game
+     */
     #[Route("proj/game/move", name: "game_move", methods: ['POST'])]
     public function gameMove(
         Request $request,
@@ -28,6 +34,12 @@ class ProjControllerGameAction extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+    /**
+     * Route for when the playes wants to pick up something
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response redirects to game
+     */
     #[Route("proj/game/pickup", name: "game_pickup", methods: ['POST'])]
     public function gamePickUp(
         Request $request,
@@ -44,6 +56,12 @@ class ProjControllerGameAction extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+    /**
+     * Route for when the player wants to examine an item
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response redirects to game
+     */
     #[Route("proj/game/examine", name: "game_examine", methods: ['POST'])]
     public function gameExamine(
         Request $request,
@@ -56,11 +74,10 @@ class ProjControllerGameAction extends AbstractController
 
         if ($text[0] === "Game Over") {
             $data = [
-                "text" => $text[1],
-            ];
+                "text" => $text[1]];
+            $session->clear();
             return $this->render('proj/game_over.html.twig', $data);
         }
-
         $this->addFlash(
             'text',
             $text[0]
@@ -68,7 +85,13 @@ class ProjControllerGameAction extends AbstractController
         return $this->redirectToRoute('game');
     }
 
-
+    /**
+     * Route for when the player wants to combine two items
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response Renders proj/win.html.twig if the player won,
+     * otherwise its a redirect to game
+     */
     #[Route("proj/game/combine", name: "game_combine", methods: ['POST'])]
     public function gameCombine(
         Request $request,
@@ -81,19 +104,22 @@ class ProjControllerGameAction extends AbstractController
 
         if ($text[0] === "Vinnare") {
             $data = [
-                "text" => $text[1],
-            ];
+                "text" => $text[1]];
             return $this->render('proj/win.html.twig', $data);
         }
-
         $this->addFlash(
             'text',
             $text[0]
         );
-
         return $this->redirectToRoute('game');
     }
 
+    /**
+     * Route for when the player wants drop an item
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response redirects to game
+     */
     #[Route("proj/game/drop", name: "game_drop", methods: ['POST'])]
     public function gameDrop(
         Request $request,
@@ -111,6 +137,14 @@ class ProjControllerGameAction extends AbstractController
         return $this->redirectToRoute('game');
     }
 
+
+    /**
+     * Route for when the player examine an item from
+     * the pockets
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return Response redirects to game
+     */
     #[Route("proj/game/examine_pocket", name: "game_examine_pocket", methods: ['POST'])]
     public function examinePocket(
         Request $request,

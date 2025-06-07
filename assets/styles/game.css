@@ -103,3 +103,25 @@ hr {
     margin-bottom: 1em;
     color: #D3D3D3;
 }
+
+.fill {
+    min-height: 100vh;
+}
+
+
+.bottom {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.bottom a {
+    color: #000;
+}
+
+.bottom a:visited {
+    color: #000;
+}
+
+.bottom a:hover {
+    color: #ff0000;
+}

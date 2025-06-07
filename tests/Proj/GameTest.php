@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 class GameTest extends GameTestBase
 {
     protected Game $game;
+    /** @var \PHPUnit\Framework\MockObject\MockObject&GameState */
     protected GameState $gameState;
 
 
@@ -21,13 +22,13 @@ class GameTest extends GameTestBase
      * and the mocks there.
      */
 
-     protected function setUp(): void 
-     {
+    protected function setUp(): void
+    {
         parent::setUp();
 
         $this->game = new Game();
         $this->gameState = $this->createMock(GameState::class);
-     }
+    }
 
 
     /**
@@ -36,7 +37,7 @@ class GameTest extends GameTestBase
     public function testMove(): void
     {
         $this->gameState->method('getExits')->willReturn(['öst' => $this->kitchen]);
-        
+
         $this->gameState->expects($this->once())
             ->method('getExits');
 
@@ -44,40 +45,35 @@ class GameTest extends GameTestBase
             ->method('setCurrentRoom')
             ->with($this->kitchen);
 
-            $this->game->move('öst', $this->gameState);
+        $this->game->move('öst', $this->gameState);
     }
 
     /**
-     * Test pickUp with pickable item
+     * Verify pickUp when inventory is empty
      */
     public function testPickUp(): void
     {
         $this->gameState->method('getInventory')->willReturn([]);
-        
+
         // Test pickable item
         $res = $this->game->pickUp($this->item1, $this->gameState);
         $this->assertEquals("Du plockade upp nyckel", $res);
+
+        // Test pickUp with item thats not pickable
+        $res = $this->game->pickUp($this->item2, $this->gameState);
+        $this->assertEquals('Byrå går inte att plocka upp!', $res);
 
     }
 
     /**
      * Test pickUp when iventory is full
      */
-    public function testPickUpFull():void
+    public function testPickUpFull(): void
     {
         $this->gameState->method('getInventory')->willReturn([1, 2]);
- 
+
         $res = $this->game->pickUp($this->item4, $this->gameState);
         $this->assertEquals("Du får inte plats med mer i fickorna. Du får lägga ifrån dig något!", $res);
-    }
-
-    /**
-     * Test pickUp with item thats not pickable
-     */
-    public function testNotPickable(): void
-    {
-        $res = $this->game->pickUp($this->item2, $this->gameState);
-        $this->assertEquals('Byrå går inte att plocka upp!', $res);
     }
 
     /**

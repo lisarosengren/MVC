@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Base class for testing Game class
  */
-class GameTestBase extends TestCase
+abstract class GameTestBase extends TestCase
 {
     /** @var \PHPUnit\Framework\MockObject\MockObject&\App\Entity\Room */
     protected Room $bedroom;
