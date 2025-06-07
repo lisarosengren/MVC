@@ -9,10 +9,8 @@
         {% endblock %}
 
         {% block javascripts %}
-        {% if app.environment != 'test' %}
             {{ encore_entry_script_tags('app') }}
-        {% endif %}
-            {% block importmap %}{{ importmap('proj') }}{% endblock %}
+        {% block importmap %}{{ importmap('proj') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
