@@ -50,8 +50,54 @@
 
                 <h3 id="kmom10">kmom10</h3>
 
-                <p>Här kommer redovisningstexten för detta kursmoment.</p>
-            
+                <h4>Krav 1-3</h4> 
+                <p>Jag valde att skapa ett äventyrsspel i kmom10. För själva spelet har jag skapat en klass för spelets “grunddata”, vilket är Room- och Item-objekt som är Entities från Doctrine. Sen har jag en klass för spelets status. Den har hand om vilket rum spelaren befinner sig i, vilka håll man kan gå åt och vad som finns i fickorna. Jag har även skapat en klass för spellogiken som hanterar vad som händer när man t.ex undersöker ett föremål eller vill gå till något annat rum. Jag har försökt utnyttja att raderna i mina Room- och Item-tabeller fås som objekt istället för att läsa in datan i ytterligare objekt. </p> 
+
+                <p>Eftersom jag loopar igenom rummen och föremålen som finns i rummen går det bra att lägga till fler rum och föremål om man vill utveckla spelet. </p> 
+
+                <p> För de tre spelklasserna jag skapade har jag lyckats nå 100% kodtäckning med hjälp av en del mockning. Jag skapade en abstrakt klass för att kunna återanvända mockningen som behövdes till Game och GameState. Kontroll har gjorts av både resultat och att metoder anropar andra klassers metoder. Jag påbörjade också testning av controllers, men det var lite dåligt i dokumentationen om hur jag skulle hantera sessions och, framför allt, satt jag illa till gällande tiden så jag fick tyvärr släppa det. Jag har testat två “vanliga” routes, att de fungerar och har åtminstone ett ord av förväntat innehåll. Att någon redirectar. Jag testade även två JSON routes. Den ena var en POST med tillhörande parameter. Jag har dock läst en del om crawlern och att den kan klicka på länkar osv, spännande! </p> 
+
+                <p>Jag har skapat en ny CSS-fil och lagt till den i webpack.config.js. I den har jag länkat in fler CSS-filer för att försöka hålla det lite strukturerat. Nackdelen med det var jag behövde köra npm run build när jag gjorde ändringar i länkade filer, men det löstes genom att göra ändringarna i huvudfilen och sen flytta dem till rätt plats. Jag fick även skapa en ny basvy med den nya CSS-filen som mina projektvyer utgår ifrån. </p> 
+
+                </p>Från Scrutinizer hämtade jag klickbara badges som ligger i min README.md på git hub. I övrigt innehåller den lite information om repot och instruktioner om hur man får igång webbplatsen. Min dokumentation är uppdateras med hjälp av phpdoc och jag har även kört phpmetrics. </p> 
+
+                
+
+                <h4>Krav 4</h4> 
+
+                <p>Jag har skapat fem JSON routes, varan en POST. Det finns routes för att visa alla rum och alla föremål i spelet och så finns det routes för att visa aktuellt rum och aktuella förmål i spelarens fickor. De två senare routsen visar bara om det redan finns ett spel i session, annars kommer info om att det saknas. För att komma till min POST route så väljer man ett föremål i en select-lista och klickar på knappen, routen visar samma text som om man hade undersökt föremålet i spelet. För att det inte skulle bli så mycket upprepningar med JSON pretty print har jag lagt den delen av koden i en Trait som jag använder mig av istället. </p> 
+
+                
+
+                <h4>Krav 5</h4> 
+
+                <p>Jag har använt möjligheten att använda en databas och har skapat två tabeller. Jag har försökt att utnyttja ORM till min fördel. Jag har inte läst in datan till andra klasser utan utnyttjat objekten direkt. Genom kopplingarna/relationerna jag skapade har det varit enkelt och smidigt att få fram och att använda de olika objekten för rum och föremål. Jag valde att aldrig använda “flush” vilket gjort att jag inte uppdaterade själva databasen utan bara objekten jag arbeta med. Det möjliggör flera spelare samtidigt och gör att jag inte behöver återställa databasen (därav saknas den möjligheten i min kod). Just kopplingarna har varit toppen för det här projektet. Det blev lite kladdigt när jag ritade ut dem i ER-diagrammet, men jag hoppas att det är tydligt ändå. Jag läste en del om testning av databasen, men jag skriver ju aldrig riktigt till den så jag prioriterade annat och sen räckte inte tiden till. </p> 
+
+                
+
+                <h4>Krav 6</h4> 
+
+                <p><b><i>ORM-relationer</b></i> 
+
+                Jag har verkligen försökt utnyttja objekten som skapats istället för att bara läsa in datan till andra klasser. Jag har undersökt hur det funkar att använda metoderna utan flush och har kopplat ihop mina relationer.</p> 
+
+                <p><b><i> Tester</b></i> 
+
+                Jag har uppnåt 100% kodtäckning på klasserna jag skapade till själva spelet. Jag har undvikit att blanda in andra klassers metoder när jag har testat och lade mycket tid på mockning. Två av testklasserna ärver av en annan klass för att jag skulle kunna återanvända mockarna. Jag har även försökt testa controllers. Tyvärr har jag lagt mer tid på att försöka läsa och googla än att skriva själva testerna, tiden tog slut. Men fyra controllers har blivit lite skrapade på ytan i alla fall. En av dem var en POST route och där har jag skickat med parameter till testet.  
+
+                <p><b><i> Styling </b></i> 
+
+                Jag har skapat en ny CSS-fil och gjort om sidan. Jag har jobbat med hover-effekter för att försöka göra det tydligt var man kan klicka i spelet. Jag testade att lägga till javascript för att man skulle komma till själva spelrutan varje gång sidan laddas om utan att behöva scrolla ner, men det blev så mycket vita “blixtar” att jag tog bort det igen. Ett alternativ var att låta headern flytta ner eller lägga på sidan, men jag ville fortsätta ha enhetligt utseende. Jag har gjort lite mer än att byta bakgrundsfärger och typsnitt.</p> 
+
+                
+
+                <p><b><i> Srutinizer och PHPstan </b></i> 
+
+                Jag har uppnått 10 poäng i scrutinizer på samtliga klasser och PHPstan ligger på nivå 8. </p> 
+                <h4>Allmänt om projektet</h4> 
+                <p>Först tyckte jag att det var ett oerhört klurigt projekt, jag fick lägga en del tid på att försöka komma vad jag skulle göra och huruvida det var möjligt för mig att ro i land. Kortspelen föll på att jag inte kan reglerna i spelen och kände att det blev för mycket att sätta sig in i. Hållbarhetsmålen föll på att jag inte riktigt förstod hur jag skulle tänka och hur jag skulle jobba med objekt i det hela. Det slutade med att jag gav mig på spelet. Jag funderade rätt mycket på hur jag skulle lägga upp det och hur det skulle se ut. Jag började med att göra en “prototyp” med statiska data i en klass bara för att se om jag hade tänkt rätt, därefter började jag med min databas. När jag påbörjade min redovisningstext kom jag på en klass jag ville separera och det medförde att jag behövde skriva om lite i själva spelklasserna och även routes och twig. Och i testerna. Det tog rätt mycket extra tid. Jag tycker nog att det var ett lite för otydligt och eventuellt omfattande projekt för kursen, även om jag nu i efterhand känner att det inte var så stort som det blev för mig. Det hade kunnat gå snabbare att få klart.</p> 
+                <h4>Allmänt om kursen</h4> 
+                <p>Jag tycker att kursen har varit lite för omfattande. Den har inkluderat många olika bitar och jag känner att jag gärna hade haft möjlighet att fokusera mer på objektorientering och hur man ska tänka kring det. Mer om hur man kan och bör dela upp klasser, vad ska man tänka kring att de blir mer beroende om de blir fler och sånt där. Det var också en hel del som räknades som “optionellt” men som jag ändå hade velat ha ordentlig genomgång av. Jag hade gärna sett ett lägre tempo och mer djup på det grundläggande. Man kan absolut påpeka att inget hindrar mig från att söka information och fördjupa mig och öva öva öva öva. Men tiden finns inte. Jag hade helt glömt av Traits tills jag började med projektet. Det är en sådan grej jag tänker att vi kanske skulle återkommit till. Intressant innehåll, men för mycket på för kort tid. Fler exempel hade varit önskvärt.</p>             
         </article>
     </main>
 {% endblock %}

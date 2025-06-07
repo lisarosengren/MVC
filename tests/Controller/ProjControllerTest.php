@@ -21,7 +21,6 @@ class ProjControllerTest extends WebTestCase
 
     /**
      * Test the initialization route of the game
-     * @group controller
      */
     public function testInit(): void
     {
@@ -35,13 +34,12 @@ class ProjControllerTest extends WebTestCase
 
     /**
      * Test JSON route for one item.
-     * @group controller
      */
     public function testJsonItem(): void
     {
         $client = static::createClient();
         $client->request('POST', '/proj/api/one_item', ['item' => 'godispapper']);
-        $res = $client->getResponse()->getContent();
+        $res = (string) $client->getResponse()->getContent();
         $this->assertStringContainsString('Banana', $res);
         $this->assertResponseIsSuccessful();
     }
@@ -50,7 +48,7 @@ class ProjControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/proj/api/inventory');
-        $res = $client->getResponse()->getContent();
+        $res = (string )$client->getResponse()->getContent();
         $this->assertStringContainsString('spel', $res);
         $this->assertResponseIsSuccessful();
     }
