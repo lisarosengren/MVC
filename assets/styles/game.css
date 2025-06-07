@@ -125,3 +125,35 @@ hr {
 .bottom a:hover {
     color: #ff0000;
 }
+
+
+.black {
+    background-color: #000;
+}
+
+.game-main {
+    margin: 0 auto;
+    max-width: 900px;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    padding-bottom: 4em !important;
+}
+
+.margin-right {
+    margin-right: 1em;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 3em 0em 3em;
+}
+
+.link {
+    color: #008000;
+    text-decoration: none;
+}
+
+.link:hover {
+    color:#00ffff;
+}

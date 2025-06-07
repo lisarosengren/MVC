@@ -1,12 +1,33 @@
-{# templates/home.html.twig #}
+{# templates/proj/game.html.twig #}
 
-{% extends "proj.html.twig" %}
+{# {% extends "proj.html.twig" %} #}
 
-{% block title %}MVC Kmom10{% endblock %}
+{# {% block title %}MVC Kmom10{% endblock %} #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}MVC Kmom10{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('proj') }}
+        {% endblock %}
 
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('proj') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="black">
+        <div class="container">
+        <div><a class="game link" href="{{ path('proj') }}">Tillbaka</a></div> 
+        <div><a class="game link" href="{{ path('proj_api') }}">API</a></div>
+    </div>
 {% block body %}
-
-    <div class="game play fill">
+    
+    <main class ="game-main">
+    
+    <div class="game play">
     <img src= "{{ asset('build/images/'~gameState.getCurrentImage()~'.jpg') }}" alt="view of the room" width=700 >
 
     <p>{{ gameState.getCurrentRoom().getDescription()}}</p>
@@ -19,7 +40,7 @@
     <div class="actions-pockets">
     <div class="actions">
         <div class ="item">
-            <form method="post" action="{{ path('game_move') }}">    
+            <form class="margin-right" method="post" action="{{ path('game_move') }}">    
                 {% for exit in gameState.getExits() |keys %}
                 <button class= "submit" name="exit" type="submit" value = {{ exit }}>
                     Gå {{ exit }}      
@@ -32,20 +53,20 @@
         {% for item in gameState.getCurrentRoom.getItems() %}
             {% if not item.isHidden() %}
                 <div class="item">
-                    <form method="post" action="{{ path('game_examine') }}">
+                    <form class="margin-right" method="post" action="{{ path('game_examine') }}">
                         <button class= "submit" name="examine" type="submit" value = {{ item.getId }}>
                             Undersök {{ item.getId }}      
                         </button>
                     </form>
 
-                    <form method="post" action="{{ path('game_pickup') }}">
+                    <form class="margin-right" method="post" action="{{ path('game_pickup') }}">
                         <button class= "submit" name="pick" type="submit" value = {{ item.getId }}>
                             Plocka upp {{ item.getId }}      
                         </button>
                     </form>
 
                     {% if gameState.getInventory() %}
-                        <form method="post" action="{{ path('game_combine') }}">
+                        <form class="margin-right" method="post" action="{{ path('game_combine') }}">
                                 <button class= "submit" name="item" type="submit" value = {{ item.getId }}>
                                     Kombinera {{ item.getId }} med       
                                 </button>
@@ -86,4 +107,6 @@
     </div>                
         
 {% endblock %}
-
+</main>
+    </body>
+</html>
