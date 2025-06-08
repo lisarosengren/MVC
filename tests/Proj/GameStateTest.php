@@ -123,7 +123,7 @@ class GameStateTest extends GameTestBase
     {
         $this->gameState->addToInventory($this->item1);
 
-        $this->bedroom->expects($this->once())
+        $this->bedroom->/** @scrutinizer ignore-call */expects($this->once())
             ->method('addItem')
             ->with($this->item1);
 

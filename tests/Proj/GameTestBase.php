@@ -37,7 +37,7 @@ abstract class GameTestBase extends TestCase
         $this->kitchen = $this->createMock(Room::class);
         $this->livingroom = $this->createMock(Room::class);
 
-        $this->bedroom->method('getId')->willReturn('bedroom');
+        $this->/** @scrutinizer ignore-call */bedroom->method('getId')->willReturn('bedroom');
         $this->kitchen->method('getId')->willReturn('kitchen');
         $this->livingroom->method('getId')->willReturn('livingroom');
 
@@ -57,7 +57,7 @@ abstract class GameTestBase extends TestCase
         $this->item3 = $this->createMock(Item::class);
         $this->item4 = $this->createMock(Item::class);
 
-        $this->item1->method('getId')->willReturn('nyckel');
+        $this->item1->/** @scrutinizer ignore-call */method('getId')->willReturn('nyckel');
         $this->item2->method('getId')->willReturn('byrå');
         $this->item3->method('getId')->willReturn('godispapper');
         $this->item4->method('getId')->willReturn('studsboll');

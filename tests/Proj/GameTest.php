@@ -36,9 +36,9 @@ class GameTest extends GameTestBase
      */
     public function testMove(): void
     {
-        $this->gameState->method('getExits')->willReturn(['öst' => $this->kitchen]);
+        $this->gameState->/** @scrutinizer ignore-call */method('getExits')->willReturn(['öst' => $this->kitchen]);
 
-        $this->gameState->expects($this->once())
+        $this->gameState->/** @scrutinizer ignore-call */expects($this->once())
             ->method('getExits');
 
         $this->gameState->expects($this->once())
@@ -91,11 +91,11 @@ class GameTest extends GameTestBase
      */
     public function testExamineReveal(): void
     {
-        $this->item4->expects($this->once())
+        $this->item4->/** @scrutinizer ignore-call */expects($this->once())
             ->method('setHidden')
             ->with(false);
 
-        $this->bedroom->expects($this->once())
+        $this->bedroom->/** @scrutinizer ignore-call */expects($this->once())
             ->method('removeItem')
             ->with($this->item2);
 
