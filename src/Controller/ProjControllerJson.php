@@ -81,7 +81,7 @@ class ProjControllerJson extends AbstractController
     #[Route("/proj/api/inventory", name: "api_inventory", methods: ['GET'])]
     public function jsonInventory(SessionInterface $session): JsonResponse
     {
-        if (!$session->has("game")) {
+        if (!$session->has("gameState")) {
             $data = "Det är inget spel igång";
             return $this->jsonRes($data);
         }
@@ -104,12 +104,12 @@ class ProjControllerJson extends AbstractController
     #[Route("/proj/api/current_room", name: "api_current_room", methods: ['GET'])]
     public function jsonCurrent(SessionInterface $session): JsonResponse
     {
-        if (!$session->has("game")) {
+        if (!$session->has("gameState")) {
             $data = "Det är inget spel igång";
             return $this->jsonRes($data);
         }
 
-        $data = $session->get("game")->getCurrentRoom()->getId();
+        $data = $session->get("gameState")->getCurrentRoom()->getId();
 
         return $this->jsonRes($data);
     }
