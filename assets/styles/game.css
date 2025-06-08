@@ -38,6 +38,9 @@
     color: #006900;
 }
 
+.over {
+    color: #D3D3D3 !important;
+}
 
 .actions {
     margin-top: 0.5em;

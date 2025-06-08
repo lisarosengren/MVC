@@ -23,7 +23,6 @@ class ProjController extends AbstractController
     #[Route("/proj", name: "proj", methods: ['GET'])]
     public function home(): Response
     {
-
         return $this->render('proj/home.html.twig');
     }
 
