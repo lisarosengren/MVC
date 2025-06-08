@@ -75,6 +75,7 @@ class ProjControllerGameAction extends AbstractController
         if ($text[0] === "Game Over") {
             $data = [
                 "text" => $text[1]];
+            $session->clear();
             return $this->render('proj/game_over.html.twig', $data);
         }
         $this->addFlash(
@@ -104,6 +105,7 @@ class ProjControllerGameAction extends AbstractController
         if ($text[0] === "Vinnare") {
             $data = [
                 "text" => $text[1]];
+            $session->clear();
             return $this->render('proj/win.html.twig', $data);
         }
         $this->addFlash(
